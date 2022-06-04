@@ -1,42 +1,49 @@
-import { getBadgesOfUser, getEmotesOfUser, getEquipedOfUser, getSumOfDonations, getSupportLevelAsBadgeAndSupportEmojis } from "../helpers/api";
+import {
+  getBadgesOfUser,
+  getEmotesOfUser,
+  getEquipedOfUser,
+  getSumOfDonations,
+  getSupportLevelAsBadgeAndSupportEmojis,
+} from "../helpers/api";
 
 export default class Auth {
-  sub: string
+  sub: string;
   provider: string;
-  name:string;
-  profilePicture:string;
-  badges: Array<string> = []
-  emotes: Array<string>= []
-  equiped = 0
-  constructor(sub:string, provider:string, name:string, profilePicture:string) {
-    this.sub = sub
+  name: string;
+  profilePicture: string;
+  badges: Array<string> = [];
+  emotes: Array<string> = [];
+  equiped = 0;
+  constructor(
+    sub: string,
+    provider: string,
+    name: string,
+    profilePicture: string
+  ) {
+    this.sub = sub;
     this.provider = provider;
     this.name = name;
     this.profilePicture = profilePicture;
     if (provider) {
       try {
-        getBadgesOfUser(this)
-      }
-      catch (e) {
-        console.log("couldnt get badges for user")
-      }
-      try {
-        getEmotesOfUser(this)
-      }
-      catch (e) {
-        console.log("couldnt get emote for user")
+        getBadgesOfUser(this);
+      } catch (e) {
+        console.log("couldnt get badges for user");
       }
       try {
-        getEquipedOfUser(this)
-      }
-      catch (e) {
-        console.log("couldnt get equpided emote for user")
+        getEmotesOfUser(this);
+      } catch (e) {
+        console.log("couldnt get emote for user");
       }
       try {
-        getSupportLevelAsBadgeAndSupportEmojis(this)
+        getEquipedOfUser(this);
+      } catch (e) {
+        console.log("couldnt get equpided emote for user");
       }
-      catch (e) {
-        console.log("couldnt get equpided emote for user")
+      try {
+        getSupportLevelAsBadgeAndSupportEmojis(this);
+      } catch (e) {
+        console.log("couldnt get equpided emote for user");
       }
     }
   }

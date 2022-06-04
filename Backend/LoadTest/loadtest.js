@@ -1,10 +1,12 @@
-import { io } from  "socket.io-client";
-import pkg from "prompt-sync"
-const prompt  = pkg()
+import { io } from "socket.io-client";
+import pkg from "prompt-sync";
+const prompt = pkg();
 
-const LOCAL  = true
-const URL = LOCAL ? "http://localhost:1000" : "https://mainbackend.soerensserver.xyz";
-const MAX_CLIENTS = 100
+const LOCAL = true;
+const URL = LOCAL
+  ? "http://localhost:1000"
+  : "https://mainbackend.soerensserver.xyz";
+const MAX_CLIENTS = 100;
 const POLLING_PERCENTAGE = 0.05;
 const CLIENT_CREATION_INTERVAL_IN_MS = 10;
 const EMIT_INTERVAL_IN_MS = 1000;
@@ -13,10 +15,9 @@ let clientCount = 0;
 let lastReport = new Date().getTime();
 let packetsSinceLastReport = 0;
 
-const room = prompt("Room: ")
+const room = prompt("Room: ");
 
-const socket = io(URL, );
-
+const socket = io(URL);
 
 const createClient = () => {
   // for demonstration purposes, some clients stay stuck in HTTP long-polling
@@ -28,28 +29,28 @@ const createClient = () => {
   });
 
   socket.emit("init", undefined, (response) => {
-
-    const token = response.guestToken
-  setInterval(() => {
-
-      socket.emit("join",room, (response)=>{
-          // console.log(response)
-          // console.log(response)
-          // console.log("event")
-            socket.emit('changeName', token, (Math.random() + 1).toString(36).substring(7), (response) => { })
-            packetsSinceLastReport++;
-      } )
+    const token = response.guestToken;
+    setInterval(() => {
+      socket.emit("join", room, (response) => {
+        // console.log(response)
+        // console.log(response)
+        // console.log("event")
+        socket.emit(
+          "changeName",
+          token,
+          (Math.random() + 1).toString(36).substring(7),
+          (response) => {}
+        );
+        packetsSinceLastReport++;
+      });
 
       // socket.emit("leave", response => {
 
-        socket.emit('vote', "keep", 0)
+      socket.emit("vote", "keep", 0);
 
       // })
-
-
-  }, EMIT_INTERVAL_IN_MS);
-
-  })
+    }, EMIT_INTERVAL_IN_MS);
+  });
   // socket.on("server to client event", () => {
   //   packetsSinceLastReport++;
   // });

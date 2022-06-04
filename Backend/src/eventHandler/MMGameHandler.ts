@@ -1,17 +1,22 @@
-
-
-import createListner from "../helpers/createListner"
-import type { MySocket, Pano } from "../types"
-import { checkIfPlayer, checkIfHost, checkIfLobby, checkCallback, isGame } from "../helpers/checkers"
-import { addWordToDB as addWordToDBAPI, reportWord as reportWordApi } from "../helpers/api";
+import createListner from "../helpers/createListner";
+import type { MySocket, Pano } from "../types";
+import {
+  checkIfPlayer,
+  checkIfHost,
+  checkIfLobby,
+  checkCallback,
+  isGame,
+} from "../helpers/checkers";
+import {
+  addWordToDB as addWordToDBAPI,
+  reportWord as reportWordApi,
+} from "../helpers/api";
 
 export default (io: unknown, socket: MySocket) => {
-
   const addCapture = (i: number, pano: Pano, callback: Function) => {
-
-    if (typeof i !== "number") return
-    if (!checkCallback(callback)) return
-    if (!pano) return
+    if (typeof i !== "number") return;
+    if (!checkCallback(callback)) return;
+    if (!pano) return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -25,10 +30,10 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
 
-    let res
+    let res;
     if (socket.player) {
       res = socket.player!.lobby!.addCapture(socket.player, pano, i);
       socket.player!.updateEveryoneInSameLobby();
@@ -36,11 +41,8 @@ export default (io: unknown, socket: MySocket) => {
     }
   };
 
-
   const reportAsNSFW = (i: number, reason: string) => {
-    
-
-    if (typeof i !== "number") return
+    if (typeof i !== "number") return;
 
     if (!checkIfPlayer(socket)) {
       return;
@@ -50,22 +52,22 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
 
     if (!reason) {
-      console.log("no reason")
-      return
+      console.log("no reason");
+      return;
     }
 
     // saveReportedPanosInDB(socket.player.lobby.captures[i].pano.pano.pano, reason, socket.player)
 
-    socket.player!.lobby!.captures[i].nsfw = true
+    socket.player!.lobby!.captures[i].nsfw = true;
 
-    socket.player!.updateEveryoneInSameLobby()
+    socket.player!.updateEveryoneInSameLobby();
   };
   const reportWord = async (word: string) => {
-    if (typeof word !== "string") return
+    if (typeof word !== "string") return;
 
     if (!checkIfPlayer(socket)) {
       return;
@@ -77,8 +79,7 @@ export default (io: unknown, socket: MySocket) => {
     if (socket.player!.lobby!.host !== socket.player) {
       return;
     }
-    await reportWordApi(word)
+    await reportWordApi(word);
   };
-  createListner(socket, "MMGame", [addCapture, reportWord, reportAsNSFW])
-
-}
+  createListner(socket, "MMGame", [addCapture, reportWord, reportAsNSFW]);
+};

@@ -1,5 +1,5 @@
 import dotEnv from "dotenv";
-import players from "../objects/PlayerHandler"
+import players from "../objects/PlayerHandler";
 dotEnv.config({ path: "/home/soeren/Programming/GeoBingo/.env" });
 
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
@@ -7,15 +7,14 @@ import Auth from "../objects/Auth";
 import Player from "../objects/Player";
 const SUPABASE_KEY = process.env.supabasekey;
 const SUPABASE_URL = process.env.supabaseurl;
-let supabase: SupabaseClient
+let supabase: SupabaseClient;
 if (SUPABASE_KEY && SUPABASE_URL) {
   supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 } else {
-
-  throw ("Error: no SUPABASE_KEY or SUPABASE_URL")
+  throw "Error: no SUPABASE_KEY or SUPABASE_URL";
 }
 
-export const addWordToDB = async (word: { word: string, tags: string[] }) => {
+export const addWordToDB = async (word: { word: string; tags: string[] }) => {
   const { data, error } = await supabase.from("bingoWords").insert([{ word }]);
   return data;
 };
@@ -26,7 +25,7 @@ export const getWordsFromDB = async () => {
     // console.log(words)
 
     // inefficent maybe
-    words = words.filter(word => !word.reported)
+    words = words.filter((word) => !word.reported);
 
     words = words.map((i) => {
       try {
@@ -37,15 +36,11 @@ export const getWordsFromDB = async () => {
     });
     //filter words for duplicates
     function uniqBy(a: any, key: any) {
-      return [
-        ...new Map(
-          a.map((x: any) => [key(x), x])
-        ).values()
-      ]
+      return [...new Map(a.map((x: any) => [key(x), x])).values()];
     }
-    words = uniqBy(words, (x: any) => x.word)
-    console.log(words.length)
-    return words
+    words = uniqBy(words, (x: any) => x.word);
+    console.log(words.length);
+    return words;
   } else {
     return [];
   }
@@ -53,14 +48,12 @@ export const getWordsFromDB = async () => {
 
 export const reportWord = async (word: string, test = false) => {
   const { data, error } = await supabase
-    .from(test ? 'bingoWordsTest' : 'bingoWords')
-    .update(
-      { reported: true }
-    )
-    .eq("word->word", JSON.stringify(word))
-  const reportedWord = data
-  return reportedWord
-}
+    .from(test ? "bingoWordsTest" : "bingoWords")
+    .update({ reported: true })
+    .eq("word->word", JSON.stringify(word));
+  const reportedWord = data;
+  return reportedWord;
+};
 
 // export const savePanosInDB = async (panos:Pano) => {
 //   panos = panos.map((p:Pano) => {
@@ -75,23 +68,28 @@ export const reportWord = async (word: string, test = false) => {
 // };
 export const updateEquipedSkin = async (auth: Auth, val: number) => {
   if (typeof val !== "number") {
-    console.log("cannot update not a number")
-    return
+    console.log("cannot update not a number");
+    return;
   }
   const { data, error } = await supabase
-    .from('equiped')
-    .upsert({ user_id: auth.sub, equiped: val })
+    .from("equiped")
+    .upsert({ user_id: auth.sub, equiped: val });
   if (!error) {
-    auth.equiped = val
+    auth.equiped = val;
+  } else {
+    console.log(error);
   }
-  else {
-    console.log(error)
-  }
-}
+};
 
-export const saveReportedPanosInDB = async (panoid: string, reason: string, player: Player) => {
+export const saveReportedPanosInDB = async (
+  panoid: string,
+  reason: string,
+  player: Player
+) => {
   try {
-    const { data, error } = await supabase.from("reportedPhotospheres").insert({ panoid, reason, playerid: player.id });
+    const { data, error } = await supabase
+      .from("reportedPhotospheres")
+      .insert({ panoid, reason, playerid: player.id });
     console.log(data, error);
   } catch (e) {
     console.log(e);
@@ -100,10 +98,11 @@ export const saveReportedPanosInDB = async (panoid: string, reason: string, play
 
 export const checkIfPanoIsReported = async (panoid: string, capture: any) => {
   const { data: reportedPhotospheres, error } = await supabase
-    .from('reportedPhotospheres')
-    .select("*").eq("panoid", panoid)
+    .from("reportedPhotospheres")
+    .select("*")
+    .eq("panoid", panoid);
   if (error === null && reportedPhotospheres) {
-    capture.nsfw = reportedPhotospheres.length > 0
+    capture.nsfw = reportedPhotospheres.length > 0;
   } else {
     capture.nsfw = false;
   }
@@ -111,157 +110,160 @@ export const checkIfPanoIsReported = async (panoid: string, capture: any) => {
 
 export const getBadgesOfUser = async (auth: Auth) => {
   let { data: badges, error } = await supabase
-    .from('badges')
+    .from("badges")
     .select("badgesOfUser")
     // Filters
-    .eq("id", auth.sub)
+    .eq("id", auth.sub);
   if (!error && badges) {
-    badges = badges[0]?.badgesOfUser
+    badges = badges[0]?.badgesOfUser;
     if (badges) {
-      auth.badges = badges
-    } else
-      auth.badges = []
+      auth.badges = badges;
+    } else auth.badges = [];
+  } else {
+    auth.badges = [];
   }
-  else {
-
-    auth.badges = []
-  }
-}
+};
 export const getEmotesOfUser = async (auth: Auth) => {
   let { data: emotes, error } = await supabase
-    .from('emotes')
+    .from("emotes")
     .select("*")
     // Filters
-    .eq("id", auth.sub)
-  console.log({ emotes, error })
+    .eq("id", auth.sub);
+  console.log({ emotes, error });
   if (!error && emotes) {
-    emotes = emotes[0]?.emotesOfUser
+    emotes = emotes[0]?.emotesOfUser;
     if (emotes) {
       // adding old emojis + removing duplicates
-      auth.emotes = [...new Set([...auth.emotes ?? [], ...emotes])]
+      auth.emotes = [...new Set([...(auth.emotes ?? []), ...emotes])];
       try {
-        const player = players.getPlayerBySub(auth.sub)
-        players.getPlayerBySub(auth.sub)!.updateSelf()
+        const player = players.getPlayerBySub(auth.sub);
+        players.getPlayerBySub(auth.sub)!.updateSelf();
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     }
   }
-}
+};
 
 export const getEquipedOfUser = async (auth: Auth) => {
   const { data: rows, error } = await supabase
-    .from('equiped')
+    .from("equiped")
     .select("equiped")
     // Filters
-    .eq("user_id", auth.sub)
+    .eq("user_id", auth.sub);
   if (!error && rows) {
-    const equiped = rows[0]?.equiped
+    const equiped = rows[0]?.equiped;
     if (equiped) {
-      auth.equiped = equiped
+      auth.equiped = equiped;
       // no player in testing
       try {
-        players.getPlayerBySub(auth.sub)!.updateSelf()
-      }
-      catch (e) {
-        console.log(e)
+        players.getPlayerBySub(auth.sub)!.updateSelf();
+      } catch (e) {
+        console.log(e);
       }
     }
   }
-}
+};
 
 export const addKofiDonation = async (donation: any) => {
   const { data, error } = await supabase
-    .from('kofi_donations')
-    .insert([
-      donation,
-    ])
-  console.log(error, data)
-  return error
-}
+    .from("kofi_donations")
+    .insert([donation]);
+  console.log(error, data);
+  return error;
+};
 
 export async function getDonationEmails(auth: Auth) {
-
   let { data: donationEmails, error: err1 } = await supabase
-    .from('donation_email_id')
-    .select("email").eq("id", auth.sub)
-
+    .from("donation_email_id")
+    .select("email")
+    .eq("id", auth.sub);
 
   if (!donationEmails) {
-    donationEmails = []
-
+    donationEmails = [];
   }
   let { data: users, error } = await supabase
-    .from('email_user')
-    .select("*").eq("id", auth.sub)
+    .from("email_user")
+    .select("*")
+    .eq("id", auth.sub);
 
   if (!users) {
-    users = []
-
+    users = [];
   }
-  users = [...users, ...donationEmails]
+  users = [...users, ...donationEmails];
 
-  return [...new Set(users.map(i => i.email))] // removing duplicates
+  return [...new Set(users.map((i) => i.email))]; // removing duplicates
 }
 
 export async function getSumOfDonations(emails: string[]): Promise<number> {
-  const [{ data: webhookdonations, error }, { data: csvDonations, error: e }] = await Promise.all(
-    [
+  const [{ data: webhookdonations, error }, { data: csvDonations, error: e }] =
+    await Promise.all([
       supabase
-        .from('kofi_donations')
-        .select("amount, email").in("email", emails)
-      ,
+        .from("kofi_donations")
+        .select("amount, email")
+        .in("email", emails),
       supabase
-        .from('donationsNew')
-        .select("BuyerEmail, Received").in("BuyerEmail", emails)
-    ])
+        .from("donationsNew")
+        .select("BuyerEmail, Received")
+        .in("BuyerEmail", emails),
+    ]);
 
-  let amount = 0
+  let amount = 0;
   if (!error && !e && csvDonations && webhookdonations) {
     if (webhookdonations.length > 1) {
-      amount = amount + Number(webhookdonations.reduce((pv, cv) => pv.amount + cv.amount))
-    } else if (webhookdonations.length === 1) { amount += webhookdonations[0].amount }
+      amount =
+        amount +
+        Number(webhookdonations.reduce((pv, cv) => pv.amount + cv.amount));
+    } else if (webhookdonations.length === 1) {
+      amount += webhookdonations[0].amount;
+    }
     if (csvDonations.length > 1) {
-      amount = amount + Number(csvDonations.reduce((pv, cv) => pv.Received + cv.Received))
-    } else if (csvDonations.length === 1) { amount += csvDonations[0].Received }
+      amount =
+        amount +
+        Number(csvDonations.reduce((pv, cv) => pv.Received + cv.Received));
+    } else if (csvDonations.length === 1) {
+      amount += csvDonations[0].Received;
+    }
+  } else {
+    console.log(e, error);
   }
-  else { console.log(e, error) }
-  return amount
+  return amount;
 }
 
 type Emote = {
-  [key: string]: string
-}
+  [key: string]: string;
+};
 const emotes: Emote = {
   0: "heart.png",
   5: "magnifying_glass.png",
   10: "plus1.png",
   15: "camera.png",
-}
+};
 export async function getSupportLevelAsBadgeAndSupportEmojis(auth: Auth) {
-  const emails = await getDonationEmails(auth)
-  const sum = await getSumOfDonations(emails)
-  if (!auth.badges) { auth.badges = [] }
-  if (sum === 0) { return }
-  auth.badges = auth.badges.filter(b => b !== "donator")
-  auth.badges.push(`Donator Level ${Math.round((sum / 3)).toString()}`)
-  Object.keys(emotes).forEach(
-    (key) => {
-      if (sum / 3 >= parseFloat(key)) {
-        auth.emotes = [...auth.emotes ?? [], "/emotes/" + emotes[key]]
-      }
+  const emails = await getDonationEmails(auth);
+  const sum = await getSumOfDonations(emails);
+  if (!auth.badges) {
+    auth.badges = [];
+  }
+  if (sum === 0) {
+    return;
+  }
+  auth.badges = auth.badges.filter((b) => b !== "donator");
+  auth.badges.push(`Donator Level ${Math.round(sum / 3).toString()}`);
+  Object.keys(emotes).forEach((key) => {
+    if (sum / 3 >= parseFloat(key)) {
+      auth.emotes = [...(auth.emotes ?? []), "/emotes/" + emotes[key]];
     }
-  )
+  });
 }
 
 export async function getStreamerWhiteList() {
   const { data: list, error } = await supabase
-    .from('Streamer Whitelist')
-    .select('Streamer')
+    .from("Streamer Whitelist")
+    .select("Streamer");
   if (!error && list) {
-    return list.map(i => i.Streamer)
+    return list.map((i) => i.Streamer);
   }
-  console.log(error)
-  return []
-
+  console.log(error);
+  return [];
 }

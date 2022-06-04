@@ -1,4 +1,3 @@
-
 export default class Voting {
   keep = new Set<string>();
   remove = new Set<string>();

@@ -1,11 +1,10 @@
-
-import createListner from "../helpers/createListner"
-import type { MySocket } from "../types"
-import { checkIfPlayer } from "../helpers/checkers"
-import { updateEquipedSkin as updateEquipedSkinInDB } from "../helpers/api"
-export default (io: unknown, socket: MySocket) => { 
+import createListner from "../helpers/createListner";
+import type { MySocket } from "../types";
+import { checkIfPlayer } from "../helpers/checkers";
+import { updateEquipedSkin as updateEquipedSkinInDB } from "../helpers/api";
+export default (io: unknown, socket: MySocket) => {
   const updateEquipedSkin = async (newVal: number) => {
-    if (typeof newVal !== "number") return
+    if (typeof newVal !== "number") return;
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
       return;
@@ -14,10 +13,9 @@ export default (io: unknown, socket: MySocket) => {
       console.log("auth not found");
       return;
     }
-    await updateEquipedSkinInDB(socket.player!.auth, newVal)
-    socket.player!.updateSelf()
+    await updateEquipedSkinInDB(socket.player!.auth, newVal);
+    socket.player!.updateSelf();
   };
 
-
-createListner(socket, "player",[updateEquipedSkin])
-}
+  createListner(socket, "player", [updateEquipedSkin]);
+};

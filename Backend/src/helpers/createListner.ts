@@ -1,17 +1,15 @@
-import type { MySocket } from "../types"
+import type { MySocket } from "../types";
 
-type FN = (...args: any[]) => any
+type FN = (...args: any[]) => any;
 
-export default (socket: MySocket
-  , nameSpace: string | string[], fns: FN[]) => {
+export default (socket: MySocket, nameSpace: string | string[], fns: FN[]) => {
   for (const fn of fns) {
     if (typeof nameSpace === "string") {
-      socket.on(nameSpace + ":" + fn.name, fn)
+      socket.on(nameSpace + ":" + fn.name, fn);
     }
     for (const n of nameSpace) {
-      socket.on(n + ":" + fn.name, fn)
+      socket.on(n + ":" + fn.name, fn);
     }
-    console.log("listening to", nameSpace + ":" + fn.name)
+    console.log("listening to", nameSpace + ":" + fn.name);
   }
-
-}
+};

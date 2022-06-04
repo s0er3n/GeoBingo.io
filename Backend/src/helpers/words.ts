@@ -1,6 +1,6 @@
 import { getWordsFromDB } from "./api";
-type Word = {word:string, tags: string[]}
-let words: Word[]  = [];
+type Word = { word: string; tags: string[] };
+let words: Word[] = [];
 getWordsFromDB()
   .then((w) => (words = w))
   .catch((e) => console.log("couldnt get words from db", e));
@@ -10,8 +10,7 @@ const refreshWords = () =>
     .then((w) => (words = w))
     .catch((e) => console.log("couldnt get words from db", e));
 
-
-export function getRandomWords(count:number) {
+export function getRandomWords(count: number) {
   const arr = words;
   let answer: Word[] = [],
     counter = 0;
@@ -31,5 +30,5 @@ export function getRandomWordNotInWordList(wordList: Word[]) {
   while (wordList.includes(newWord)) {
     newWord = words[Math.floor(Math.random() * words.length)];
   }
-  return newWord
+  return newWord;
 }

@@ -2,29 +2,29 @@ import { disconnect } from "../helpers/twitch-chat";
 import { setStreamerFrontPage, streamerFrontPage } from "../helpers/variables";
 import Auth from "./Auth";
 import Game from "./Game";
-import MMGame from "./MMGame"
+import MMGame from "./MMGame";
 
-import type { MySocket } from "../types"
+import type { MySocket } from "../types";
 import TGAH from "./GeoBingoAgainstHumanity";
 
 export default class Player {
   lobby?: Game | TGAH | MMGame;
   online = false;
   sockets: MySocket[] = [];
-  auth: Auth | undefined
+  auth: Auth | undefined;
   get name() {
-    if (!this.auth) return ""
+    if (!this.auth) return "";
 
-    return this.auth.name
+    return this.auth.name;
   }
 
   get id() {
-    if (!this.auth) return ""
-    return this.auth.sub
+    if (!this.auth) return "";
+    return this.auth.sub;
   }
   get sub() {
-    if (!this.auth) return ""
-    return this.auth.sub
+    if (!this.auth) return "";
+    return this.auth.sub;
   }
 
   constructor(auth: Auth) {
@@ -32,8 +32,8 @@ export default class Player {
   }
 
   getSub() {
-    if (!this.auth) return ""
-    return this.auth.sub
+    if (!this.auth) return "";
+    return this.auth.sub;
   }
 
   addSocket(socket: MySocket) {
@@ -49,7 +49,7 @@ export default class Player {
     if (this.sockets.length === 0) {
       this.online = false;
       if (this.name === streamerFrontPage) {
-        setStreamerFrontPage("")
+        setStreamerFrontPage("");
       }
       this.updateEveryoneInSameLobby();
       if (socket.player?.auth?.provider === "twitch") {
@@ -59,17 +59,16 @@ export default class Player {
   }
 
   updateSelf = () => {
-    if (!this.online) return
+    if (!this.online) return;
     this.sockets.forEach((s) => {
       if (s.player) {
-        s.emit("update", s.player.toObjWithLobby())
+        s.emit("update", s.player.toObjWithLobby());
       }
-    }
-    )
+    });
   };
 
   updateEveryoneInSameLobby() {
-    this.lobby?.updateLobby()
+    this.lobby?.updateLobby();
   }
 
   toObj() {
@@ -84,16 +83,14 @@ export default class Player {
   }
 
   toObjWithLobby() {
-
     if (!this.lobby) {
-      return [this.toObj(), undefined]
+      return [this.toObj(), undefined];
     }
 
+    const res = this.toObj();
 
-    const res = this.toObj()
+    const game = this.lobby.toGameState();
 
-    const game = this.lobby.toGameState()
-
-    return [res, game]
+    return [res, game];
   }
 }

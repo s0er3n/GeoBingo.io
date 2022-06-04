@@ -1,16 +1,23 @@
-
-import createListner from "../helpers/createListner"
-import type { MySocket, Pano } from "../types"
-import { checkIfPlayer, checkIfHost, checkIfLobby, checkCallback, isGame } from "../helpers/checkers"
-import { addWordToDB as addWordToDBAPI, reportWord as reportWordApi } from "../helpers/api";
+import createListner from "../helpers/createListner";
+import type { MySocket, Pano } from "../types";
+import {
+  checkIfPlayer,
+  checkIfHost,
+  checkIfLobby,
+  checkCallback,
+  isGame,
+} from "../helpers/checkers";
+import {
+  addWordToDB as addWordToDBAPI,
+  reportWord as reportWordApi,
+} from "../helpers/api";
 
 export default (io: unknown, socket: MySocket) => {
-
-  const addWords = (newWords: { word: string, tags: string[] }) => {
-    if (!newWords) return
+  const addWords = (newWords: { word: string; tags: string[] }) => {
+    if (!newWords) return;
 
     if (newWords?.word !== "") {
-      if (typeof newWords?.word !== "string") return
+      if (typeof newWords?.word !== "string") return;
       addWordToDBAPI(newWords);
     }
   };
@@ -21,8 +28,7 @@ export default (io: unknown, socket: MySocket) => {
   //   callback({ words: words });
   // });
   const newRandomWord = (i: number) => {
-
-    if (typeof i !== "number") return
+    if (typeof i !== "number") return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -39,17 +45,16 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
 
     socket.player.lobby.newRandomWord(i);
-  }
+  };
 
   const newRandomWords = (lockedWords: number[]) => {
-    if (typeof lockedWords === "undefined") return
-    if (!Array.isArray(lockedWords)) return
-
+    if (typeof lockedWords === "undefined") return;
+    if (!Array.isArray(lockedWords)) return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -67,17 +72,17 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
 
     socket.player?.lobby?.newRandomWords(lockedWords);
   };
 
   const changeWord = (newWord: string, i: number) => {
-    if (typeof i !== "number") return
-    if (!newWord) return
-    if (typeof newWord !== "string") return
+    if (typeof i !== "number") return;
+    if (!newWord) return;
+    if (typeof newWord !== "string") return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -95,15 +100,14 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
 
     socket.player?.lobby?.changeWord(newWord, i);
   };
 
   const addWordToGame = () => {
-
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
       return;
@@ -120,15 +124,15 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
     socket.player?.lobby?.addWordToGame();
   };
 
   const addCustomWordToGame = (newWord: string, database: boolean) => {
-    if (!newWord) return
-    if (typeof newWord !== "string") return
+    if (!newWord) return;
+    if (typeof newWord !== "string") return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -149,26 +153,26 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
-
 
     // let word = { word: newWord, tags: ["english"] };
 
     if (database) {
-      newWord.split(";").forEach(word => { if (word.length <= 100) { addWordToDBAPI({ word, tags: [] }) } })
+      newWord.split(";").forEach((word) => {
+        if (word.length <= 100) {
+          addWordToDBAPI({ word, tags: [] });
+        }
+      });
     }
-
-
 
     socket.player?.lobby?.addCustomWordToGame(newWord);
   };
 
   const addWordToDB = (newWord: string) => {
-
-    if (!newWord) return
-    if (typeof newWord !== "string") return
+    if (!newWord) return;
+    if (typeof newWord !== "string") return;
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
       return;
@@ -187,17 +191,14 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
 
-
-
     // let word = { word: newWord, tags: ["english"] };
 
-    newWord.split(";").forEach(word => { addWordToDBAPI({ word, tags: [] }) })
-
-
+    newWord.split(";").forEach((word) => {
+      addWordToDBAPI({ word, tags: [] });
+    });
   };
 
   const addSuggestWord = (suggestedWord: string) => {
-
     if (typeof suggestedWord !== "string") {
       return;
     }
@@ -214,15 +215,17 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
 
-    socket.player?.lobby?.addWordSuggestion(suggestedWord, socket.player.auth!.name);
-  }
+    socket.player?.lobby?.addWordSuggestion(
+      suggestedWord,
+      socket.player.auth!.name
+    );
+  };
 
   const clearSuggestions = () => {
-
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
       return;
@@ -238,14 +241,14 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
     socket.player!.lobby!.clearSuggestions();
   };
 
   const removeWordSuggestion = (removedWord: string) => {
-    if (typeof removedWord !== "string") return
+    if (typeof removedWord !== "string") return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -266,14 +269,14 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
     socket.player?.lobby?.removeWordSuggestion(removedWord);
   };
 
   const addWordSuggestionToWords = (addedWord: string) => {
-    if (typeof addedWord !== "string") return
+    if (typeof addedWord !== "string") return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -293,16 +296,15 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
 
     socket.player?.lobby?.addWordSuggestionToWords(addedWord);
   };
 
   const deleteWord = (i: number) => {
-
-    if (typeof i !== "number") return
+    if (typeof i !== "number") return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -320,8 +322,8 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player.lobby)) {
-      console.log("wrong game")
-      return
+      console.log("wrong game");
+      return;
     }
     socket.player?.lobby?.deleteWord(i);
   };
@@ -355,14 +357,10 @@ export default (io: unknown, socket: MySocket) => {
   /*   callback({ games }); */
   /* }); */
 
-
-
-
   const addCapture = (i: number, pano: Pano, callback: Function) => {
-
-    if (typeof i !== "number") return
-    if (!checkCallback(callback)) return
-    if (!pano) return
+    if (typeof i !== "number") return;
+    if (!checkCallback(callback)) return;
+    if (!pano) return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -376,10 +374,10 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
 
-    let res
+    let res;
     if (socket.player) {
       res = socket.player!.lobby!.addCapture(socket.player, pano, i);
       socket.player!.updateEveryoneInSameLobby();
@@ -388,7 +386,7 @@ export default (io: unknown, socket: MySocket) => {
   };
 
   const backToGameOver = (callback: Function) => {
-    if (!checkCallback(callback)) return
+    if (!checkCallback(callback)) return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -406,14 +404,14 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
 
     socket.player!.lobby!.goBackToGameOver();
     return "success";
   };
   const score = (callback: Function) => {
-    if (!checkCallback(callback)) return
+    if (!checkCallback(callback)) return;
 
     if (!checkIfPlayer(socket)) {
       callback("fail");
@@ -431,13 +429,13 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
     socket.player!.lobby!.goToScore();
     return "success";
   };
   const endGame = (callback: Function) => {
-    if (!checkCallback(callback)) return
+    if (!checkCallback(callback)) return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -455,14 +453,14 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
 
     socket.player!.lobby!.goToGameOver();
     return "success";
   };
   const lobby = (callback: Function) => {
-    if (!checkCallback(callback)) return
+    if (!checkCallback(callback)) return;
 
     if (!checkIfPlayer(socket)) {
       callback("fail");
@@ -480,7 +478,7 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
     socket.player!.lobby!.goToLobby();
 
@@ -488,9 +486,7 @@ export default (io: unknown, socket: MySocket) => {
   };
 
   const reportAsNSFW = (i: number, reason: string) => {
-    
-
-    if (typeof i !== "number") return
+    if (typeof i !== "number") return;
 
     if (!checkIfPlayer(socket)) {
       return;
@@ -500,22 +496,22 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
 
     if (!reason) {
-      console.log("no reason")
-      return
+      console.log("no reason");
+      return;
     }
 
     // saveReportedPanosInDB(socket.player.lobby.captures[i].pano.pano.pano, reason, socket.player)
 
-    socket.player!.lobby!.captures[i].nsfw = true
+    socket.player!.lobby!.captures[i].nsfw = true;
 
-    socket.player!.updateEveryoneInSameLobby()
+    socket.player!.updateEveryoneInSameLobby();
   };
   const reportWord = async (word: string) => {
-    if (typeof word !== "string") return
+    if (typeof word !== "string") return;
 
     if (!checkIfPlayer(socket)) {
       return;
@@ -527,10 +523,10 @@ export default (io: unknown, socket: MySocket) => {
     if (socket.player!.lobby!.host !== socket.player) {
       return;
     }
-    await reportWordApi(word)
+    await reportWordApi(word);
   };
   const remove = (val: boolean, i: number) => {
-    if (typeof val !== "boolean") return
+    if (typeof val !== "boolean") return;
 
     if (!checkIfPlayer(socket)) {
       return;
@@ -545,7 +541,7 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
     socket.player!.lobby!.captures[i].changeRemove(val);
 
@@ -554,8 +550,7 @@ export default (io: unknown, socket: MySocket) => {
   };
 
   const switchExtraVoteCapture = (val: boolean, i: number) => {
-
-    if (typeof val !== "boolean") return
+    if (typeof val !== "boolean") return;
     if (!checkIfPlayer(socket)) {
       return;
     }
@@ -569,7 +564,7 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
     socket.player!.lobby!.captures[i].switchExtraVoteCapture(val);
 
@@ -577,8 +572,7 @@ export default (io: unknown, socket: MySocket) => {
     return "success";
   };
   const switchAnonVoting = (val: boolean) => {
-
-    if (typeof val !== "boolean") return
+    if (typeof val !== "boolean") return;
     if (!checkIfPlayer(socket)) {
       return;
     }
@@ -591,7 +585,7 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
 
     socket.player!.lobby!.anonVoting = val;
@@ -600,8 +594,7 @@ export default (io: unknown, socket: MySocket) => {
     return "success";
   };
   const switchAllowEveryoneToVote = (val: boolean) => {
-
-    if (typeof val !== "boolean") return
+    if (typeof val !== "boolean") return;
 
     if (!checkIfPlayer(socket)) {
       return;
@@ -615,7 +608,7 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
 
     socket.player.lobby.allowEveryoneToVote = val;
@@ -626,7 +619,7 @@ export default (io: unknown, socket: MySocket) => {
   };
 
   const setCaptureIndex = (newVal: number) => {
-    if (typeof newVal !== "number") return
+    if (typeof newVal !== "number") return;
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
       return;
@@ -643,13 +636,13 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
     socket.player!.lobby!.setCaptureIndex(newVal);
   };
 
   const changeCountry = (country: string) => {
-    if (typeof country !== "string") return
+    if (typeof country !== "string") return;
 
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -666,12 +659,11 @@ export default (io: unknown, socket: MySocket) => {
       return;
     }
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
 
     socket.player!.lobby!.changeCountry(country);
   };
-
 
   const vote = (vote: "keep" | "remove", index: number) => {
     if (!checkIfPlayer(socket)) {
@@ -685,13 +677,12 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
     socket.player.lobby.vote(vote, socket.player!.auth!.name, index);
   };
 
   const startGame = () => {
-
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
       return;
@@ -708,18 +699,15 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
     socket.player!.lobby!.startGame();
 
     console.log("starting game ending :", socket.player!.lobby!.gameEndTime);
-
-
   };
 
   const switchOnlyOfficialCoverage = (val: boolean) => {
-
-    if (typeof val !== "boolean") return
+    if (typeof val !== "boolean") return;
     if (!checkIfPlayer(socket)) {
       return;
     }
@@ -733,7 +721,7 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!isGame(socket.player!.lobby)) {
-      return
+      return;
     }
     socket.player!.lobby!.onlyOfficialCoverage = val;
 
@@ -741,7 +729,34 @@ export default (io: unknown, socket: MySocket) => {
     return "success";
   };
 
-  createListner(socket, "normalGame", [newRandomWords,
-    addWords, newRandomWord, changeWord, addWordToGame, addCustomWordToGame, addWordToDB, addSuggestWord, clearSuggestions, removeWordSuggestion, addWordSuggestionToWords, deleteWord, addCapture, backToGameOver, score, endGame, lobby, reportAsNSFW, reportWord, remove, switchExtraVoteCapture, switchAnonVoting, switchAllowEveryoneToVote, setCaptureIndex, changeCountry, vote, startGame, switchOnlyOfficialCoverage])
-
-}
+  createListner(socket, "normalGame", [
+    newRandomWords,
+    addWords,
+    newRandomWord,
+    changeWord,
+    addWordToGame,
+    addCustomWordToGame,
+    addWordToDB,
+    addSuggestWord,
+    clearSuggestions,
+    removeWordSuggestion,
+    addWordSuggestionToWords,
+    deleteWord,
+    addCapture,
+    backToGameOver,
+    score,
+    endGame,
+    lobby,
+    reportAsNSFW,
+    reportWord,
+    remove,
+    switchExtraVoteCapture,
+    switchAnonVoting,
+    switchAllowEveryoneToVote,
+    setCaptureIndex,
+    changeCountry,
+    vote,
+    startGame,
+    switchOnlyOfficialCoverage,
+  ]);
+};

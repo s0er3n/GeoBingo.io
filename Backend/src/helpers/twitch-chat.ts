@@ -2,7 +2,7 @@ import dotEnv from "dotenv";
 import tmi from "tmi.js";
 import Game from "../objects/Game";
 import TGAH from "../objects/GeoBingoAgainstHumanity";
-import { isGame } from "./checkers"
+import { isGame } from "./checkers";
 dotEnv.config({ path: "/home/soeren/Programming/GeoBingo/.env" });
 const client = new tmi.Client({
   identity: {
@@ -13,10 +13,11 @@ const client = new tmi.Client({
 
 // u have to wait for client connect before you can join channel
 try {
-  (async () => { await client.connect(); })()
-}
-catch (e) {
-  console.log(e)
+  (async () => {
+    await client.connect();
+  })();
+} catch (e) {
+  console.log(e);
 }
 
 const lobbies: { [key: string]: Game | TGAH } = {};
@@ -26,12 +27,11 @@ client.on("message", (channel, tags, message, self) => {
 
   const args = message.slice(1).split(" ");
   const command = args.shift()!.toLowerCase();
-  const game = lobbies[channel]
+  const game = lobbies[channel];
   if (isGame(game)) {
     if (command === "remove") {
       console.log("remove");
       try {
-
         game?.vote("remove", tags.username!, undefined);
       } catch (e) {
         console.log(e);
@@ -61,7 +61,7 @@ client.on("message", (channel, tags, message, self) => {
           channel,
           `🤖 you can join here: ${process.env.domain}/?code=` + game.title
         );
-      } catch (e) { }
+      } catch (e) {}
     }
     if (command === "code") {
       try {
@@ -69,7 +69,7 @@ client.on("message", (channel, tags, message, self) => {
           channel,
           "🤖 you can join the game with this code: " + game.title
         );
-      } catch (e) { }
+      } catch (e) {}
     }
   } else {
     if (
@@ -84,7 +84,7 @@ client.on("message", (channel, tags, message, self) => {
           channel,
           "🤖 This is a private lobby :( Try asking the host for the code."
         );
-      } catch (e) { }
+      } catch (e) {}
     }
   }
 });
@@ -95,7 +95,7 @@ export const join = (channel: string, lobby: Game | TGAH) => {
     client.say(
       "#" + channel,
       `🤖 ${process.env.domain} just connected to twitch chat. You can use !link or !code to join the game. If you like the game join the discord server and follow the twitch category. You can also support me on https://ko-fi.com/soerenmichaels <3.` +
-      (!lobby.privateLobby ? "The code is " + lobby.title : "")
+        (!lobby.privateLobby ? "The code is " + lobby.title : "")
     );
     lobbies["#" + channel.toLowerCase()] = lobby;
   } catch (e) {
