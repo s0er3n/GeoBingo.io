@@ -1,0 +1,17 @@
+{
+	"short_name": "GeoBingo.io",
+	"name": "GeoBingo.io a multiplayer street view bingo game",
+	"description": "find things on street view alone or with friends",
+	"icons": [
+		{
+			"src": "/logo.png",
+			"sizes": "any",
+			"type": "image/png"
+		}
+	],
+	"start_url": "/",
+	"background_color": "#FBEFEF",
+	"display": "standalone",
+	"scope": "/",
+	"theme_color": "#FBEFEF"
+}

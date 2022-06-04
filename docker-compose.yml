@@ -1,0 +1,21 @@
+services:
+  backend:
+    environment:
+      - branch
+      - name
+      - token
+      - server_port
+      - domain
+      - supabasekey
+      - supabaseurl
+      - jwtpriv
+    image: docker.soerensserver.xyz/bingo-backend-${branch}:latest
+  frontend:
+    environment:
+      - branch
+      - VITE_DOMAIN
+    image: docker.soerensserver.xyz/bingo-frontend-${branch}:latest
+networks:
+  default:
+    external:
+      name: backend

@@ -1,0 +1,11 @@
+.env
+
+Backend/coverage/
+*/node_modules
+Frontend/.netlify
+Frontend/build/
+
+Backend/src/node_modules
+node_modules
+Frontend/.svelte-kit/dev
+Frontend/.svelte-kit/

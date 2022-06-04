@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "dev": "sudo concurrently --kill-others \"sudo npm run backend\" \"npm run frontend\" ",
+    "backend": "sudo npm run --prefix Backend  dev",
+    "frontend": "npm run --prefix Frontend dev ",
+    "test": "npm run --prefix Backend test "
+  }
+}

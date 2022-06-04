@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+
+[context.beta]
+  VITE_BACKEND= "betabackend.geobingo.io"
+  VITE_DOMAIN= "beta.geobingo.io"
