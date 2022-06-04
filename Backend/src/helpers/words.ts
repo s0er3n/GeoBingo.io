@@ -12,12 +12,12 @@ const refreshWords = () =>
 
 
 export function getRandomWords(count:number) {
-  let arr = words;
+  const arr = words;
   let answer: Word[] = [],
     counter = 0;
 
   while (counter < count) {
-    let rand = arr[Math.floor(Math.random() * arr.length)];
+    const rand = arr[Math.floor(Math.random() * arr.length)];
     if (!answer.some((an) => an === rand)) {
       answer.push(rand);
       counter++;

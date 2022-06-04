@@ -40,7 +40,7 @@ export default class Game extends BaseGame {
 
 
   newRandomWord(i: number) {
-    let newWord = getRandomWordNotInWordList(this.words)
+    const newWord = getRandomWordNotInWordList(this.words)
     this.words[i] = newWord;
     this.updateLobby();
   }
@@ -64,7 +64,7 @@ export default class Game extends BaseGame {
     this.updateLobby();
   }
   addWordToGame() {
-    let newWord = getRandomWordNotInWordList(this.words)
+    const newWord = getRandomWordNotInWordList(this.words)
     this.words.push(newWord);
     this.updateLobby();
   }
@@ -100,7 +100,7 @@ export default class Game extends BaseGame {
       return true;
     }
 
-    let res = checkLatLangPointisInCountry(this.country, pano.position.long, pano.position.lat)
+    const res = checkLatLangPointisInCountry(this.country, pano.position.long, pano.position.lat)
     return res;
   }
 
@@ -111,7 +111,7 @@ export default class Game extends BaseGame {
 
   addCapture(player: Player, pano: Pano, i: number) {
 
-    let time = Math.floor((Date.now() - (this.gameEndTime!.getTime() - this.time * 60000)) / 1000)
+    const time = Math.floor((Date.now() - (this.gameEndTime!.getTime() - this.time * 60000)) / 1000)
 
     if (this.gamePhase !== gamePhases.INGAME) {
       return "fail";
@@ -121,7 +121,7 @@ export default class Game extends BaseGame {
     }
     // filtering out if capture already there
     // FIXME: what is going on here
-    let filtered = this.captures.filter(
+    const filtered = this.captures.filter(
       (capture) => !(capture.word === i && capture.player === player)
     );
     if (
@@ -136,7 +136,7 @@ export default class Game extends BaseGame {
     return "success";
   }
   startGame() {
-    let newGameEndTime = new Date(Date.now() + this.time * 60000);
+    const newGameEndTime = new Date(Date.now() + this.time * 60000);
     this.gameEndTime = newGameEndTime;
     schedule.scheduleJob(newGameEndTime, () => {
       if (this.gamePhase !== "ingame") {

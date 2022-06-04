@@ -4,17 +4,17 @@ class PlayerHandler {
   players: Player[] = []
 
   createNewPlayer(auth: Auth) {
-    let newPLayer = new Player(auth)
+    const newPLayer = new Player(auth)
     this.players.push(newPLayer)
     return newPLayer
   }
 
   getPlayerBySub(sub: string): Player | undefined {
-    let foundPlayer = this.players.find((player: Player) => player.getSub() === sub)
+    const foundPlayer = this.players.find((player: Player) => player.getSub() === sub)
     return foundPlayer
   }
   getPlayerOrCreatePlayer(auth: Auth) {
-    let player = this.getPlayerBySub(auth.sub)
+    const player = this.getPlayerBySub(auth.sub)
     if (player) {
       player.auth = auth
       return player

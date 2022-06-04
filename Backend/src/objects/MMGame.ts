@@ -59,14 +59,14 @@ export default class Game extends BaseGame {
       return true;
     }
 
-    let res = checkLatLangPointisInCountry(this.country, pano.position.long, pano.position.lat)
+    const res = checkLatLangPointisInCountry(this.country, pano.position.long, pano.position.lat)
     return res;
   }
 
 
   addCapture(player: Player, pano: Pano, i: number) {
 
-    let time = Math.floor((Date.now() - (this.gameEndTime!.getTime() - this.time * 60000)) / 1000)
+    const time = Math.floor((Date.now() - (this.gameEndTime!.getTime() - this.time * 60000)) / 1000)
 
     if (this.gamePhase !== gamePhases.INGAME) {
       return "fail";
@@ -76,7 +76,7 @@ export default class Game extends BaseGame {
     }
     // filtering out if capture already there
     // FIXME: what is going on here
-    let filtered = this.captures.filter(
+    const filtered = this.captures.filter(
       (capture) => !(capture.word === i && capture.player === player)
     );
     if (
@@ -91,7 +91,7 @@ export default class Game extends BaseGame {
     return "success";
   }
   startGame = () => {
-    let newGameEndTime = new Date(Date.now() + this.time * 60000);
+    const newGameEndTime = new Date(Date.now() + this.time * 60000);
     this.gameEndTime = newGameEndTime;
     schedule.scheduleJob(newGameEndTime, () => {
       if (this.gamePhase !== "ingame") {
@@ -132,9 +132,9 @@ export default class Game extends BaseGame {
 
   goThroughCaptures = () => {
     //TODO: add remove logic
-    let votesForKeep = this.captures[this.captureIndex].voting.keep.size
-    let votesForRemove = this.captures[this.captureIndex].voting.remove.size
-    let totalVotes = votesForKeep + votesForRemove
+    const votesForKeep = this.captures[this.captureIndex].voting.keep.size
+    const votesForRemove = this.captures[this.captureIndex].voting.remove.size
+    const totalVotes = votesForKeep + votesForRemove
     if (totalVotes) {
       if (votesForKeep / totalVotes <= 0.5) {
         this.captures[this.captureIndex].removed = true

@@ -120,7 +120,7 @@ export default (io: unknown, socket: MySocket) => {
   };
 
   const host = (privateLobby: boolean, gameType: "game" | "gah" | "MMGame" = "game", callback: Function) => {
-    let roomName: string = makeRoomName();
+    const roomName: string = makeRoomName();
 
 
     if (typeof privateLobby !== "boolean") return
@@ -174,7 +174,7 @@ export default (io: unknown, socket: MySocket) => {
     }
 
     if (!checkIfHost(socket)) return
-    let oldGame = socket.player.lobby
+    const oldGame = socket.player.lobby
 
     let newGame: Game | GeoBingoAgainstHumanity
 
@@ -193,7 +193,7 @@ export default (io: unknown, socket: MySocket) => {
     lobbies[oldGame.title] = newGame;
 
 
-    for (let player of oldGame.players) {
+    for (const player of oldGame.players) {
       newGame.players.add(player)
       if (player.lobby === oldGame) {
         player.lobby = newGame

@@ -11,10 +11,10 @@ export const gamePhases: { [key: string]: "lobby" | "ingame" | "gameover" | "sco
 };
 
 export let streamerFrontPage = "";
-export let setStreamerFrontPage = (streamer: string) => streamerFrontPage = streamer
+export const setStreamerFrontPage = (streamer: string) => streamerFrontPage = streamer
 export let streamerWhiteList: string[] = [];
-export let updateWhiteList = async () => {
-  let res = await getStreamerWhiteList()
+export const updateWhiteList = async () => {
+  const res = await getStreamerWhiteList()
   streamerWhiteList = res
 }
 type Lobbies = {

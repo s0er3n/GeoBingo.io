@@ -1,8 +1,8 @@
 import { checkLatLangPointisInCountry } from "./countryValidator"
 
 
-let country = "Germany"
-let countryNotInDatabase = "Gerone"
+const country = "Germany"
+const countryNotInDatabase = "Gerone"
 describe('check country validator', function () {
   it('accepting country', function () {
     expect(checkLatLangPointisInCountry(country, 13.354366, 52.496352)).toBeTruthy()

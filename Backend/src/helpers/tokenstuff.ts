@@ -4,7 +4,7 @@ import players from "../objects/PlayerHandler"
 import Player from "../objects/Player";
 import { MySocket } from "../types";
 
-let jwtpriv: string = process.env.jwtpriv!
+const jwtpriv: string = process.env.jwtpriv!
 
 export const verifyAndGetAuth = (token: string) => {
   let decode: any;
@@ -42,7 +42,7 @@ const decodeToken = (token: string) => {
 
 
 export const updateTokenAndAuth = (token: string, player: Player, name: string) => {
-  let decoded: any = decodeToken(token)
+  const decoded: any = decodeToken(token)
   if (!decoded) {
     console.log("couldnt decode token")
     return
@@ -55,7 +55,7 @@ export const updateTokenAndAuth = (token: string, player: Player, name: string) 
 
 
 export const changeAuth = (token: string, socket: MySocket) => {
-  let decodedToken: any = decodeToken(token)
+  const decodedToken: any = decodeToken(token)
 
   if (!decodedToken) {
     console.log("couldnt decode token:", token)
@@ -63,7 +63,7 @@ export const changeAuth = (token: string, socket: MySocket) => {
   }
 
 
-  let auth = new Auth(
+  const auth = new Auth(
     decodedToken.sub,
     decodedToken.app_metadata?.provider,
     decodedToken.user_metadata.nickname,
@@ -72,7 +72,7 @@ export const changeAuth = (token: string, socket: MySocket) => {
 
 
 
-  let player = players.getPlayerBySub(auth.sub)
+  const player = players.getPlayerBySub(auth.sub)
 
   if (!socket.player) {
     return

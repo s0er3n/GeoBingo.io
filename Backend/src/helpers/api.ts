@@ -16,7 +16,7 @@ if (SUPABASE_KEY && SUPABASE_URL) {
 }
 
 export const addWordToDB = async (word: { word: string, tags: string[] }) => {
-  let { data, error } = await supabase.from("bingoWords").insert([{ word }]);
+  const { data, error } = await supabase.from("bingoWords").insert([{ word }]);
   return data;
 };
 
@@ -91,7 +91,7 @@ export const updateEquipedSkin = async (auth: Auth, val: number) => {
 
 export const saveReportedPanosInDB = async (panoid: string, reason: string, player: Player) => {
   try {
-    let { data, error } = await supabase.from("reportedPhotospheres").insert({ panoid, reason, playerid: player.id });
+    const { data, error } = await supabase.from("reportedPhotospheres").insert({ panoid, reason, playerid: player.id });
     console.log(data, error);
   } catch (e) {
     console.log(e);
@@ -99,7 +99,7 @@ export const saveReportedPanosInDB = async (panoid: string, reason: string, play
 };
 
 export const checkIfPanoIsReported = async (panoid: string, capture: any) => {
-  let { data: reportedPhotospheres, error } = await supabase
+  const { data: reportedPhotospheres, error } = await supabase
     .from('reportedPhotospheres')
     .select("*").eq("panoid", panoid)
   if (error === null && reportedPhotospheres) {
@@ -150,13 +150,13 @@ export const getEmotesOfUser = async (auth: Auth) => {
 }
 
 export const getEquipedOfUser = async (auth: Auth) => {
-  let { data: rows, error } = await supabase
+  const { data: rows, error } = await supabase
     .from('equiped')
     .select("equiped")
     // Filters
     .eq("user_id", auth.sub)
   if (!error && rows) {
-    let equiped = rows[0]?.equiped
+    const equiped = rows[0]?.equiped
     if (equiped) {
       auth.equiped = equiped
       // no player in testing
@@ -205,7 +205,7 @@ export async function getDonationEmails(auth: Auth) {
 }
 
 export async function getSumOfDonations(emails: string[]): Promise<number> {
-  let [{ data: webhookdonations, error }, { data: csvDonations, error: e }] = await Promise.all(
+  const [{ data: webhookdonations, error }, { data: csvDonations, error: e }] = await Promise.all(
     [
       supabase
         .from('kofi_donations')
@@ -255,7 +255,7 @@ export async function getSupportLevelAsBadgeAndSupportEmojis(auth: Auth) {
 }
 
 export async function getStreamerWhiteList() {
-  let { data: list, error } = await supabase
+  const { data: list, error } = await supabase
     .from('Streamer Whitelist')
     .select('Streamer')
   if (!error && list) {

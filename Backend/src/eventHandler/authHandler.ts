@@ -28,8 +28,8 @@ export default (io: any, socket: MySocket) => {
       socket.auth = verifyAndGetAuth(token)
     }
     if (!socket.auth) {
-      let sub = uuidv4()
-      let name = userNameGenerator()
+      const sub = uuidv4()
+      const name = userNameGenerator()
       token = makeGuestToken(sub, name)
       socket.auth = verifyAndGetAuth(token)// can be optimized
       guestToken = token

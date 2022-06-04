@@ -38,7 +38,7 @@ export default (io: unknown, socket: MySocket) => {
 
 
   const reportAsNSFW = (i: number, reason: string) => {
-    ;
+    
 
     if (typeof i !== "number") return
 

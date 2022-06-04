@@ -19,7 +19,7 @@ export default (io: unknown, socket: MySocket) => {
 
   const vote = (index: number) => {
     console.log("voting", index, socket?.player?.auth?.name)
-    let game = getGAH(socket)
+    const game = getGAH(socket)
     game?.voting?.addVote(socket?.player?.auth?.name, index)
     //updating lobby bc we are acessing voting directly //TODO: improve this
     game?.updateLobby()

@@ -19,7 +19,7 @@ catch (e) {
   console.log(e)
 }
 
-let lobbies: { [key: string]: Game | TGAH } = {};
+const lobbies: { [key: string]: Game | TGAH } = {};
 
 client.on("message", (channel, tags, message, self) => {
   if (self || !message.startsWith("!")) return;

@@ -54,6 +54,7 @@ const httpServer = http(app);
 const io = new Server(httpServer, options);
 
 const onConnection = (socket: MySocket) => {
+
   authHandler(io, socket)
   baseGameHandler(io, socket)
   normalGameHandler(io, socket)
@@ -77,138 +78,6 @@ const onConnection = (socket: MySocket) => {
 
 io.on("connection", onConnection)
 
-
-
-
-
-
-
-//   // GeoBingoAgainstHumanity
-
-
-//   socket.on("gah.host", (privateLobby: boolean, callback: Function) => {
-
-//     if (typeof privateLobby !== "boolean") return
-
-//     if (!checkCallback(callback)) return
-
-//     if (!checkIfPlayer(socket)) {
-//       console.log("player object not found cannot host");
-//       return;
-//     }
-
-//     let roomName: string = makeRoomName();
-
-//     let game = new GeoBingoAgainstHumanity(socket.player!, roomName, privateLobby);
-
-//     lobbies[roomName] = game;
-
-
-//     game.host.lobby = game;
-
-//     console.log(
-//       socket.player?.toObj(),
-
-//       socket.player?.lobby?.privateLobby,
-//       "is hosting",
-//       makeRoomName
-//     );
-//     callback(roomName);
-//   });
-
-//   socket.on("gah.join", (lobby: string, callback: Function) => {
-//     if (!checkCallback(callback)) return
-
-//     if (!checkIfPlayer(socket)) {
-//       console.log("player not found");
-//       return;
-//     }
-
-//     if (!lobby) return
-
-//     lobby = lobby.trim().toLowerCase();
-//     if (lobbies[lobby] === undefined) {
-//       console.log("room not found");
-//       callback("room not found");
-//       return;
-//     }
-
-//     if (socket.player) {
-
-
-//       if (lobbies[lobby].playersKicked.has(socket.player)) {
-//         console.log("player kicked");
-//         return;
-//       }
-//     }
-
-//     if (!socket.player) {
-//       return
-//     }
-//     if (lobbies[lobby].players.size >= lobbies[lobby].size && !lobbies[lobby].players.has(socket.player)) {
-//       console.log("room full")
-//       callback("lobby full")
-//       return
-//     }
-
-//     if (lobbies[lobby].onlyAuth) {
-
-//       if (!socket.player.auth!.provider) {
-//         callback("twitch only lobby");
-//         return;
-//       }
-//     }
-
-//     if (lobbies[lobby].banned_ips.has(socket.handshake.address)) {
-//       return;
-//     }
-
-//     socket.player.lobby = lobbies[lobby];
-
-//     lobbies[lobby].join(socket.player);
-
-//     socket.player.lobby.updateLobby();
-
-//     if (checkIfHost(socket)) {
-//       if (
-
-//         socket.player.auth?.provider === "twitch" &&
-
-//         streamerWhiteList.map(streamer => streamer.toLowerCase()).includes(socket.player.auth.name.toLowerCase())
-//       ) {
-
-//         setStreamerFrontPage(socket.player.auth.name)
-//       }
-
-//       if (socket.player.auth?.provider === "twitch") {
-
-//         join(socket.player.auth.name, socket.player.lobby);
-//       }
-//     }
-
-//     callback("success");
-//   })
-
-//   socket.on("gah.leave", (callback: Function) => {
-//     if (!checkCallback(callback)) return
-
-//     if (!checkIfPlayer(socket)) {
-//       return;
-//     }
-//     // TODO either not show player if is not in lobby or delete player from lobby
-
-
-//     if (!socket.player?.lobby) {
-//       return
-//     }
-//     socket.player.lobby = undefined;
-
-//     socket.player.updateSelf()
-//     callback("success");
-//   });
-
-// });
-
 httpServer.listen(process.env.server_port);
 
 const KOFI_TOKEN = process.env.KOFI_TOKEN;
@@ -220,7 +89,7 @@ app.post("/webhook/donations", async (req, res) => {
     delete data["tier_name"]
     delete data["verification_token"]
     console.log(data)
-    let error = await addKofiDonation(data)
+    const error = await addKofiDonation(data)
     if (!error) {
       res.sendStatus(200)
     }

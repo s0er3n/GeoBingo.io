@@ -38,9 +38,9 @@ describe('Testing GeoBingo Against Humanity', () => {
     })
     it("add 2 images", () => {
       game.start()
-      let pano: Pano = { pano: { pano: "123", pov: { heading: 0, pitch: 0, zoom: 0 } }, position: { lat: 0, long: 1 } }
-      let player: Player = game.host
-      let index = 1
+      const pano: Pano = { pano: { pano: "123", pov: { heading: 0, pitch: 0, zoom: 0 } }, position: { lat: 0, long: 1 } }
+      const player: Player = game.host
+      const index = 1
 
       game.makeCapture(pano, player, index)
       expect(game.toGameState().captures[0].captures[index].pano.pano).toBe("123")
@@ -57,9 +57,9 @@ describe('Testing GeoBingo Against Humanity', () => {
 
     })
     it("should be gamephase = lobby with captures", () => {
-      let pano: Pano = { pano: { pano: "123", pov: { heading: 0, pitch: 0, zoom: 0 } }, position: { lat: 0, long: 1 } }
-      let player: Player = game.host
-      let index = 1
+      const pano: Pano = { pano: { pano: "123", pov: { heading: 0, pitch: 0, zoom: 0 } }, position: { lat: 0, long: 1 } }
+      const player: Player = game.host
+      const index = 1
       game.makeCapture(pano, player, index)
       game.end()
       expect(game.gamePhase).toBe("voting")
@@ -67,9 +67,9 @@ describe('Testing GeoBingo Against Humanity', () => {
   })
   describe("voting", () => {
     it("should be 3 votes for the first capture store ", () => {
-      let pano: Pano = { pano: { pano: "123", pov: { heading: 0, pitch: 0, zoom: 0 } }, position: { lat: 0, long: 1 } }
-      let player: Player = game.host
-      let player2: Player = Array.from(game.players)[1]
+      const pano: Pano = { pano: { pano: "123", pov: { heading: 0, pitch: 0, zoom: 0 } }, position: { lat: 0, long: 1 } }
+      const player: Player = game.host
+      const player2: Player = Array.from(game.players)[1]
       game.start()
       game.makeCapture(pano, player, 1)
       game.makeCapture(pano, player, 2)

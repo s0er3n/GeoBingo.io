@@ -5,8 +5,8 @@ export default class Auth {
   provider: string;
   name:string;
   profilePicture:string;
-  badges: Array<String> = []
-  emotes: Array<String>= []
+  badges: Array<string> = []
+  emotes: Array<string>= []
   equiped = 0
   constructor(sub:string, provider:string, name:string, profilePicture:string) {
     this.sub = sub

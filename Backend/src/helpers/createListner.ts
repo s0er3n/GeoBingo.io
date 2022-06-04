@@ -4,7 +4,7 @@ type FN = (...args: any[]) => any
 
 export default (socket: MySocket
   , nameSpace: string | string[], fns: FN[]) => {
-  for (let fn of fns) {
+  for (const fn of fns) {
     if (typeof nameSpace === "string") {
       socket.on(nameSpace + ":" + fn.name, fn)
     }

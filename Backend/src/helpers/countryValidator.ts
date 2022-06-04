@@ -4,7 +4,7 @@ import { geometries } from "./getAllCountries";
 
 export const checkLatLangPointisInCountry = (country:string, long: number, lat:number) => {
   try {
-    let res = geoContains(geometries[country]?.feature?.geometry, [
+    const res = geoContains(geometries[country]?.feature?.geometry, [
       long,
       lat,
     ]);
