@@ -211,10 +211,11 @@ io.on("connection", onConnection)
 
 httpServer.listen(process.env.server_port);
 
+const KOFI_TOKEN = process.env.KOFI_TOKEN;
 // webhook
 app.post("/webhook/donations", async (req, res) => {
   const data = JSON.parse(req.body.data)
-  if (data.verification_token === "4bda3d8d-fbb2-4800-b459-4bca3b0936b9") {
+  if (data.verification_token === KOFI_TOKEN) {
     delete data["shop_items"]
     delete data["tier_name"]
     delete data["verification_token"]
