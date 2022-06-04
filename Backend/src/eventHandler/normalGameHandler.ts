@@ -357,7 +357,7 @@ export default (io: unknown, socket: MySocket) => {
   /*   callback({ games }); */
   /* }); */
 
-  const addCapture = (i: number, pano: Pano, callback: Function) => {
+  const addCapture = (i: number, pano: Pano, callback: any) => {
     if (typeof i !== "number") return;
     if (!checkCallback(callback)) return;
     if (!pano) return;

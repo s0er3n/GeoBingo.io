@@ -1,5 +1,5 @@
 import dotEnv from "dotenv";
-
+import path from "path"
 import express from "express";
 
 import bodyParser from "body-parser";
@@ -15,7 +15,6 @@ import { Server } from "socket.io";
 import { addKofiDonation } from "./helpers/api";
 import { updateWhiteList } from "./helpers/variables";
 
-dotEnv.config({ path: "/home/soeren/Programming/GeoBingo/.env" });
 
 import type { MySocket } from "./types";
 import gahGameHandler from "./eventHandler/gahGameHandler";
@@ -61,8 +60,7 @@ const onConnection = (socket: MySocket) => {
 };
 
 io.on("connection", onConnection);
-
-httpServer.listen(process.env.server_port);
+httpServer.listen(8000);
 
 const KOFI_TOKEN = process.env.KOFI_TOKEN;
 // webhook

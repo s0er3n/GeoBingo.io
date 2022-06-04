@@ -4,7 +4,6 @@ services:
       - branch
       - name
       - token
-      - server_port
       - domain
       - supabasekey
       - supabaseurl

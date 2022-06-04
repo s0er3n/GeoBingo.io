@@ -5,7 +5,6 @@ import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-
 	kit: {
 		trailingSlash: 'always',
 		adapter: adapter({
@@ -13,10 +12,9 @@ const config = {
 			pages: 'build',
 			assets: 'build',
 			fallback: null,
-			precompress: true,
+			precompress: true
 		}),
 		prerender: { default: true }
-
 	},
 
 	preprocess: [

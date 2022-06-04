@@ -5,11 +5,10 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
-    "dev": "sudo nodemon src/main.ts",
+    "dev": "nodemon src/main.ts",
     "prod": "node --experimental-specifier-resolution=node  --max_old_space_size=8192 --experimental-specifier-resolution=node --loader ts-node/esm src/main.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --watchAll ",
-    "lint": "eslint .",
-    "lint fix": "eslint --fix ."
+    "lint": "eslint --fix ."
   },
   "author": "",
   "license": "ISC",

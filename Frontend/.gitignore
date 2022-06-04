@@ -1,0 +1,3 @@
+// eslint seems to need an .gitignore here 
+.svelte-kit/
+build/

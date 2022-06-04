@@ -6,5 +6,6 @@
 <h2>Kontakt:</h2>
 <p>
 	E-Mail-Adresse:
-	<a href="mailto:soeren.michaels+geobingo@gmail.com">soeren.michaels+geobingo@gmail.com</a>
+	<a href="mailto:soeren.michaels+geobingo@gmail.com"
+		>soeren.michaels+geobingo@gmail.com</a>
 </p>
