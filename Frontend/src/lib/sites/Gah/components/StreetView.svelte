@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import { api } from '$lib/js/api';
 	import { VotingPhase } from '$lib/js/GeoBingoAgainstHumanity';
 	export let pano: any;
