@@ -1,6 +1,6 @@
-import dotEnv from "dotenv";
 import players from "../objects/PlayerHandler";
-dotEnv.config({ path: "/home/soeren/Programming/GeoBingo/.env" });
+import dotEnv from "dotenv";
+dotEnv.config({ path: "../.env" })
 
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import Auth from "../objects/Auth";
@@ -11,15 +11,29 @@ let supabase: SupabaseClient;
 if (SUPABASE_KEY && SUPABASE_URL) {
   supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 } else {
-  throw "Error: no SUPABASE_KEY or SUPABASE_URL";
+  console.warn("No SUPABASE_KEY or SUPABASE_URL");
 }
+
+const supabaseProvided = SUPABASE_KEY && SUPABASE_URL
 
 export const addWordToDB = async (word: { word: string; tags: string[] }) => {
   const { data, error } = await supabase.from("bingoWords").insert([{ word }]);
   return data;
 };
 
+const getTestWords = () => {
+  const words = []
+  for (let i = 0; i <= 100; i++  ){
+    words.push({
+      word : "test word " + i,
+      tags: []
+    })
+  }
+  return words
+}
 export const getWordsFromDB = async () => {
+  if (!supabaseProvided) return getTestWords()
+
   let { data: words, error } = await supabase.from("bingoWords").select("*");
   if (error === null && words) {
     // console.log(words)
@@ -47,6 +61,8 @@ export const getWordsFromDB = async () => {
 };
 
 export const reportWord = async (word: string, test = false) => {
+  if (!supabaseProvided) return
+
   const { data, error } = await supabase
     .from(test ? "bingoWordsTest" : "bingoWords")
     .update({ reported: true })
@@ -67,6 +83,8 @@ export const reportWord = async (word: string, test = false) => {
 //   }
 // };
 export const updateEquipedSkin = async (auth: Auth, val: number) => {
+  if (!supabaseProvided) return
+
   if (typeof val !== "number") {
     console.log("cannot update not a number");
     return;
@@ -86,6 +104,8 @@ export const saveReportedPanosInDB = async (
   reason: string,
   player: Player
 ) => {
+
+  if (!supabaseProvided) return
   try {
     const { data, error } = await supabase
       .from("reportedPhotospheres")
@@ -97,6 +117,8 @@ export const saveReportedPanosInDB = async (
 };
 
 export const checkIfPanoIsReported = async (panoid: string, capture: any) => {
+
+  if (!supabaseProvided) return
   const { data: reportedPhotospheres, error } = await supabase
     .from("reportedPhotospheres")
     .select("*")
@@ -109,6 +131,7 @@ export const checkIfPanoIsReported = async (panoid: string, capture: any) => {
 };
 
 export const getBadgesOfUser = async (auth: Auth) => {
+  if (!supabaseProvided) return
   let { data: badges, error } = await supabase
     .from("badges")
     .select("badgesOfUser")
@@ -124,6 +147,8 @@ export const getBadgesOfUser = async (auth: Auth) => {
   }
 };
 export const getEmotesOfUser = async (auth: Auth) => {
+
+  if (!supabaseProvided) return
   let { data: emotes, error } = await supabase
     .from("emotes")
     .select("*")
@@ -146,6 +171,7 @@ export const getEmotesOfUser = async (auth: Auth) => {
 };
 
 export const getEquipedOfUser = async (auth: Auth) => {
+  if (!supabaseProvided) return
   const { data: rows, error } = await supabase
     .from("equiped")
     .select("equiped")
@@ -166,6 +192,8 @@ export const getEquipedOfUser = async (auth: Auth) => {
 };
 
 export const addKofiDonation = async (donation: any) => {
+
+  if (!supabaseProvided) return
   const { data, error } = await supabase
     .from("kofi_donations")
     .insert([donation]);
@@ -174,6 +202,8 @@ export const addKofiDonation = async (donation: any) => {
 };
 
 export async function getDonationEmails(auth: Auth) {
+
+  if (!supabaseProvided) return []
   let { data: donationEmails, error: err1 } = await supabase
     .from("donation_email_id")
     .select("email")
@@ -196,6 +226,8 @@ export async function getDonationEmails(auth: Auth) {
 }
 
 export async function getSumOfDonations(emails: string[]): Promise<number> {
+
+  if (!supabaseProvided) return 0
   const [{ data: webhookdonations, error }, { data: csvDonations, error: e }] =
     await Promise.all([
       supabase
@@ -240,6 +272,7 @@ const emotes: Emote = {
   15: "camera.png",
 };
 export async function getSupportLevelAsBadgeAndSupportEmojis(auth: Auth) {
+  if (!supabaseProvided) return
   const emails = await getDonationEmails(auth);
   const sum = await getSumOfDonations(emails);
   if (!auth.badges) {
@@ -258,6 +291,9 @@ export async function getSupportLevelAsBadgeAndSupportEmojis(auth: Auth) {
 }
 
 export async function getStreamerWhiteList() {
+
+  if (!supabaseProvided) return []
+
   const { data: list, error } = await supabase
     .from("Streamer Whitelist")
     .select("Streamer");

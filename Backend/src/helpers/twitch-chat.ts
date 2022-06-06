@@ -1,9 +1,11 @@
-import dotEnv from "dotenv";
 import tmi from "tmi.js";
 import Game from "../objects/Game";
 import TGAH from "../objects/GeoBingoAgainstHumanity";
 import { isGame } from "./checkers";
-dotEnv.config({ path: "/home/soeren/Programming/GeoBingo/.env" });
+
+
+dotEnv.config({ path: "../.env" })
+import dotEnv from "dotenv";
 const client = new tmi.Client({
   identity: {
     username: process.env.name,
@@ -61,7 +63,7 @@ client.on("message", (channel, tags, message, self) => {
           channel,
           `🤖 you can join here: ${process.env.domain}/?code=` + game.title
         );
-      } catch (e) {}
+      } catch (e) { }
     }
     if (command === "code") {
       try {
@@ -69,7 +71,7 @@ client.on("message", (channel, tags, message, self) => {
           channel,
           "🤖 you can join the game with this code: " + game.title
         );
-      } catch (e) {}
+      } catch (e) { }
     }
   } else {
     if (
@@ -84,7 +86,7 @@ client.on("message", (channel, tags, message, self) => {
           channel,
           "🤖 This is a private lobby :( Try asking the host for the code."
         );
-      } catch (e) {}
+      } catch (e) { }
     }
   }
 });
@@ -95,7 +97,7 @@ export const join = (channel: string, lobby: Game | TGAH) => {
     client.say(
       "#" + channel,
       `🤖 ${process.env.domain} just connected to twitch chat. You can use !link or !code to join the game. If you like the game join the discord server and follow the twitch category. You can also support me on https://ko-fi.com/soerenmichaels <3.` +
-        (!lobby.privateLobby ? "The code is " + lobby.title : "")
+      (!lobby.privateLobby ? "The code is " + lobby.title : "")
     );
     lobbies["#" + channel.toLowerCase()] = lobby;
   } catch (e) {

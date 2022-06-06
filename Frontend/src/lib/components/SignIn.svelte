@@ -6,7 +6,7 @@
 	import { api } from '$lib/js/api';
 	export let code;
 
-	supabase.auth.onAuthStateChange((event, session) => {
+	supabase?.auth?.onAuthStateChange((event, session) => {
 		if (event === 'SIGNED_IN') {
 			if (session.access_token) {
 				api.player.authChange(session.access_token);
@@ -32,6 +32,6 @@
 	<div class="card bordered" on:click={() => signout()}>
 		<Profile player={api.player} />
 	</div>
-{:else}
+{:else if supabase}
 	<Auth {code} />
 {/if}
