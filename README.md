@@ -11,6 +11,8 @@ a multiplayer street view bingo game
 
 ## go into cloned directory
 
+## install the dependencies 
+
 `
 npm install
 `
