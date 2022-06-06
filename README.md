@@ -11,7 +11,7 @@ a multiplayer street view bingo game
 
 ## go into cloned directory
 
-`{bash}
+`
 npm install
 `
 
@@ -27,7 +27,7 @@ VITE_GMAPSAPI=YOURAPIKEY
 ## run it 
 
 make sure your are in the root of the project and write
-`{bash}
+`
 npm run dev
 `
 open geobingo on http://localhost:3000 :)
