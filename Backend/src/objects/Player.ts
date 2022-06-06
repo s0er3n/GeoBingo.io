@@ -5,10 +5,10 @@ import Game from "./Game";
 import MMGame from "./MMGame";
 
 import type { MySocket } from "../types";
-import TGAH from "./GeoBingoAgainstHumanity";
+import GeoBingoAgainstHumanityGame from "./GeoBingoAgainstHumanity";
 
 export default class Player {
-  lobby?: Game | TGAH | MMGame;
+  lobby?: Game | GeoBingoAgainstHumanityGame | MMGame;
   online = false;
   sockets: MySocket[] = [];
   auth: Auth | undefined;

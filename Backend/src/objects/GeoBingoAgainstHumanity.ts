@@ -117,7 +117,7 @@ class Voting {
   }
 }
 
-export default class TGAH extends BaseGame {
+export default class GeoBingoAgainstHumanityGame extends BaseGame {
   captureIndex = 0;
   host: Player;
   country = "all";

@@ -1,6 +1,6 @@
 import tmi from "tmi.js";
 import Game from "../objects/Game";
-import TGAH from "../objects/GeoBingoAgainstHumanity";
+import GeoBingoAgainstHumanityGame from "../objects/GeoBingoAgainstHumanity";
 import { isGame } from "./checkers";
 
 
@@ -22,7 +22,7 @@ try {
   console.log(e);
 }
 
-const lobbies: { [key: string]: Game | TGAH } = {};
+const lobbies: { [key: string]: Game | GeoBingoAgainstHumanityGame } = {};
 
 client.on("message", (channel, tags, message, self) => {
   if (self || !message.startsWith("!")) return;
@@ -91,7 +91,7 @@ client.on("message", (channel, tags, message, self) => {
   }
 });
 
-export const join = (channel: string, lobby: Game | TGAH) => {
+export const join = (channel: string, lobby: Game | GeoBingoAgainstHumanityGame) => {
   try {
     client.join("#" + channel).catch((e) => console.log(e));
     client.say(

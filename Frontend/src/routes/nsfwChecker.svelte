@@ -5,6 +5,8 @@
 	let i = 0;
 	let deleteReported = async (val) =>
 		await supabase.from('reportedPhotospheres').delete().eq('panoid', val);
+
+	let googleMapsApiKey = import.meta.env.VITE_GMAPSAPI;
 </script>
 
 <div class="h-screen">
@@ -19,7 +21,7 @@
 			style=""
 			height="80%"
 			width="100%"
-			src={`https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDBPDTKQOkPV5pXuwOThAboS2ABIxQD4kg&pano=${data.data[i].panoid}`}
+			src={`https://www.google.com/maps/embed/v1/streetview?key=${googleMapsApiKey}&pano=${data.data[i].panoid}`}
 			allowfullscreen />
 		<button
 			class="btn"

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Pano from '$lib/components/Pano.svelte';
 
 	import { api } from '$lib/js/api';
 	import { VotingPhase } from '$lib/js/GeoBingoAgainstHumanity';

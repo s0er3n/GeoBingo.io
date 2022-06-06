@@ -1,6 +1,6 @@
 import Game from "../objects/Game";
 import MMGame from "../objects/MMGame";
-import TGAH from "../objects/GeoBingoAgainstHumanity";
+import GeoBingoAgainstHumanityGame from "../objects/GeoBingoAgainstHumanity";
 import { getStreamerWhiteList } from "./api";
 
 export const gamePhases: {
@@ -21,7 +21,7 @@ export const updateWhiteList = async () => {
   streamerWhiteList = res;
 };
 type Lobbies = {
-  [key: string]: Game | TGAH | MMGame;
+  [key: string]: Game | GeoBingoAgainstHumanityGame | MMGame;
 };
 
 export const lobbies: Lobbies = {};

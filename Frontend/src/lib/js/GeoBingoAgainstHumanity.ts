@@ -1,6 +1,6 @@
 import socket from './socket';
 
-import type TGAH from '../../../../Backend/src/objects/GeoBingoAgainstHumanity';
+import type GeoBingoAgainstHumanityGame from '../../../../Backend/src/objects/GeoBingoAgainstHumanity';
 import { supabase } from './supabaseClient.js';
 
 type GamePhases = Lobby | Ingame | Score | VotingPhase;
@@ -9,7 +9,7 @@ type GamePhaseString = 'lobby' | 'ingame' | 'score' | 'votingphase';
 
 // make Type
 
-type gameStateFn = TGAH['toGameState'];
+type gameStateFn = GeoBingoAgainstHumanityGame['toGameState'];
 type GameObj = ReturnType<gameStateFn>;
 
 export class GeoBingoAgainstHumanity {
