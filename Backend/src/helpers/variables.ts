@@ -1,6 +1,6 @@
-import Game from "../objects/Game";
-import MMGame from "../objects/MMGame";
-import GeoBingoAgainstHumanityGame from "../objects/GeoBingoAgainstHumanity";
+import Game from "../objects/NormalGameModes/Game";
+import MMGame from "../objects/NormalGameModes/MMGame";
+import GeoBingoAgainstHumanityGame from "../objects/GeoBingoAgainstHumanity/GeoBingoAgainstHumanity";
 import { getStreamerWhiteList } from "./api";
 
 export const gamePhases: {

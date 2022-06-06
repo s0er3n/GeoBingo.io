@@ -1,6 +1,6 @@
 import tmi from "tmi.js";
-import Game from "../objects/Game";
-import GeoBingoAgainstHumanityGame from "../objects/GeoBingoAgainstHumanity";
+import Game from "../objects/NormalGameModes/Game";
+import GeoBingoAgainstHumanityGame from "../objects/GeoBingoAgainstHumanity/GeoBingoAgainstHumanity";
 import { isGame } from "./checkers";
 
 

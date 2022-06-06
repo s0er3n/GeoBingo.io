@@ -1,7 +1,7 @@
 import Voting from "./Voting";
-import { checkIfPanoIsReported } from "../helpers/api";
-import Player from "./Player";
-import { Pano } from "../types";
+import { checkIfPanoIsReported } from "../../helpers/api";
+import Player from "./../Player";
+import { Pano } from "../../types";
 export default class Capture {
   pano: any;
   player: Player;

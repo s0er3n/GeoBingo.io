@@ -1,5 +1,5 @@
 import socket from './socket';
-import type Game from '../../../../Backend/src/objects/Game';
+import type Game from '../../../../Backend/src/objects/NormalGameModes/Game';
 import { supabase } from './supabaseClient.js';
 
 type GamePhases = Lobby | Ingame | Score | VotingPhase;

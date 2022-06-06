@@ -1,8 +1,8 @@
 "use strict";
-import { Pano } from "../types";
-import Auth from "./Auth";
+import { Pano } from "../../types";
+import Auth from "../Auth";
 import GeoBingoAgainstHumanity from "./GeoBingoAgainstHumanity";
-import Player from "./Player";
+import Player from "../Player";
 
 function createGame() {
   const auth = new Auth("123-sub", "", "sören", "test.png");

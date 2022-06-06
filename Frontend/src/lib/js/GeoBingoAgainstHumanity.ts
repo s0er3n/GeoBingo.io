@@ -1,6 +1,6 @@
 import socket from './socket';
 
-import type GeoBingoAgainstHumanityGame from '../../../../Backend/src/objects/GeoBingoAgainstHumanity';
+import type GeoBingoAgainstHumanityGame from '../../../../Backend/src/objects/GeoBingoAgainstHumanity/GeoBingoAgainstHumanity';
 import { supabase } from './supabaseClient.js';
 
 type GamePhases = Lobby | Ingame | Score | VotingPhase;

@@ -1,11 +1,11 @@
 import { disconnect } from "../helpers/twitch-chat";
 import { setStreamerFrontPage, streamerFrontPage } from "../helpers/variables";
 import Auth from "./Auth";
-import Game from "./Game";
-import MMGame from "./MMGame";
+import Game from "./NormalGameModes/Game";
+import MMGame from "./NormalGameModes/MMGame";
 
 import type { MySocket } from "../types";
-import GeoBingoAgainstHumanityGame from "./GeoBingoAgainstHumanity";
+import GeoBingoAgainstHumanityGame from "./GeoBingoAgainstHumanity/GeoBingoAgainstHumanity";
 
 export default class Player {
   lobby?: Game | GeoBingoAgainstHumanityGame | MMGame;

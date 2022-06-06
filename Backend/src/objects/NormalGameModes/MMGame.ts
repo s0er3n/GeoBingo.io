@@ -1,32 +1,26 @@
-import { gamePhases } from "../helpers/variables";
+import { gamePhases } from "../../helpers/variables";
 import Score from "./Score";
 import Capture from "./Capture";
 import schedule from "node-schedule";
-import { getRandomWords, getRandomWordNotInWordList } from "../helpers/words";
-import { checkLatLangPointisInCountry } from "../helpers/countryValidator";
+import { getRandomWords, getRandomWordNotInWordList } from "../../helpers/words";
+import { checkLatLangPointisInCountry } from "../../helpers/countryValidator";
 import _ from "lodash";
-import Player from "./Player";
-import { Pano } from "../types";
-import BaseGame from "./BaseGame";
+import Player from "../Player";
+import { Pano } from "../../types";
+import BaseGame from "../BaseGame";
 
 type Word = {
   word: string;
   tags: string[];
 };
 
-type SuggestedWord = {
-  word: string;
-  playerName: string;
-};
 export default class Game extends BaseGame {
   captureIndex = 0;
   captures: Capture[] = [];
   words: Word[] = [];
-  size = 100;
-  suggestedWords: SuggestedWord[] = [];
+  size = 1000;
   country = "all";
   score = new Score();
-  host: Player;
   wordsDisabled = false;
   onlyOfficialCoverage = false;
   allowEveryoneToVote = true;
@@ -35,16 +29,27 @@ export default class Game extends BaseGame {
   gamePhase = gamePhases.LOBBY;
   constructor(host: Player, roomName: string, privateLobby: boolean) {
     super(roomName, privateLobby);
-    this.host = host;
     this.players.add(host);
+    this.time = 10;
+    // after timer or players joined
+    this.waitingForPlayers();
     this.words = getRandomWords(5);
   }
 
-  newRandomWord(i: number) {
-    const newWord = getRandomWordNotInWordList(this.words);
-    this.words[i] = newWord;
-    this.updateLobby();
-  }
+  waitingForPlayers = () => {
+    let online = 0;
+    this.players.forEach((player) => {
+      if (player.online && player.lobby === this) {
+        online += 1;
+      }
+    });
+    if (online === 2) {
+      this.startGame();
+      return;
+    }
+    setTimeout(this.waitingForPlayers, 5000);
+  };
+
   newRandomWords(lockedWords: number[]) {
     for (let index = 0; index < this.words.length; index++) {
       if (!lockedWords.includes(index)) {
@@ -53,48 +58,7 @@ export default class Game extends BaseGame {
     }
     this.updateLobby();
   }
-  changeWord(newWord: string, i: number) {
-    if (newWord !== undefined) {
-      this.words[i] = { word: newWord, tags: ["english"] };
-      this.updateLobby();
-    }
-  }
-  deleteWord(i: number) {
-    this.words.splice(i, 1);
-    this.updateLobby();
-  }
-  addWordToGame() {
-    const newWord = getRandomWordNotInWordList(this.words);
-    this.words.push(newWord);
-    this.updateLobby();
-  }
-  kick(player: Player) {
-    player.lobby = undefined;
-    this.playersKicked.add(player);
-    // new index
-    let newIndex =
-      this.captures
-        .slice(0, this.captureIndex)
-        .filter((capture) => !(capture.player === player)).length - 1;
-    if (newIndex === -1) {
-      newIndex = 0;
-    }
 
-    this.captures = this.captures.filter(
-      (capture) => !(capture.player === player)
-    );
-
-    this.captureIndex = newIndex;
-    if (this.gamePhase === gamePhases.GAMEOVER) {
-      this.goToGameOver(newIndex);
-    }
-    this.players.delete(player);
-    this.updateLobby();
-  }
-  isHostOnline() {
-    if (!this.host) return false;
-    return this.host.online;
-  }
   checkPanoIsValidCountry(pano: Pano) {
     if (this.country === "all") {
       return true;
@@ -106,11 +70,6 @@ export default class Game extends BaseGame {
       pano.position.lat
     );
     return res;
-  }
-
-  clearSuggestions() {
-    this.suggestedWords = [];
-    this.updateLobby();
   }
 
   addCapture(player: Player, pano: Pano, i: number) {
@@ -140,7 +99,7 @@ export default class Game extends BaseGame {
     this.updateLobby();
     return "success";
   }
-  startGame() {
+  startGame = () => {
     const newGameEndTime = new Date(Date.now() + this.time * 60000);
     this.gameEndTime = newGameEndTime;
     schedule.scheduleJob(newGameEndTime, () => {
@@ -158,13 +117,16 @@ export default class Game extends BaseGame {
     });
     this.gamePhase = gamePhases.INGAME;
     this.updateLobby();
-  }
-  goToLobby() {
+  };
+
+  goToLobby = () => {
     this.gamePhase = gamePhases.LOBBY;
     this.captures = [];
+    this.newRandomWords([]);
     this.updateLobby();
-  }
-  goToGameOver(captureIndex = 0) {
+    setTimeout(this.waitingForPlayers, 60000);
+  };
+  goToGameOver = (captureIndex = 0) => {
     this.captureIndex = captureIndex;
     console.log(captureIndex);
     if (this.captures.length === 0) {
@@ -174,9 +136,32 @@ export default class Game extends BaseGame {
         (a, b) => Number(a.word) - Number(b.word)
       );
       this.gamePhase = gamePhases.GAMEOVER;
+      setTimeout(this.goThroughCaptures, 12000);
     }
     this.updateLobby();
-  }
+  };
+
+  goThroughCaptures = () => {
+    //TODO: add remove logic
+    const votesForKeep = this.captures[this.captureIndex].voting.keep.size;
+    const votesForRemove = this.captures[this.captureIndex].voting.remove.size;
+    const totalVotes = votesForKeep + votesForRemove;
+    if (totalVotes) {
+      if (votesForKeep / totalVotes <= 0.5) {
+        this.captures[this.captureIndex].removed = true;
+      }
+    }
+
+    if (this.captureIndex === this.captures.length - 1) {
+      setTimeout(this.goToScore, 12000);
+      return;
+    }
+
+    this.captureIndex += 1;
+    this.updateLobby();
+    setTimeout(this.goThroughCaptures, 12000);
+  };
+
   setCaptureIndex(newVal: number) {
     this.captureIndex = newVal;
     this.updateLobby();
@@ -190,16 +175,21 @@ export default class Game extends BaseGame {
     });
     this.updateLobby();
   }
-  goToScore() {
+  goToScore = () => {
     if (this.gamePhase === gamePhases.SCORE) {
       console.log("already in score");
       return;
     }
+    console.log(this.score, this.captures);
+
     this.score.captures = [...this.captures];
 
     this.gamePhase = gamePhases.SCORE;
+
     this.updateLobby();
-  }
+
+    setTimeout(this.goToLobby, 15000);
+  };
   goBackToGameOver() {
     this.score.revert([...this.captures]);
     this.gamePhase = gamePhases.GAMEOVER;
@@ -232,8 +222,9 @@ export default class Game extends BaseGame {
 
   getPlayersAsASortedArray() {
     return Array.from(this.players)
-      .map((player) => player.toObj())
-      .sort((a, b) => Number(b.online) - Number(a.online));
+      .sort((a, b) => Number(b.online) - Number(a.online))
+      .filter((player) => player.online && player.lobby === this)
+      .map((player) => player.toObj());
   }
 
   getCapturesAsObjectsForIngame() {
@@ -278,9 +269,9 @@ export default class Game extends BaseGame {
 
   toGameState() {
     type State = {
-      gameMode: "NormalGame";
+      gameMode: "MMGame";
       gamePhase: "lobby" | "ingame" | "gameover" | "score";
-      host: ReturnType<Player["toObj"]>;
+      // host: ReturnType<Player["toObj"]>,
       players?: ReturnType<Player["toObj"]>[];
       time?: number;
       size?: number;
@@ -291,7 +282,6 @@ export default class Game extends BaseGame {
       onlyAuth?: boolean;
       onlyOfficialCoverage?: boolean;
       title?: string;
-      suggestedWords?: { word: string; playerName: string }[];
       country?: string;
       captureIndex?: number;
       gameEndTime?: string;
@@ -304,11 +294,11 @@ export default class Game extends BaseGame {
     switch (this.gamePhase) {
       case gamePhases.LOBBY:
         state = {
-          gameMode: "NormalGame",
+          gameMode: "MMGame",
           score: this.score.new(),
           allowEveryoneToVote: this.allowEveryoneToVote,
           gamePhase: this.gamePhase,
-          host: this.host.toObj(),
+          // host: this.host.toObj(),
           players: this.getPlayersAsASortedArray(),
           time: this.time,
           size: this.size,
@@ -318,15 +308,14 @@ export default class Game extends BaseGame {
           onlyAuth: this.onlyAuth,
           onlyOfficialCoverage: this.onlyOfficialCoverage,
           title: this.title,
-          suggestedWords: this.suggestedWords,
           country: this.country,
         };
         return state;
       case gamePhases.INGAME:
         state = {
-          gameMode: "NormalGame",
+          gameMode: "MMGame",
           gamePhase: this.gamePhase,
-          host: this.host.toObj(),
+          // host: this.host.toObj(),
           time: this.time,
           gameEndTime: this.gameEndTime?.toString(),
           title: this.title,
@@ -338,8 +327,8 @@ export default class Game extends BaseGame {
         return state;
       case gamePhases.GAMEOVER:
         state = {
-          gameMode: "NormalGame",
-          host: this.host.toObj(),
+          gameMode: "MMGame",
+          // host: this.host.toObj(),
           gamePhase: this.gamePhase,
           allowEveryoneToVote: this.allowEveryoneToVote,
           words: this.words,
@@ -351,11 +340,12 @@ export default class Game extends BaseGame {
         return state;
       case gamePhases.SCORE:
         state = {
-          gameMode: "NormalGame",
+          gameMode: "MMGame",
           captures: this.getCapturesAsObjectsForScore(),
           words: this.words,
-          players: this.getPlayersAsASortedArray(),
-          host: this.host.toObj(),
+          players: this.getPlayersAsASortedArray().filter(
+            (player) => player.online
+          ),
           gamePhase: this.gamePhase,
           score: this.score.new(),
           title: this.title,
@@ -363,29 +353,5 @@ export default class Game extends BaseGame {
         };
         return state;
     }
-  }
-  addWordSuggestion(words: string, playerName: string) {
-    words
-      .split(";")
-      .forEach((word) =>
-        word !== "" && word.length <= 100 && this.suggestedWords.length <= 200
-          ? this.suggestedWords.push({ word, playerName })
-          : undefined
-      );
-    this.updateLobby();
-  }
-  removeWordSuggestion(removeWord: string) {
-    this.suggestedWords = this.suggestedWords.filter(
-      (word) => word.word !== removeWord
-    );
-    this.updateLobby();
-  }
-
-  addWordSuggestionToWords(newWord: string) {
-    this.suggestedWords = this.suggestedWords.filter(
-      (word) => word.word !== newWord
-    );
-    this.addCustomWordToGame(newWord);
-    // no update lobby bc addCustomWord already calls it
   }
 }

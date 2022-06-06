@@ -1,8 +1,8 @@
 import { Socket } from "socket.io";
 import { MySocket } from "../types";
 import Player from "../objects/Player";
-import Game from "../objects/Game";
-import GeoBingoAgainstHumanityGame from "../objects/GeoBingoAgainstHumanity";
+import Game from "../objects/NormalGameModes/Game";
+import GeoBingoAgainstHumanityGame from "../objects/GeoBingoAgainstHumanity/GeoBingoAgainstHumanity";
 
 export const checkIfPlayer = (
   socket: MySocket

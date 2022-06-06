@@ -1,8 +1,8 @@
-import { Pano } from "../types";
-import BaseGame from "./BaseGame";
-import Player from "./Player";
+import { Pano } from "../../types";
+import BaseGame from "./../BaseGame";
+import Player from "./../Player";
 
-import { checkIfPanoIsReported } from "../helpers/api";
+import { checkIfPanoIsReported } from "../../helpers/api";
 type Card = {
   text: string;
   pick: number;

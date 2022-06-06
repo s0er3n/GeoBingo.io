@@ -8,15 +8,15 @@ import {
 } from "../helpers/checkers";
 import players from "../objects/PlayerHandler";
 import { makeRoomName } from "../helpers/tools";
-import Game from "../objects/Game";
+import Game from "../objects/NormalGameModes/Game";
 import { join as joinTwitchChat } from "../helpers/twitch-chat";
 import {
   lobbies,
   setStreamerFrontPage,
   streamerWhiteList,
 } from "../helpers/variables";
-import GeoBingoAgainstHumanity from "../objects/GeoBingoAgainstHumanity";
-import MMGame from "../objects/MMGame";
+import GeoBingoAgainstHumanity from "../objects/GeoBingoAgainstHumanity/GeoBingoAgainstHumanity";
+import MMGame from "../objects/NormalGameModes/MMGame";
 
 let currentMMGame: MMGame;
 
