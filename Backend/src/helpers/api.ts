@@ -17,7 +17,8 @@ if (SUPABASE_KEY && SUPABASE_URL) {
 const supabaseProvided = SUPABASE_KEY && SUPABASE_URL
 
 export const addWordToDB = async (word: { word: string; tags: string[] }) => {
-  const { data, error } = await supabase.from("bingoWords").insert([{ word }]);
+  if (!supabaseProvided) return 
+  const { data, error } = await supabase.from("bingoWords")?.insert([{ word }]);
   return data;
 };
 
