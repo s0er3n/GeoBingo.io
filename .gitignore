@@ -1,4 +1,5 @@
 .env
+.env.backup
 
 Backend/coverage/
 */node_modules
