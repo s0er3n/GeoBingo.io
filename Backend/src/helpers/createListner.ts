@@ -10,6 +10,6 @@ export default (socket: MySocket, nameSpace: string | string[], fns: FN[]) => {
     for (const n of nameSpace) {
       socket.on(n + ":" + fn.name, fn);
     }
-    console.log("listening to", nameSpace + ":" + fn.name);
+    // console.log("listening to", nameSpace + ":" + fn.name);
   }
 };
