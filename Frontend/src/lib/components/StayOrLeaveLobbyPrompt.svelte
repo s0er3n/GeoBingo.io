@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/env';
+	import { api } from '$lib/js/api';
 	let differentLobby = true;
 	let code: string | undefined;
 
@@ -14,8 +16,8 @@
 <div
 	class={`modal ${
 		differentLobby &&
-		$client.player.lobby &&
-		!($client.player.lobby.title === code || !code)
+		$api.game &&
+		!($api.game.currentPhase.title === code || !code)
 			? 'modal-open'
 			: ''
 	}`}>
@@ -25,14 +27,14 @@
 			current room?
 		</p>
 		<div class="modal-action">
-			<button on:click={() => client.leave()} class="btn btn-primary"
-				>Leave</button>
 			<button
 				on:click={() => {
 					differentLobby = false;
 				}}
 				for="my-modal-2"
 				class="btn">Stay</button>
+			<button on:click={() => api.player.leave()} class="btn btn-primary"
+				>Leave</button>
 		</div>
 	</div>
 </div>
