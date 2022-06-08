@@ -450,7 +450,7 @@
 							</label>
 							<div
 								class="relative"
-								on:click={() =>
+								on:pointerdown={() =>
 									navigator.clipboard.writeText(
 										window.location.href
 											.split('#')[0]
@@ -471,7 +471,7 @@
 										$api.game.currentPhase.title}
 									class={`${
 										$api.game.currentPhase.privateLobby ? 'blur-sm ' : ''
-									}w-full pr-16 input input-secondary input-bordered`} />
+									}w-full pr-16 input input-secondary select-auto input-bordered`} />
 								<button
 									class="absolute top-0 right-0 rounded-l-none btn btn-secondary"
 									><CopyIcon size="1x" /></button>

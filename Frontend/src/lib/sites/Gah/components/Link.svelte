@@ -9,7 +9,7 @@
 </label>
 <div
 	class="relative"
-	on:click={() =>
+	on:pointerdown={() =>
 		navigator.clipboard.writeText(
 			window.location.href.split('#')[0].split('?')[0].replace(/#/g, '') +
 				'?code=' +
@@ -24,7 +24,7 @@
 			$api.game.currentPhase.title}
 		class={`${
 			$api.game.currentPhase.privateLobby ? 'blur-sm ' : ''
-		}w-full pr-16 input input-secondary input-bordered`} />
+		}w-full pr-16 input input-secondary input-bordered select-auto`} />
 	<button class="absolute top-0 right-0 rounded-l-none btn btn-secondary"
 		><CopyIcon size="1.5x" /></button>
 </div>
