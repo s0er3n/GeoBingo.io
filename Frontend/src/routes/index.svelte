@@ -12,6 +12,7 @@
 	import GAHVoting from '$lib/sites/Gah/GAHVoting.svelte';
 	import GahScore from '$lib/sites/Gah/GAHScore.svelte';
 	import MMLobby from '$lib/sites/MMGame/MMLobby.svelte';
+	import StayOrLeaveLobbyPrompt from '$lib/components/StayOrLeaveLobbyPrompt.svelte';
 	if (!dev) {
 		console.log = () => {};
 	}
@@ -21,6 +22,7 @@
 	<Main />
 	<Footer />
 {:else if $api.game.gameMode === 'NormalGame'}
+	<StayOrLeaveLobbyPrompt />
 	{#if $api.game.currentPhaseString === 'lobby'}
 		<Lobby />
 	{:else if $api.game.currentPhaseString === 'ingame'}
@@ -42,6 +44,7 @@
 		<Score />
 	{/if}
 {:else if $api.game.gameMode === 'gah'}
+	<StayOrLeaveLobbyPrompt />
 	{#if $api.game.currentPhaseString === 'lobby'}
 		<GAHLobby />
 	{:else if $api.game.currentPhaseString === 'ingame'}
