@@ -29,9 +29,13 @@
 </script>
 
 {#if $api.player.twitch}
-	<div class="card bordered" on:click={() => signout()}>
+	<div class="card bordered p-2" >
 		<Profile player={api.player} />
+    <div class="p-1">
+    <button class="btn btn-xs btn-error" on:click={() => signout()}>Logout</button>
+  </div>
 	</div>
+    
 {:else if supabase}
 	<Auth {code} />
 {/if}
