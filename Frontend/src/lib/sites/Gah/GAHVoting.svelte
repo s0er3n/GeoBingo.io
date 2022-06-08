@@ -79,13 +79,20 @@
 						<button disabled={true}>
 							<ChevronLeftIcon strokeWidth="1px" size="2x" /></button>
 					{/if}
-					<button on:click={() => votingPhase.vote(captureIndex)}>
-						{#if votingPhase.voting[captureIndex]?.includes($api.player.name)}
-							<HeartIcon strokeWidth="3px" class="text-red-700" size="4x" />
-						{:else}
-							<HeartIcon strokeWidth="1px" class="" size="4x" />
-						{/if}
-					</button>
+
+					<div
+						class="tooltip"
+						data-tip={currentCapture.player.id === $api.player.id
+							? 'you cannot vote for yourself '
+							: 'you only have one vote'}>
+						<button on:click={() => votingPhase.vote(captureIndex)}>
+							{#if votingPhase.voting[captureIndex]?.includes($api.player.name)}
+								<HeartIcon strokeWidth="3px" class="text-red-700" size="4x" />
+							{:else}
+								<HeartIcon strokeWidth="1px" class="" size="4x" />
+							{/if}
+						</button>
+					</div>
 					{#if captureIndex < captures.length - 1}
 						<button
 							on:click={() => {
