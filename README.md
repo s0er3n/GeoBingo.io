@@ -2,10 +2,6 @@
 
 # 🌎 [GeoBingo.io](https://geobingo.io/)
 an open source multiplayer street view bingo game
-
-
-**You want to contribute? See this [issue here](https://github.com/s0er3n/GeoBingo.io/issues/1)**
-
 # Socials
 
 [Discord Server](https://discord.gg/9rsM72jKvj)
@@ -13,6 +9,10 @@ an open source multiplayer street view bingo game
 [TikTok](https://www.tiktok.com/@geobingo)
 [YouTube](https://www.youtube.com/channel/UCEB92TvBTby2GeDyU2ak8Dg)
 [Instagram](https://www.instagram.com/geobingo.io/)
+
+**You want to contribute? See this [issue here](https://github.com/s0er3n/GeoBingo.io/issues/1)**
+
+
 # ⚡ How to run it yourself
 - install node 16.5
 
