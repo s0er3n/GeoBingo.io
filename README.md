@@ -17,7 +17,7 @@ a multiplayer street view bingo game
 npm install
 `
 
--  how to get google maps working
+##  how to get google maps working
 
 get an api key https://developers.google.com/maps/documentation/javascript/get-api-key
 
