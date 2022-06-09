@@ -26,7 +26,7 @@ create Frontend/.env file and paste in your api key like this:
 `
 VITE_GMAPSAPI=YOURAPIKEY
 `
-- ▶️ run it 
+## ▶️ run it 
 
 make sure your are in the root of the project and write
 `
