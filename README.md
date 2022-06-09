@@ -4,7 +4,7 @@
 an open source multiplayer street view bingo game
 
 
-**You want to contribute. See this [issue here](https://github.com/s0er3n/GeoBingo.io/issues/1)**
+**You want to contribute? See this [issue here](https://github.com/s0er3n/GeoBingo.io/issues/1)**
 
 # ⚡ How to run it yourself
 - install node 16.5
