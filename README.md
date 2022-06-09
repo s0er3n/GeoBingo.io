@@ -1,5 +1,5 @@
 # 🌎 GeoBingo.io
-a multiplayer street view bingo game
+an open source multiplayer street view bingo game
 ![image](https://user-images.githubusercontent.com/48496757/172946606-046630b6-5eae-43e4-a2e9-c06bb9d9ea2e.png)
 
 **You want to contribute. See this [issue here](https://github.com/s0er3n/GeoBingo.io/issues/1)**
