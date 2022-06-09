@@ -45,4 +45,4 @@ npm run dev
 `
 open geobingo on http://localhost:3000 :)
 
-# 🤔 Questions? Write an me on discord or create an issue :)
+# 🤔 Questions? Write an me on discord or create an issue
