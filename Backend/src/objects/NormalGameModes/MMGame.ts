@@ -18,6 +18,7 @@ export default class Game extends BaseGame {
   captureIndex = 0;
   captures: Capture[] = [];
   words: Word[] = [];
+  lng = "en"
   size = 1000;
   country = "all";
   score = new Score();
@@ -266,6 +267,20 @@ export default class Game extends BaseGame {
       })
       .sort((a, b) => Number(a.word) - Number(b.word));
   }
+  getWordsInLng = () => {
+    // i hate this cloning and node doesnt seem to have structuredClone
+    return JSON.parse(JSON.stringify(this.words)).map((word: Word) => {
+      if (typeof word.word !== "string") {
+        if (word.word[this.lng]) {
+          word.word = word.word[this.lng]
+          return word
+        }
+      }
+
+      return word
+
+    })
+  }
 
   toGameState() {
     type State = {
@@ -302,7 +317,7 @@ export default class Game extends BaseGame {
           players: this.getPlayersAsASortedArray(),
           time: this.time,
           size: this.size,
-          words: this.words,
+          words: this.getWordsInLng(),
           anonVoting: this.anonVoting,
           privateLobby: this.privateLobby,
           onlyAuth: this.onlyAuth,
@@ -320,7 +335,7 @@ export default class Game extends BaseGame {
           gameEndTime: this.gameEndTime?.toString(),
           title: this.title,
           onlyOfficialCoverage: this.onlyOfficialCoverage,
-          words: this.words,
+          words: this.getWordsInLng(),
           country: this.country,
           captures: this.getCapturesAsObjectsForIngame(),
         };
@@ -331,7 +346,7 @@ export default class Game extends BaseGame {
           // host: this.host.toObj(),
           gamePhase: this.gamePhase,
           allowEveryoneToVote: this.allowEveryoneToVote,
-          words: this.words,
+          words: this.getWordsInLng(),
           captureIndex: this.captureIndex,
           title: this.title,
           anonVoting: this.anonVoting,
@@ -342,7 +357,7 @@ export default class Game extends BaseGame {
         state = {
           gameMode: "MMGame",
           captures: this.getCapturesAsObjectsForScore(),
-          words: this.words,
+          words: this.getWordsInLng(),
           players: this.getPlayersAsASortedArray().filter(
             (player) => player.online
           ),

@@ -28,7 +28,8 @@
 			? $api.game.currentPhase
 			: undefined;
 
-	const lang = navigator.language || navigator.userLanguage;
+	// const lang = navigator.language || navigator.userLanguage;
+	const lang = 'en';
 
 	let countries = $api.geometries;
 	let lockedWords = [];
@@ -157,6 +158,17 @@
 								class=" btn btn-secondary"
 								on:click={() => lobby.newRandomWords(lockedWords)}
 								>randomize all words</button>
+							<select
+								on:change={(e) => api.game.settings.changeLang(e.target.value)}
+								class="select uppercase w-full max-w-xs border-2 border-black">
+								<option disabled selected>Pick your language</option>
+								<option value="en">English</option>
+								<option value="nl">Dutch</option>
+								<option value="es">Spanish</option>
+								<option value="de">German</option>
+								<option value="fr">french</option>
+								<option value="pt">portuguese</option>
+							</select>
 						{/if}
 					</h3>
 					<ul>

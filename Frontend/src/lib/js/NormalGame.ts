@@ -241,6 +241,9 @@ class Settings {
 	changeCountry(country: string) {
 		socket.emit('normalGame:' + 'changeCountry', country);
 	}
+	changeLang(lang: string) {
+		socket.emit('normalGame:' + 'changeLang', lang);
+	}
 	switchAnonVoting(val: boolean) {
 		socket.emit('normalGame:' + 'switchAnonVoting', val);
 	}
