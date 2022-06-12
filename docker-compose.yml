@@ -11,9 +11,6 @@ services:
     image: docker.soerensserver.xyz/bingo-backend-${branch}:latest
   frontend:
     environment:
-      - VITE_GMAPSAPI=AIzaSyDBPDTKQOkPV5pXuwOThAboS2ABIxQD4kg
-      - VITE_SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDk4Nzc4NCwiZXhwIjoxOTUwNTYzNzg0fQ.pvNjymNGXdj4HTKsHUsN3uhZNJr9FYKbXpS7Xyxhq2A
-      - VITE_SUPABASE_URL=https://aesfbivwcjawvnujxazv.supabase.co
       - branch
       - VITE_DOMAIN
     image: docker.soerensserver.xyz/bingo-frontend-${branch}:latest
