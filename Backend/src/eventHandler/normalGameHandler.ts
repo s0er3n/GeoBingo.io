@@ -665,6 +665,30 @@ export default (io: unknown, socket: MySocket) => {
     socket.player!.lobby!.changeCountry(country);
   };
 
+  const changeLang = (lang: string) => {
+    if (typeof lang !== "string") return;
+
+    if (!checkIfPlayer(socket)) {
+      console.log("player not found");
+      return;
+    }
+
+    if (!checkIfLobby(socket)) {
+      console.log("lobby not found");
+      return;
+    }
+
+    if (socket.player!.lobby!.host !== socket.player) {
+      console.log("player has to be host to start game");
+      return;
+    }
+    if (!isGame(socket.player!.lobby)) {
+      return;
+    }
+
+    socket.player!.lobby!.changeLang(lang);
+  };
+
   const vote = (vote: "keep" | "remove", index: number) => {
     if (!checkIfPlayer(socket)) {
       console.log("player not found");
@@ -758,5 +782,6 @@ export default (io: unknown, socket: MySocket) => {
     vote,
     startGame,
     switchOnlyOfficialCoverage,
+    changeLang,
   ]);
 };

@@ -5,6 +5,7 @@ dotEnv.config({ path: "../.env" })
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import Auth from "../objects/Auth";
 import Player from "../objects/Player";
+import translator from "./translator";
 const SUPABASE_KEY = process.env.supabasekey;
 const SUPABASE_URL = process.env.supabaseurl;
 let supabase: SupabaseClient;
@@ -17,16 +18,68 @@ if (SUPABASE_KEY && SUPABASE_URL) {
 const supabaseProvided = SUPABASE_KEY && SUPABASE_URL
 
 export const addWordToDB = async (word: { word: string; tags: string[] }) => {
-  if (!supabaseProvided) return 
-  const { data, error } = await supabase.from("bingoWords")?.insert([{ word }]);
+  if (!supabaseProvided) return
+  // not translating yet incase there is no google translate api key on the server
+  const { data, error } = await supabase.from("bingoWordsBackup")?.insert([{ word }]);
+  return data;
+};
+
+const LANGUAGES = ["en", "nl", "es", "de", "fr", "pt"]
+
+export const backUpDB = async (words: { word: { word: string | { [lng: string]: string } } }[]) => {
+  if (!supabaseProvided) return
+  // console.log(words)
+  const langWords = words.map(async word => {
+    if (typeof word.word.word !== "string") {
+      // console.log("already translated")
+      let languagesMissing = []
+      for (const lang of LANGUAGES) {
+        if (!Object.keys(word.word.word).includes(lang)) {
+          console.log("language missing:", lang)
+          languagesMissing.push(lang)
+        }
+      }
+      if (languagesMissing.length !== 0) {
+        const [error, translationRes] = await translator(word.word.word.en, languagesMissing)
+        if (!error && translationRes) {
+          for (const [key, value] of Object.entries(translationRes)) {
+            word.word.word[key] = value
+          }
+          return word
+        }
+        else {
+          console.log(error)
+        }
+      }
+
+      return word
+    }
+    console.log("translating")
+    const [error, translationRes] = await translator(word.word.word, ["en", "nl", "es"])
+    if (!error && translationRes) {
+      console.log(translationRes)
+      word.word.word = translationRes
+      return word
+    }
+    else {
+      console.log(error)
+    }
+
+    return word
+
+  })
+  let answer = await Promise.all(langWords)
+  // console.log(answer)
+  const { data, error } = await supabase.from("bingoWordsBackup")?.upsert(answer);
+  console.log(error)
   return data;
 };
 
 const getTestWords = () => {
   const words = []
-  for (let i = 0; i <= 100; i++  ){
+  for (let i = 0; i <= 100; i++) {
     words.push({
-      word : "test word " + i,
+      word: "test word " + i,
       tags: []
     })
   }
@@ -35,19 +88,19 @@ const getTestWords = () => {
 export const getWordsFromDB = async () => {
   if (!supabaseProvided) return getTestWords()
 
-  let { data: words, error } = await supabase.from("bingoWords").select("*");
+  // FIXME: filter reported here
+  let { data: words, error } = await supabase.from("bingoWordsBackup").select("*");
+
   if (error === null && words) {
     // console.log(words)
+    // console.log(words)
 
-    // inefficent maybe
-    words = words.filter((word) => !word.reported);
+    // inefficent see fix me
+    words = words.filter((word) => !word.reported || typeof word.word.word !== "string");
 
+    backUpDB(words)
     words = words.map((i) => {
-      try {
-        return JSON.parse(i.word);
-      } catch {
-        return i.word;
-      }
+      return i.word;
     });
     //filter words for duplicates
     function uniqBy(a: any, key: any) {
