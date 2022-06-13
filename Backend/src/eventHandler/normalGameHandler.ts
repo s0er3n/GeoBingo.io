@@ -11,6 +11,7 @@ import {
   addWordToDB as addWordToDBAPI,
   reportWord as reportWordApi,
 } from "../helpers/api";
+import Game from "../objects/NormalGameModes/Game";
 
 export default (io: unknown, socket: MySocket) => {
   const addWords = (newWords: { word: string; tags: string[] }) => {
@@ -510,8 +511,9 @@ export default (io: unknown, socket: MySocket) => {
 
     socket.player!.updateEveryoneInSameLobby();
   };
-  const reportWord = async (word: string) => {
-    if (typeof word !== "string") return;
+
+  const reportWord = async (word: number) => {
+    if (typeof word !== "number") return;
 
     if (!checkIfPlayer(socket)) {
       return;
@@ -523,8 +525,11 @@ export default (io: unknown, socket: MySocket) => {
     if (socket.player!.lobby!.host !== socket.player) {
       return;
     }
-    await reportWordApi(word);
-  };
+    if (socket.player.lobby instanceof Game) {
+      socket.player.lobby.reportWord(word)
+    };
+  }
+
   const remove = (val: boolean, i: number) => {
     if (typeof val !== "boolean") return;
 

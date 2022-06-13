@@ -24,9 +24,9 @@ export const addWordToDB = async (word: { word: string; tags: string[] }) => {
   return data;
 };
 
-const LANGUAGES = ["en", "nl", "es", "de", "fr", "pt"]
+const LANGUAGES = ["en", "nl", "es", "de", "fr", "pt", "pl"]
 
-export const backUpDB = async (words: { word: { word: string | { [lng: string]: string } } }[]) => {
+export const backUpDBAndTranslate = async (words: { word: { word: string | { [lng: string]: string } } }[]) => {
   if (!supabaseProvided) return
   // console.log(words)
   const langWords = words.map(async word => {
@@ -55,7 +55,7 @@ export const backUpDB = async (words: { word: { word: string | { [lng: string]: 
       return word
     }
     console.log("translating")
-    const [error, translationRes] = await translator(word.word.word, ["en", "nl", "es"])
+    const [error, translationRes] = await translator(word.word.word, LANGUAGES)
     if (!error && translationRes) {
       console.log(translationRes)
       word.word.word = translationRes
@@ -98,7 +98,7 @@ export const getWordsFromDB = async () => {
     // inefficent see fix me
     words = words.filter((word) => !word.reported || typeof word.word.word !== "string");
 
-    backUpDB(words)
+    backUpDBAndTranslate(words)
     words = words.map((i) => {
       return i.word;
     });
@@ -116,11 +116,11 @@ export const getWordsFromDB = async () => {
 
 export const reportWord = async (word: string, test = false) => {
   if (!supabaseProvided) return
-
+  console.log(word)
   const { data, error } = await supabase
-    .from(test ? "bingoWordsTest" : "bingoWords")
+    .from(test ? "bingoWordsTest" : "bingoWordsBackup")
     .update({ reported: true })
-    .eq("word->word", JSON.stringify(word));
+    .eq("word->word", word);
   const reportedWord = data;
   return reportedWord;
 };

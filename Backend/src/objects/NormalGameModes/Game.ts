@@ -8,7 +8,9 @@ import _ from "lodash";
 import Player from "./../Player";
 import { Pano } from "../../types";
 import BaseGame from "./../BaseGame";
-
+import {
+  reportWord as reportWordApi,
+} from "../../helpers/api";
 type Word = {
   word: string;
   tags: string[];
@@ -41,6 +43,12 @@ export default class Game extends BaseGame {
     this.words = getRandomWords(5);
   }
 
+  reportWord(i: number) {
+    if (this.words[i]) {
+      console.log("report: ", this.words[i])
+      reportWordApi(JSON.stringify(this.words[i].word))
+    }
+  }
   newRandomWord(i: number) {
     const newWord = getRandomWordNotInWordList(this.words);
     this.words[i] = newWord;
@@ -342,8 +350,6 @@ export default class Game extends BaseGame {
           suggestedWords: this.suggestedWords,
           country: this.country,
         };
-
-        console.log(this.words)
         return state;
       case gamePhases.INGAME:
         state = {

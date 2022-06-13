@@ -72,7 +72,7 @@
 	onDestroy(() => unsubscribe());
 	$: isHost = $api.isHost;
 	let addWordModal = '';
-	let reportWordModal = '';
+	let reportWordModal: number | undefined = null;
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -103,30 +103,30 @@
 </label>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<label class={`modal ${reportWordModal ? 'modal-open' : ''}  cursor-pointer`}>
+<label
+	class={`modal ${
+		reportWordModal !== null ? 'modal-open' : ''
+	}  cursor-pointer`}>
 	<label class="modal-box relative" for="">
 		<h3 class="text-lg font-bold">
-			Do you want to report the word "{reportWordModal}"?
+			Do you want to report the word "{words[
+				reportWordModal
+			]?.word?.toUpperCase()}"?
 		</h3>
 		<div class=" flex mt-2 justify-end space-x-2">
 			<button
 				class="btn btn-primary"
 				on:click={() => {
-					const foundWordObject = words.find(
-						(element) =>
-							element.word.toLowerCase() === reportWordModal.toLowerCase()
-					);
-					lobby.reportWord(foundWordObject.word);
-					lobby.deleteWord(words.indexOf(foundWordObject));
-
-					reportWordModal = '';
+					lobby.reportWord(reportWordModal);
+					lobby.deleteWord(reportWordModal);
+					reportWordModal = null;
 				}}>
 				Yes
 			</button>
 			<button
 				class="btn btn-secondary"
 				on:click={() => {
-					reportWordModal = '';
+					reportWordModal = null;
 				}}>
 				no
 			</button>
@@ -145,11 +145,14 @@
 					<h3 class="card-title">Links</h3>
 					<div class="grid gap-2">
 						<div class="flex gap-2"><Socials /></div>
-						<div>please report bugs and suggestions in the discord server</div>
+						<div>
+							please report bugs and suggestions in the discord server/ on
+							GitHub
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="card bg-base-100 bordered shadow-lg">
+			<div class="card bg-base-100 bordered shadow-lg ">
 				<div class="card-body">
 					<h3 class="card-title">
 						Words {words.length}
@@ -167,6 +170,7 @@
 								<option value="es">Spanish</option>
 								<option value="de">German</option>
 								<option value="fr">french</option>
+								<option value="pl">polish</option>
 								<option value="pt">portuguese</option>
 							</select>
 						{/if}
@@ -242,7 +246,7 @@
 												class=" btn btn-warning"
 												on:click={() => {
 													// client.reportWord(word.word);
-													reportWordModal = word.word;
+													reportWordModal = i;
 													// deleting word
 													lockedWords = lockedWords.filter((w) => w !== i);
 													lockedWords = lockedWords.map((w) => {
