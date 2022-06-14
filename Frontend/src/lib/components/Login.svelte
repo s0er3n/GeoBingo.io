@@ -63,7 +63,14 @@
 				<button
 					on:click={() => {
 						if (api.player) {
-							$api.player.host(privateLobby, 'game');
+							console.log(navigator.language || navigator.userLanguage);
+							const lang = (navigator.language || navigator.userLanguage).slice(
+								0,
+								2
+							);
+							// maybe get languages from backend in the future
+							console.log(lang);
+							$api.player.host(privateLobby, 'game', lang);
 						}
 					}}
 					class="btn btn-primary  w-full">

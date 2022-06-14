@@ -28,8 +28,7 @@
 			? $api.game.currentPhase
 			: undefined;
 
-	// const lang = navigator.language || navigator.userLanguage;
-	const lang = 'en';
+	// const lang = 'en';
 
 	let countries = $api.geometries;
 	let lockedWords = [];
@@ -229,7 +228,7 @@
 												disabled={isLockedWord[i]}
 												><ShuffleIcon size="1x" /></button>
 										</div>
-										{#if lang.startsWith('en')}
+										{#if true}
 											<div
 												class="tooltip"
 												data-tip="save in database for other people">
