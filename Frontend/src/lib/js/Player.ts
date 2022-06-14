@@ -61,11 +61,18 @@ export class Player {
 
 	host(
 		privateLobby: boolean = false,
-		gameType: 'gah' | 'game' | 'MMGame' = 'game'
+		gameType: 'gah' | 'game' | 'MMGame' = 'game',
+		lang: string
 	) {
+		console.log(lang);
 		socket.emit('normalGame:host', privateLobby, gameType, (response) => {
 			console.log('hosting?');
 			console.log(response);
+			if (['en', 'nl', 'es', 'de', 'fr', 'pt', 'pl'].includes(lang)) {
+				console.log('setting langauge to:', lang);
+				socket.emit('normalGame:' + 'changeLang', lang);
+			}
+
 			this.join(response);
 		});
 	}
