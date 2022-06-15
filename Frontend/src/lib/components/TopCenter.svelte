@@ -6,16 +6,15 @@
 	let min = 0;
 	let seconds = 0;
 	let timeLeft = 1;
-	let timeNow = new Date();
+	let timeNow = new Date() - api.timeDelta;
 
 	let endTime = Date.parse($api.game.currentPhase.gameEndTime);
 
 	let timer = setInterval(function () {
 		let timeNow = new Date();
-		timeLeft = parseInt(parseInt(endTime - timeNow) / 1000);
+		timeLeft = parseInt(parseInt(endTime - (timeNow - api.timeDelta)) / 1000);
 		seconds = timeLeft % 60;
 		min = Math.floor(timeLeft / 60);
-		console.log(seconds);
 	}, 1000);
 	$: {
 		if ($api.game.currentPhaseString !== 'ingame') {
