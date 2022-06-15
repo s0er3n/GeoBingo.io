@@ -153,7 +153,7 @@
 			</div>
 			<div class="card bg-base-100 bordered shadow-lg ">
 				<div class="card-body">
-					<h3 class="card-title">
+					<h3 class="card-title flex flex-wrap">
 						Words {words.length}
 						{#if isHost}
 							<button
