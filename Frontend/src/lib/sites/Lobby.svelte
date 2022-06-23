@@ -396,7 +396,7 @@
 
 						<div class="grid gap-y-5">
 							<div class="w-full"><ChangeGameMode gameMode="gah" /></div>
-							<div class="label">{lobby.time} min</div>
+							<div class="label">{lobby?.time} min</div>
 							<input
 								disabled={!isHost}
 								type="range"

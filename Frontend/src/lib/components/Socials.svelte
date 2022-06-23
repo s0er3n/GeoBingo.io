@@ -14,8 +14,8 @@
 				href="https://github.com/s0er3n/GeoBingo.io"
 				data-size="large"
 				data-show-count="true"
-				aria-label="Star s0er3n/GeoBingo.io on GitHub"
-				>Star s0er3n/GeoBingo.io</a>
+				aria-label="Star GeoBingo.io on GitHub"
+				>Star GeoBingo.io on GitHub</a>
 		</div>
 	</div>
 
