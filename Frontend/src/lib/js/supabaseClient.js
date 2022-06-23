@@ -7,8 +7,8 @@ if (!(SUPABASE_URL && SUPABASE_KEY)) {
 export const supabase =
 	SUPABASE_URL && SUPABASE_KEY
 		? createClient(SUPABASE_URL, SUPABASE_KEY, {
-			autoRefreshToken: true,
-			persistSession: true,
-			detectSessionInUrl: true
-		})
+				autoRefreshToken: true,
+				persistSession: true,
+				detectSessionInUrl: true
+		  })
 		: undefined;
