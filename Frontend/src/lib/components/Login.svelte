@@ -24,11 +24,11 @@
 
 <div class="w-3/4">
 	<ul class="p-4 grid w-full space-y-4 shadow-lg bg-base-100 rounded-box">
-		<li class="w-full">
+		<li class="flex justify-center w-full">
 			<span> login or choose username </span>
 		</li>
 		<div class="w-full">
-			<li class="w-full">
+			<li class="flex justify-center w-full">
 				<SignIn bind:code />
 			</li>
 		</div>

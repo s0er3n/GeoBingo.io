@@ -105,7 +105,6 @@
 						{#if $api.game.currentPhase.words}
 							{#each $api.game.currentPhase.words as word, i}
 								<li
-									use:swipe={{ timeframe: 400, minSwipeDistance: 10 }}
 									on:swipe={(event) => {
 										console.log(event.detail.direction);
 										hide = true;

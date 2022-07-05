@@ -4,7 +4,7 @@
 	let disable = false;
 </script>
 
-<div class="card-title my-5">
+<div class="card-title my-5 flex flex-wrap">
 	Suggestions <input
 		on:click={() => (disable = !disable)}
 		checked={!disable}
