@@ -18,6 +18,18 @@
 	}
 </script>
 
+{#if $api?.game?.currentPhaseString !== 'ingame'}
+<div class="fixed -z-40 w-full h-full border-black border-[0px]">
+	<video
+		autoplay
+		muted
+		loop
+		playsinline
+		class="-z-50  w-full h-full  blur-md object-cover fit  ">
+		<source src="/Untitled.mp4" type="video/mp4" />
+	</video>
+</div>
+{/if}
 {#if !$api.game}
 	<Main />
 	<Footer />
@@ -57,3 +69,5 @@
 {:else}
 	error
 {/if}
+
+

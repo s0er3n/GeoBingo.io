@@ -24,6 +24,7 @@
 	{/if}
 
 	{#each $api.game.currentPhase?.suggestedWords ?? [] as suggestedWord}
+	
 		<li class="mb-5 mt-5">
 			<label class="label">
 				<span class="label-text-alt">{suggestedWord.playerName}</span>
