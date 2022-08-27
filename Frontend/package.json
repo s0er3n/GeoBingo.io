@@ -37,6 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@formkit/auto-animate": "^1.0.0-beta.3",
 		"@googlemaps/js-api-loader": "^1.12.10",
 		"@supabase/supabase-js": "^1.28.5",
 		"cypress": "^9.5.2",
