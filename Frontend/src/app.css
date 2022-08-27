@@ -20,9 +20,10 @@
 }
 
 body {
-background-color: #16161e;
-opacity: 1;
-background-image:  radial-gradient(#d4d6ff 1.35px, transparent 1.35px), radial-gradient(#d4d6ff 1.35px, #16161e 1.35px);
-background-size: 54px 54px;
-background-position: 0 0,27px 27px;
+	background-color: #16161e;
+	opacity: 1;
+	background-image: radial-gradient(#d4d6ff 1.35px, transparent 1.35px),
+		radial-gradient(#d4d6ff 1.35px, #16161e 1.35px);
+	background-size: 54px 54px;
+	background-position: 0 0, 27px 27px;
 }
