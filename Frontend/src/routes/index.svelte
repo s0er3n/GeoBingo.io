@@ -18,7 +18,7 @@
 	}
 </script>
 
-{#if $api?.game?.currentPhaseString !== 'ingame'}
+<!-- {#if $api?.game?.currentPhaseString !== 'ingame'}
 	<div class="fixed -z-40 w-full h-full border-black border-[0px]">
 		<video
 			autoplay
@@ -29,7 +29,7 @@
 			<source src="/Untitled.mp4" type="video/mp4" />
 		</video>
 	</div>
-{/if}
+{/if} -->
 {#if !$api.game}
 	<Main />
 	<Footer />
