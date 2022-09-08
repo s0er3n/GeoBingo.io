@@ -50,7 +50,7 @@
 	import LoadGoogleMaps, {
 		loadGoogleMaps
 	} from '$lib/components/LoadGoogleMaps.svelte';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 
 	export let mapOptions = {

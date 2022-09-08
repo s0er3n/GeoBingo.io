@@ -6,7 +6,7 @@
 </script>
 
 <script>
-	import { dev } from '$app/env';
+	import { dev } from '$app/environment';
 	import { writable } from 'svelte/store';
 	let googleMapsApiKey = import.meta.env.VITE_GMAPSAPI;
 

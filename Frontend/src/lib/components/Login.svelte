@@ -1,5 +1,5 @@
 <script>
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import NameChange from '$lib/components/NameChange.svelte';
 	import SignIn from '$lib/components/SignIn.svelte';
 	import { api } from '$lib/js/api';

@@ -3,7 +3,7 @@ import socket from './socket';
 import { user } from './sessionStore.js';
 
 import { supabase } from './supabaseClient.js';
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 
 type Auth = {
 	provider: string;

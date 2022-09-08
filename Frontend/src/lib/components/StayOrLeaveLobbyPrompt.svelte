@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import { api } from '$lib/js/api';
 	let differentLobby = true;
 	let code: string | undefined;

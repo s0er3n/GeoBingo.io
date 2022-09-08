@@ -1,5 +1,5 @@
 <script>
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	let kofi;
 	if (browser) {
 		try {

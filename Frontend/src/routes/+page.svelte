@@ -1,5 +1,5 @@
 <script>
-	import { dev, browser } from '$app/env';
+	import { dev, browser } from '$app/environment';
 	import Footer from '$lib/components/Footer.svelte';
 	import { api } from '$lib/js/api';
 	import GameOver from '$lib/sites/GameOver.svelte';

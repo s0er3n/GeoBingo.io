@@ -1,5 +1,5 @@
 <script>
-	import { dev } from '$app/env';
+	import { dev } from '$app/environment';
 </script>
 
 <div class="grid bg-base-100 items-center content-center justify-center">

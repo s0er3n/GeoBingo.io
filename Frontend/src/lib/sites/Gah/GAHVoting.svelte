@@ -10,7 +10,7 @@
 		ChevronRightIcon
 	} from 'svelte-feather-icons';
 	import { onMount } from 'svelte';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import SentenceWithStreetView from './components/SentenceWithStreetView.svelte';
 
 	let movingFree = false;
