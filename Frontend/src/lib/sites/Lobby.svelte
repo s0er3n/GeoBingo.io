@@ -4,7 +4,7 @@
 	import Suggestions from '$lib/components/Suggestions.svelte';
 	import ThemePicker from '$lib/components/ThemePicker.svelte';
 	import { Lobby as L } from '$lib/js/NormalGame';
-	import autoAnimate from '@formkit/auto-animate';
+	// import autoAnimate from '@formkit/auto-animate';
 
 	import { Lobby as M } from '$lib/js/MMGame';
 	import {
@@ -175,7 +175,8 @@
 							</select>
 						{/if}
 					</h3>
-					<ul use:autoAnimate>
+					<!-- <ul use:autoAnimate> -->
+					 <ul > 
 						{#each words.map((word) => {
 							return { word: word.word
 										.charAt(0)
@@ -601,7 +602,7 @@
 				<div
 					class=" flex justify-center items-center mt-4 card bg-base-100 bordered shadow-lg h-full">
 					<h3 class="pt-2 card-title">Players</h3>
-					<ul use:autoAnimate>
+					<ul >
 						{#each $api.game.currentPhase.players as player}
 							<li class="my-2">
 								<div class="flex ">
