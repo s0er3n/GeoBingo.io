@@ -14,13 +14,12 @@ import { WritableClass } from '../helpers/WriteableClass';
 
 // dont forget to refresh if you want things to update reactivly
 
-
 export class Api extends WritableClass {
 	playerLoaded = false;
 	streamerFrontPage = '';
 	socket: Socket;
 	player: Player;
-	countries: string[]
+	countries: string[];
 	game?: NormalGame | GeoBingoAgainstHumanity | MMGame;
 	timeDelta: number;
 
