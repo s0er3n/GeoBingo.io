@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import createListner from "../helpers/createListner";
 import type { MySocket, Pano } from "../types";
 import {

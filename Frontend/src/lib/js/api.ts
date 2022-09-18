@@ -14,20 +14,13 @@ import { WritableClass } from '../helpers/WriteableClass';
 
 // dont forget to refresh if you want things to update reactivly
 
-type CountryBounds = {
-	east: number;
-	north: number;
-	south: number;
-	west: number;
-};
 
 export class Api extends WritableClass {
 	playerLoaded = false;
 	streamerFrontPage = '';
-	geometries = [];
 	socket: Socket;
 	player: Player;
-	bounds: CountryBounds[];
+	countries: string[]
 	game?: NormalGame | GeoBingoAgainstHumanity | MMGame;
 	timeDelta: number;
 
@@ -56,7 +49,7 @@ export class Api extends WritableClass {
 					})
 				);
 			}
-			this.geometries = response.geometries.sort();
+			// this.geometries = response.geometries.sort();
 
 			const [player, game] = response.playerAndGame;
 
@@ -71,7 +64,7 @@ export class Api extends WritableClass {
 				this.game = undefined;
 			}
 
-			this.bounds = response.bounds;
+			this.countries = response.countries;
 			this.player = new Player(player);
 
 			this.playerLoaded = true;

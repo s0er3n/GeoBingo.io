@@ -104,12 +104,12 @@ export default class Game extends BaseGame {
     if (!this.host) return false;
     return this.host.online;
   }
-  checkPanoIsValidCountry(pano: Pano) {
+  async checkPanoIsValidCountry(pano: Pano): Promise<boolean> {
     if (this.country === "all") {
       return true;
     }
 
-    const res = checkLatLangPointisInCountry(
+    const res = await checkLatLangPointisInCountry(
       this.country,
       pano.position.long,
       pano.position.lat
@@ -122,7 +122,7 @@ export default class Game extends BaseGame {
     this.updateLobby();
   }
 
-  addCapture(player: Player, pano: Pano, i: number) {
+  async addCapture(player: Player, pano: Pano, i: number) {
     const time = Math.floor(
       (Date.now() - (this.gameEndTime!.getTime() - this.time * 60000)) / 1000
     );
@@ -130,7 +130,7 @@ export default class Game extends BaseGame {
     if (this.gamePhase !== gamePhases.INGAME) {
       return "fail";
     }
-    if (!this.checkPanoIsValidCountry(pano)) {
+    if (!(await this.checkPanoIsValidCountry(pano))) {
       return "fail";
     }
     // filtering out if capture already there

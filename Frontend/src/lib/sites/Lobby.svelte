@@ -31,7 +31,7 @@
 
 	// const lang = 'en';
 
-	let countries = $api.geometries;
+	let countries = $api.countries;
 	let lockedWords = [];
 	let countryEnabled = true;
 	let toggleDatabase = false;

@@ -9,7 +9,7 @@ import {
 
 import players from "../objects/PlayerHandler";
 
-import { bounds, countryNames } from "../helpers/getAllCountries";
+import { getCountries } from "../helpers/getAllCountries";
 
 import { join } from "../helpers/twitch-chat";
 
@@ -25,6 +25,10 @@ import {
   checkCallback,
   checkIfPlayer,
 } from "../helpers/checkers";
+
+let countries: string[]
+
+getCountries().then(r => countries = r).catch(e => console.log("couldn't get all country names"))
 
 export default (io: any, socket: MySocket) => {
   const init = (token: string | undefined, callback: Function) => {
@@ -63,8 +67,7 @@ export default (io: any, socket: MySocket) => {
       guestToken: guestToken,
       streamerFrontPage,
       playerAndGame: socket.player.toObjWithLobby(),
-      geometries: countryNames,
-      bounds: bounds,
+      countries,
       time: Date.now().toString(),
     });
   };
