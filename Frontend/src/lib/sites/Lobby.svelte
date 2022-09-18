@@ -179,7 +179,9 @@
 					<!-- <ul use:autoAnimate> -->
 					<ul>
 						{#each words.map((word) => {
-							return { word: word?.word?.charAt(0)?.toUpperCase() + word?.word?.slice(1) };
+							return { word: word?.word
+										?.charAt(0)
+										?.toUpperCase() + word?.word?.slice(1) };
 						}) as word, i}
 							<li name={word.word} class="mb-5">
 								<div
