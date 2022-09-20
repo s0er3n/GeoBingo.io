@@ -24,7 +24,7 @@ export const addWordToDB = async (word: { word: string; tags: string[] }) => {
   return data;
 };
 
-const LANGUAGES = ["en", "nl", "es", "de", "fr", "pt", "pl"]
+const LANGUAGES = ["en", "nl", "es", "de", "fr", "pt", "pl", "id"]
 
 export const backUpDBAndTranslate = async (words: { word: { word: string | { [lng: string]: string } } }[]) => {
   if (!supabaseProvided) return
@@ -70,7 +70,7 @@ export const backUpDBAndTranslate = async (words: { word: { word: string | { [ln
   })
   let answer = await Promise.all(langWords)
   // console.log(answer)
-  const { data, error } = await supabase.from("bingoWordsBackup")?.upsert(answer);
+  const { data, error } = await supabase.from("bingoWordsBackup").upsert(answer);
   console.log(error)
   return data;
 };

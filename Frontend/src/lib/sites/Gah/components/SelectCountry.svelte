@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { api } from '$lib/js/api';
-	let countries = $api.geometries;
+	let countries = $api.countries;
 	$: isHost = $api.isHost;
 </script>
 

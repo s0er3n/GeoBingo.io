@@ -12,7 +12,7 @@
 
 	const lang = navigator.language || navigator.userLanguage;
 
-	let countries = $api.geometries;
+	let countries = $api.countries;
 	let lockedWords = [];
 	let countryEnabled = true;
 

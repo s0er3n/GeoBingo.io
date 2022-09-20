@@ -53,11 +53,11 @@
 
 			if ($api.game.currentPhase.country !== 'all') {
 				let country = $api.game.currentPhase.country;
-				let countryBounds = $api.bounds[country];
-				console.log(countryBounds);
-				$map.map.setOptions({
-					restriction: { latLngBounds: countryBounds, strictBounds: false }
-				});
+				// let countryBounds = $api.bounds[country];
+				// console.log(countryBounds);
+				// $map.map.setOptions({
+				// 	restriction: { latLngBounds: countryBounds, strictBounds: false }
+				// });
 			}
 			if (click || $api.game.currentPhase.onlyOfficialCoverage) {
 				const infowindow = new google.maps.InfoWindow({
