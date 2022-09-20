@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "svelte-kit build",
+		"build": "vite build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview ",
 		"lint": "prettier --fix --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --fix --ignore-path .gitignore .",
