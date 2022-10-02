@@ -127,12 +127,11 @@ export default class Game extends BaseGame {
       (Date.now() - (this.gameEndTime!.getTime() - this.time * 60000)) / 1000
     );
 
-    if (this.gamePhase !== gamePhases.INGAME) {
-      return "fail";
-    }
     if (!(await this.checkPanoIsValidCountry(pano))) {
       return "fail";
     }
+
+
     // filtering out if capture already there
     // FIXME: what is going on here
     const filtered = this.captures.filter(
@@ -145,6 +144,9 @@ export default class Game extends BaseGame {
       this.captures.push(new Capture(player, pano, i, time));
     } else {
       this.captures = filtered;
+    }
+    if (this.gamePhase !== gamePhases.INGAME) {
+      return "fail";
     }
     this.updateLobby();
     return "success";
