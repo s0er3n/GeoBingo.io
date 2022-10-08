@@ -22,7 +22,7 @@
 	$: isHost = $api.isHost;
 
 	$: winnerRound = $api.game.currentPhase.players.find(
-		(p) => p.id === sortedThisRound[0].id
+		(p) => p.id === sortedThisRound[0]?.id
 	);
 </script>
 
@@ -80,6 +80,6 @@
 	</div>
 </div>
 
-{#if winnerRound.auth?.emotes?.length > 0}
+{#if winnerRound?.auth?.emotes?.length > 0}
 	<Celebration emote={winnerRound.auth.emotes[winnerRound.auth.equiped]} />
 {/if}
