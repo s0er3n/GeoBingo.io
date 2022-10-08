@@ -56,7 +56,7 @@ client.on("message", (channel, tags, message, self) => {
     }
   }
   if (!lobbies[channel].privateLobby) {
-    if (command === "bingo"  || command === "bingo"  || command === "join" || command === "link") {
+    if (command === "bongo"  || command === "bingo"  || command === "join" || command === "link") {
       try {
         client.say(
           channel,
