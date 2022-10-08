@@ -27,7 +27,7 @@
 	let disabled = false;
 </script>
 
-<div class="h-screen">
+<div class="min-h-screen">
 	<div class="flex justify-center items-center p-2">
 		<img class=" rounded-md  back shadow-2xl w-1/4" src="cover.png" alt="" />
 	</div>
