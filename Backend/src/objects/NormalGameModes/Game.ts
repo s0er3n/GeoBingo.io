@@ -132,8 +132,10 @@ export default class Game extends BaseGame {
     }
 
 
+    if (this.gamePhase !== gamePhases.INGAME) {
+      return "fail";
+    }
     // filtering out if capture already there
-    // FIXME: what is going on here
     const filtered = this.captures.filter(
       (capture) => !(capture.word === i && capture.player === player)
     );
