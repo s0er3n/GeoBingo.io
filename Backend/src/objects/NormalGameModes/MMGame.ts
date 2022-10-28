@@ -2,7 +2,10 @@ import { gamePhases } from "../../helpers/variables";
 import Score from "./Score";
 import Capture from "./Capture";
 import schedule from "node-schedule";
-import { getRandomWords, getRandomWordNotInWordList } from "../../helpers/words";
+import {
+  getRandomWords,
+  getRandomWordNotInWordList,
+} from "../../helpers/words";
 import { checkLatLangPointisInCountry } from "../../helpers/countryValidator";
 import _ from "lodash";
 import Player from "../Player";
@@ -18,9 +21,10 @@ export default class Game extends BaseGame {
   captureIndex = 0;
   captures: Capture[] = [];
   words: Word[] = [];
-  lng = "en"
+  lng = "en";
   size = 1000;
-  country = "all";
+  restriction: null | { key: string; val: string; lat: string; lng: string } =
+    null;
   score = new Score();
   wordsDisabled = false;
   onlyOfficialCoverage = false;
@@ -61,12 +65,12 @@ export default class Game extends BaseGame {
   }
 
   checkPanoIsValidCountry(pano: Pano) {
-    if (this.country === "all") {
+    if (this.restriction === null) {
       return true;
     }
 
     const res = checkLatLangPointisInCountry(
-      this.country,
+      this.restriction,
       pano.position.long,
       pano.position.lat
     );
@@ -216,8 +220,10 @@ export default class Game extends BaseGame {
     return this.playersKicked.has(player);
   }
 
-  changeCountry(country: string) {
-    this.country = country;
+  changeRestriction(
+    restriction: null | { key: string; val: string; lat: string; lng: string }
+  ) {
+    this.restriction = restriction;
     this.updateLobby();
   }
 
@@ -272,15 +278,14 @@ export default class Game extends BaseGame {
     return JSON.parse(JSON.stringify(this.words)).map((word: Word) => {
       if (typeof word.word !== "string") {
         if (word.word[this.lng]) {
-          word.word = word.word[this.lng]
-          return word
+          word.word = word.word[this.lng];
+          return word;
         }
       }
 
-      return word
-
-    })
-  }
+      return word;
+    });
+  };
 
   toGameState() {
     type State = {
@@ -297,7 +302,7 @@ export default class Game extends BaseGame {
       onlyAuth?: boolean;
       onlyOfficialCoverage?: boolean;
       title?: string;
-      country?: string;
+      restriction?: null | { key: string, val: string, lat: string, lng: string };
       captureIndex?: number;
       gameEndTime?: string;
       captures?: any[];
@@ -323,7 +328,7 @@ export default class Game extends BaseGame {
           onlyAuth: this.onlyAuth,
           onlyOfficialCoverage: this.onlyOfficialCoverage,
           title: this.title,
-          country: this.country,
+          restriction: this.restriction,
         };
         return state;
       case gamePhases.INGAME:
@@ -336,7 +341,7 @@ export default class Game extends BaseGame {
           title: this.title,
           onlyOfficialCoverage: this.onlyOfficialCoverage,
           words: this.getWordsInLng(),
-          country: this.country,
+          restriction: this.restriction,
           captures: this.getCapturesAsObjectsForIngame(),
         };
         return state;

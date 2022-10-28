@@ -27,7 +27,7 @@ export default class Game extends BaseGame {
   size = 100;
   lng = "en"
   suggestedWords: SuggestedWord[] = [];
-  country = "all";
+  restriction: null | { key: string, val: string, lat: string, lng: string } = null;
   score = new Score();
   host: Player;
   wordsDisabled = false;
@@ -105,12 +105,12 @@ export default class Game extends BaseGame {
     return this.host.online;
   }
   async checkPanoIsValidCountry(pano: Pano): Promise<boolean> {
-    if (this.country === "all") {
+    if (this.restriction === null) {
       return true;
     }
 
     const res = await checkLatLangPointisInCountry(
-      this.country,
+      this.restriction,
       pano.position.long,
       pano.position.lat
     );
@@ -238,8 +238,8 @@ export default class Game extends BaseGame {
     return this.playersKicked.has(player);
   }
 
-  changeCountry(country: string) {
-    this.country = country;
+  changeRestriction(data: { key: string, val: string, lat: string, lng: string }) {
+    this.restriction = data;
     this.updateLobby();
   }
   changeLang(lng: string) {
@@ -325,7 +325,7 @@ export default class Game extends BaseGame {
       onlyOfficialCoverage?: boolean;
       title?: string;
       suggestedWords?: { word: string; playerName: string }[];
-      country?: string;
+      restriction?: null | { key: string, val: string, lat: string, lng: string };
       captureIndex?: number;
       gameEndTime?: string;
       captures?: any[];
@@ -352,7 +352,7 @@ export default class Game extends BaseGame {
           onlyOfficialCoverage: this.onlyOfficialCoverage,
           title: this.title,
           suggestedWords: this.suggestedWords,
-          country: this.country,
+          restriction: this.restriction,
         };
         return state;
       case gamePhases.INGAME:
@@ -366,7 +366,7 @@ export default class Game extends BaseGame {
           onlyOfficialCoverage: this.onlyOfficialCoverage,
 
           words: this.getWordsInLng(),
-          country: this.country,
+          restriction: this.restriction,
           captures: this.getCapturesAsObjectsForIngame(),
         };
         return state;

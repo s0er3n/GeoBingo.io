@@ -54,7 +54,7 @@ export default class BaseGame {
     leading: true,
   });
 
-  startGame(gameOverCallback: Function) {
+  startGame(gameOverCallback: () => void) {
     const newGameEndTime = new Date(Date.now() + this.time * 60000);
     this.gameEndTime = newGameEndTime;
     this.currentScheduledJob = schedule.scheduleJob(newGameEndTime, () => {
