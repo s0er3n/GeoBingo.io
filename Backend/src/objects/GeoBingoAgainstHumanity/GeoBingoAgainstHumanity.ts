@@ -120,7 +120,7 @@ class Voting {
 export default class GeoBingoAgainstHumanityGame extends BaseGame {
   captureIndex = 0;
   host: Player;
-  country = "all";
+  restriction: null | { key: string, val: string, lat: string, lng: string } = null;
   card: Card;
   captures: CardAgainstHumanityCaptureStore[] = [];
   gamePhase: GamePhase = "lobby";
@@ -134,9 +134,8 @@ export default class GeoBingoAgainstHumanityGame extends BaseGame {
     this.card = getRandomCard();
   }
 
-  //FIXME: validate captures
-  changeCountry(country: string) {
-    this.country = country;
+  changeRestriction(data: { key: string, val: string, lat: string, lng: string }) {
+    this.restriction = data;
     this.updateLobby();
   }
 
@@ -194,7 +193,7 @@ export default class GeoBingoAgainstHumanityGame extends BaseGame {
       size: this.size,
       privateLobby: this.privateLobby,
       onlyAuth: this.onlyAuth,
-      country: this.country,
+      restriction: this.restriction,
       captures: this.captures.map((capture) => capture.toObj()),
       players: Array.from(this.players).map((player: Player) => player.toObj()),
       host: this.host.toObj(),

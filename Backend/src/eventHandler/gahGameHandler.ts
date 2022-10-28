@@ -6,6 +6,7 @@ import {
   checkIfLobby,
   checkCallback,
   isGeoBingoAgainstHumanity,
+  isGame,
 } from "../helpers/checkers";
 import { panoSchema } from "../zodTypes";
 const getGAH = (socket: MySocket, hostOnly = false) => {
@@ -62,10 +63,31 @@ export default (io: unknown, socket: MySocket) => {
   const score = () => {
     getGAH(socket, true)?.goToScore();
   };
-  const changeCountry = (country: string) => {
-    if (typeof country !== "string") return;
+  const changeRestriction = (data: {
+    key: string;
+    val: string;
+    lat: string;
+    lng: string;
+  }) => {
+    if (!checkIfPlayer(socket)) {
+      console.log("player not found");
+      return;
+    }
 
-    getGAH(socket, true)?.changeCountry(country);
+    if (!checkIfLobby(socket)) {
+      console.log("lobby not found");
+      return;
+    }
+
+    if (socket.player.lobby.host == socket.player) {
+      console.log("player has to be host to start game");
+      return;
+    }
+    if (isGame(socket.player.lobby)) {
+      return;
+    }
+
+    socket.player.lobby.changeRestriction(data);
   };
 
   const goToLobby = () => {
@@ -81,7 +103,7 @@ export default (io: unknown, socket: MySocket) => {
     endGame,
     setCaptureIndex,
     goToLobby,
-    changeCountry,
+    changeRestriction,
     changeCard,
     report,
   ]);

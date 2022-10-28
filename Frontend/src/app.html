@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html style="height: 100%" lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta
-			name="description"
-			content="multiplayer street view bingo game. find prompts in google street view. like a scavenger hunt but in google maps" />
-		<meta name="viewport" content="width=device-width" />
-		%sveltekit.head%
-		<script
-			type="text/javascript"
-			src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"
-			async></script>
-		<link rel="icon" href="/logo.svg" />
-		<!-- <link rel="manifest" href="/manifest.json" /> -->
-		<link
-			rel="stylesheet"
-			href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-			integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-			crossorigin=""
-			async />
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="multiplayer street view bingo game. find prompts in google street view. like a scavenger hunt but in google maps"
+    />
+    <meta name="viewport" content="width=device-width" />
+    %sveltekit.head%
+    <script
+      type="text/javascript"
+      src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"
+      async
+    ></script>
+    <link rel="icon" href="/logo.svg" />
+    <!-- <link rel="manifest" href="/manifest.json" /> -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+      async
+    />
 
-		<!-- <script
+    <!-- <script
 			defer
 			data-domain="geobingo.io"
 			src="https://plausible.io/js/plausible.js"></script> -->
-		<script
-			src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-			async
-			integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-			crossorigin=""></script>
-		<title>GeoBingo.io - a multiplayer street view bingo game</title>
-	</head>
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      async
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <title>GeoBingo.io - a multiplayer street view bingo game</title>
+  </head>
 
-	<body class="">
-		<div id="svelte">%sveltekit.body%</div>
-	</body>
+  <body class="">
+    <div id="svelte">%sveltekit.body%</div>
+  </body>
 </html>
 
 <style>
-	/* #background {
+  /* #background {
 		position: fixed;
 		top: 0px;
 		left: 0px;
@@ -49,11 +53,11 @@
 	}
 
 	*/
-	/* body {
+  /* body {
 		background-color: black;
 	} */
 
-	/*
+  /*
 
 	#svelte {
 		position: relative;

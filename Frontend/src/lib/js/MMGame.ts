@@ -1,221 +1,221 @@
-import socket from './socket';
-import type Game from '../../../../Backend/src/objects/MMGame';
-import { supabase } from './supabaseClient.js';
+import socket from "./socket";
+import type Game from "../../../../Backend/src/objects/MMGame";
+import { supabase } from "./supabaseClient.js";
 
 type GamePhases = Lobby | Ingame | Score | VotingPhase;
 
-type GamePhaseString = 'lobby' | 'ingame' | 'score' | 'votingphase';
+type GamePhaseString = "lobby" | "ingame" | "score" | "votingphase";
 // make Type
-type gameStateFn = Game['toGameState'];
+type gameStateFn = Game["toGameState"];
 type GameObj = ReturnType<gameStateFn>;
 
 export class MMGame {
-	currentPhase: GamePhases;
-	gameMode = 'MMGame';
-	currentPhaseString: GamePhaseString;
+  currentPhase: GamePhases;
+  gameMode = "MMGame";
+  currentPhaseString: GamePhaseString;
 
-	// moved it here bc it makes more sense
+  // moved it here bc it makes more sense
 
-	constructor(gameObj: GameObj) {
-		this.updateGamePhase(gameObj);
-	}
+  constructor(gameObj: GameObj) {
+    this.updateGamePhase(gameObj);
+  }
 
-	updateOrCreateGamePhase(gameObj: GameObj, typeOfPhase: any) {
-		if (this.currentPhase instanceof typeOfPhase) {
-			this.currentPhase.update(gameObj);
-		} else {
-			this.currentPhase = new typeOfPhase(gameObj);
-		}
-	}
+  updateOrCreateGamePhase(gameObj: GameObj, typeOfPhase: any) {
+    if (this.currentPhase instanceof typeOfPhase) {
+      this.currentPhase.update(gameObj);
+    } else {
+      this.currentPhase = new typeOfPhase(gameObj);
+    }
+  }
 
-	updateGamePhase(gameObj: GameObj) {
-		switch (gameObj.gamePhase) {
-			case 'lobby': {
-				this.currentPhaseString = gameObj.gamePhase;
-				this.updateOrCreateGamePhase(gameObj, Lobby);
-				break;
-			}
-			case 'ingame': {
-				this.currentPhaseString = gameObj.gamePhase;
-				this.updateOrCreateGamePhase(gameObj, Ingame);
-				break;
-			}
-			case 'score': {
-				this.currentPhaseString = gameObj.gamePhase;
-				this.updateOrCreateGamePhase(gameObj, Score);
-				break;
-			}
-			case 'gameover': {
-				this.currentPhaseString = 'votingphase';
-				this.updateOrCreateGamePhase(gameObj, VotingPhase);
-				break;
-			}
-		}
-	}
+  updateGamePhase(gameObj: GameObj) {
+    switch (gameObj.gamePhase) {
+      case "lobby": {
+        this.currentPhaseString = gameObj.gamePhase;
+        this.updateOrCreateGamePhase(gameObj, Lobby);
+        break;
+      }
+      case "ingame": {
+        this.currentPhaseString = gameObj.gamePhase;
+        this.updateOrCreateGamePhase(gameObj, Ingame);
+        break;
+      }
+      case "score": {
+        this.currentPhaseString = gameObj.gamePhase;
+        this.updateOrCreateGamePhase(gameObj, Score);
+        break;
+      }
+      case "gameover": {
+        this.currentPhaseString = "votingphase";
+        this.updateOrCreateGamePhase(gameObj, VotingPhase);
+        break;
+      }
+    }
+  }
 }
 
 type GamePhase = {
-	update(gameObj: GameObj): void;
+  update(gameObj: GameObj): void;
 };
 
 export class Lobby implements GamePhase {
-	players: GameObj['players'];
-	time: GameObj['time'];
-	size: GameObj['size'];
-	words: GameObj['words'];
-	anonVoting: GameObj['anonVoting'];
-	privateLobby: GameObj['privateLobby'];
-	onlyAuth: GameObj['onlyAuth'];
-	onlyOfficialCoverage: GameObj['onlyOfficialCoverage'];
-	title: GameObj['title'];
-	country: GameObj['country'];
-	score: GameObj['score'];
+  players: GameObj["players"];
+  time: GameObj["time"];
+  size: GameObj["size"];
+  words: GameObj["words"];
+  anonVoting: GameObj["anonVoting"];
+  privateLobby: GameObj["privateLobby"];
+  onlyAuth: GameObj["onlyAuth"];
+  onlyOfficialCoverage: GameObj["onlyOfficialCoverage"];
+  title: GameObj["title"];
+  restriction: GameObj["restriction"];
+  score: GameObj["score"];
 
-	constructor(gameObj: GameObj) {
-		this.update(gameObj);
-	}
+  constructor(gameObj: GameObj) {
+    this.update(gameObj);
+  }
 
-	update(gameObj: GameObj): void {
-		if (gameObj.gamePhase !== 'lobby') {
-			throw 'update with wrong gameObj in lobby';
-		}
-		for (const [key, value] of Object.entries(gameObj)) {
-			this[key] = value;
-		}
-	}
+  update(gameObj: GameObj): void {
+    if (gameObj.gamePhase !== "lobby") {
+      throw "update with wrong gameObj in lobby";
+    }
+    for (const [key, value] of Object.entries(gameObj)) {
+      this[key] = value;
+    }
+  }
 
-	reportWord(word: string) {
-		socket.emit('normalGame:' + 'reportWord', word);
-	}
+  reportWord(word: string) {
+    socket.emit("normalGame:" + "reportWord", word);
+  }
 }
 
 export class Ingame implements GamePhase {
-	time: GameObj['time'];
-	gameEndTime: GameObj['gameEndTime'];
-	title: GameObj['title'];
-	onlyOfficialCoverage: GameObj['onlyOfficialCoverage'];
-	words: GameObj['words'];
-	country: GameObj['country'];
-	captures: GameObj['captures'];
+  time: GameObj["time"];
+  gameEndTime: GameObj["gameEndTime"];
+  title: GameObj["title"];
+  onlyOfficialCoverage: GameObj["onlyOfficialCoverage"];
+  words: GameObj["words"];
+  restriction: GameObj["restriction"];
+  captures: GameObj["captures"];
 
-	constructor(gameObj: GameObj) {
-		this.update(gameObj);
-	}
+  constructor(gameObj: GameObj) {
+    this.update(gameObj);
+  }
 
-	update(gameObj: GameObj): void {
-		if (gameObj.gamePhase !== 'ingame') {
-			throw 'update with wrong gameObj in ingame';
-		}
-		for (const [key, value] of Object.entries(gameObj)) {
-			this[key] = value;
-		}
-	}
-	addCapture(i: number, pano: any) {
-		socket.emit(
-			'normalGame:' + 'addCapture',
-			i,
-			pano,
-			(response: string | undefined) => {
-				console.log(response);
-			}
-		);
-	}
+  update(gameObj: GameObj): void {
+    if (gameObj.gamePhase !== "ingame") {
+      throw "update with wrong gameObj in ingame";
+    }
+    for (const [key, value] of Object.entries(gameObj)) {
+      this[key] = value;
+    }
+  }
+  addCapture(i: number, pano: any) {
+    socket.emit(
+      "normalGame:" + "addCapture",
+      i,
+      pano,
+      (response: string | undefined) => {
+        console.log(response);
+      }
+    );
+  }
 
-	endGame() {
-		socket.emit('normalGame:' + 'endGame', (response: string | undefined) =>
-			console.log(response)
-		);
-	}
+  endGame() {
+    socket.emit("normalGame:" + "endGame", (response: string | undefined) =>
+      console.log(response)
+    );
+  }
 }
 
 class Score implements GamePhase {
-	captures: GameObj['captures'];
-	words: GameObj['words'];
-	players: GameObj['players'];
-	gamePhase: GameObj['gamePhase'];
-	score: GameObj['score'];
-	title: GameObj['title'];
-	oldScore: GameObj['oldScore'];
+  captures: GameObj["captures"];
+  words: GameObj["words"];
+  players: GameObj["players"];
+  gamePhase: GameObj["gamePhase"];
+  score: GameObj["score"];
+  title: GameObj["title"];
+  oldScore: GameObj["oldScore"];
 
-	constructor(gameObj: GameObj) {
-		this.update(gameObj);
-	}
+  constructor(gameObj: GameObj) {
+    this.update(gameObj);
+  }
 
-	update(gameObj: GameObj): void {
-		if (gameObj.gamePhase !== 'score') {
-			throw 'update with wrong gameObj in ingame';
-		}
-		for (const [key, value] of Object.entries(gameObj)) {
-			this[key] = value;
-		}
-	}
+  update(gameObj: GameObj): void {
+    if (gameObj.gamePhase !== "score") {
+      throw "update with wrong gameObj in ingame";
+    }
+    for (const [key, value] of Object.entries(gameObj)) {
+      this[key] = value;
+    }
+  }
 
-	goToLobby() {
-		socket.emit('normalGame:' + 'lobby', (response: string | undefined) =>
-			console.log(response)
-		);
-	}
+  goToLobby() {
+    socket.emit("normalGame:" + "lobby", (response: string | undefined) =>
+      console.log(response)
+    );
+  }
 
-	backToGameOver() {
-		socket.emit(
-			'normalGame:' + 'backToGameOver',
-			(response: string | undefined) => console.log(response)
-		);
-	}
+  backToGameOver() {
+    socket.emit(
+      "normalGame:" + "backToGameOver",
+      (response: string | undefined) => console.log(response)
+    );
+  }
 }
 
 class VotingPhase implements GamePhase {
-	gamePhase: GameObj['gamePhase'];
-	words: GameObj['words'];
-	captureIndex: GameObj['captureIndex'];
-	title: GameObj['title'];
-	anonVoting: GameObj['anonVoting'];
-	captures: GameObj['captures'];
-	allowEveryoneToVote: GameObj['allowEveryoneToVote'];
+  gamePhase: GameObj["gamePhase"];
+  words: GameObj["words"];
+  captureIndex: GameObj["captureIndex"];
+  title: GameObj["title"];
+  anonVoting: GameObj["anonVoting"];
+  captures: GameObj["captures"];
+  allowEveryoneToVote: GameObj["allowEveryoneToVote"];
 
-	constructor(gameObj: GameObj) {
-		this.update(gameObj);
-	}
+  constructor(gameObj: GameObj) {
+    this.update(gameObj);
+  }
 
-	update(gameObj: GameObj): void {
-		if (gameObj.gamePhase !== 'gameover') {
-			throw 'update with wrong gameObj in VotingPhase';
-		}
-		for (const [key, value] of Object.entries(gameObj)) {
-			this[key] = value;
-		}
-	}
+  update(gameObj: GameObj): void {
+    if (gameObj.gamePhase !== "gameover") {
+      throw "update with wrong gameObj in VotingPhase";
+    }
+    for (const [key, value] of Object.entries(gameObj)) {
+      this[key] = value;
+    }
+  }
 
-	saveReportedPanosInDB = async (
-		i: number,
-		reason: string,
-		playerId: string
-	) => {
-		try {
-			let { data, error } = await supabase.from('reportedPhotospheres').insert({
-				panoid: this.captures[i].pano.pano.pano,
-				reason,
-				playerid: playerId
-			});
-			console.log(data, error);
-		} catch (e) {
-			console.log(e);
-		}
-	};
+  saveReportedPanosInDB = async (
+    i: number,
+    reason: string,
+    playerId: string
+  ) => {
+    try {
+      let { data, error } = await supabase.from("reportedPhotospheres").insert({
+        panoid: this.captures[i].pano.pano.pano,
+        reason,
+        playerid: playerId,
+      });
+      console.log(data, error);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-	async reportAsNSFW(i: number, reason: string, playerId: string) {
-		// maybe i should consider doing this on server site
-		// someone could write random stuff in the table
+  async reportAsNSFW(i: number, reason: string, playerId: string) {
+    // maybe i should consider doing this on server site
+    // someone could write random stuff in the table
 
-		try {
-			await this.saveReportedPanosInDB(i, reason, playerId);
-		} catch (e) {
-			console.log(e);
-		}
+    try {
+      await this.saveReportedPanosInDB(i, reason, playerId);
+    } catch (e) {
+      console.log(e);
+    }
 
-		socket.emit('normalGame:' + 'reportAsNSFW', i, reason);
-	}
-	vote(vote: string, index: number) {
-		socket.emit('normalGame:' + 'vote', vote, index);
-	}
+    socket.emit("normalGame:" + "reportAsNSFW", i, reason);
+  }
+  vote(vote: string, index: number) {
+    socket.emit("normalGame:" + "vote", vote, index);
+  }
 }

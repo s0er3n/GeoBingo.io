@@ -13,9 +13,9 @@ import { Server } from "socket.io";
 import { addKofiDonation } from "./helpers/api";
 import { updateWhiteList } from "./helpers/variables";
 
-
 import type { MySocket } from "./types";
 import gahGameHandler from "./eventHandler/gahGameHandler";
+import region from "./eventHandler/region";
 import MMGameHandler from "./eventHandler/MMGameHandler";
 
 const app = express();
@@ -44,6 +44,7 @@ const onConnection = (socket: MySocket) => {
   normalGameHandler(io, socket);
   playerHandler(io, socket);
   gahGameHandler(io, socket);
+  region(io, socket);
   MMGameHandler(io, socket);
 
   socket.on("disconnect", () => {

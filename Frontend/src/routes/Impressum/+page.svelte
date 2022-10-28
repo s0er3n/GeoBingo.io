@@ -5,7 +5,8 @@
 <p>Deutschland</p>
 <h2>Kontakt:</h2>
 <p>
-	E-Mail-Adresse:
-	<a href="mailto:soeren.michaels+geobingo@gmail.com"
-		>soeren.michaels+geobingo@gmail.com</a>
+  E-Mail-Adresse:
+  <a href="mailto:soeren.michaels+geobingo@gmail.com"
+    >soeren.michaels+geobingo@gmail.com</a
+  >
 </p>

@@ -4,26 +4,26 @@
 @tailwind utilities;
 /* for better map performance. idk if it works */
 #map * {
-	-moz-transition: none;
-	-webkit-transition: none;
-	-o-transition: all 0s ease;
-	transition: none;
+  -moz-transition: none;
+  -webkit-transition: none;
+  -o-transition: all 0s ease;
+  transition: none;
 }
 /* removing copy and paste from every thing */
 * {
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 body {
-	background-color: #16161e;
-	opacity: 1;
-	background-image: radial-gradient(#d4d6ff 1.35px, transparent 1.35px),
-		radial-gradient(#d4d6ff 1.35px, #16161e 1.35px);
-	background-size: 54px 54px;
-	background-position: 0 0, 27px 27px;
+  background-color: #16161e;
+  opacity: 1;
+  background-image: radial-gradient(#d4d6ff 1.35px, transparent 1.35px),
+    radial-gradient(#d4d6ff 1.35px, #16161e 1.35px);
+  background-size: 54px 54px;
+  background-position: 0 0, 27px 27px;
 }
