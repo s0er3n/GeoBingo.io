@@ -48,7 +48,7 @@ export default class Game extends BaseGame {
         online += 1;
       }
     });
-    if (online === 2) {
+    if (online > 1) {
       this.startGame();
       return;
     }
