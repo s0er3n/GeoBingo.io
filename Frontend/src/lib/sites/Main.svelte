@@ -17,13 +17,12 @@
   // 		link: 'https://donate.redcrossredcrescent.org/ua/donate/~my-donation'
   // 	}
   // ];
-  // let events = [
-  // 	{
-  // 		image: 'wordle.png',
-  // 		link: 'https://satellitedle.com'
-  // 	}
-  // ];
-  let events = [];
+  let events = [
+    {
+      image: "wikiparty.png",
+      link: "https://wikiparty.org",
+    },
+  ];
   let disabled = false;
 </script>
 
@@ -47,9 +46,8 @@
     <div class="p-2">
       {#if $api.streamerFrontPage}
         <StreamerFrontPage streamerFrontPage={$api.streamerFrontPage} />
-        <!-- {:else if events.length}
-				<Carousel {events} bind:disabled />
-				<YoutubeVideo /> -->
+      {:else if events.length}
+        <Carousel {events} bind:disabled />
       {:else}
         <Discord />
       {/if}

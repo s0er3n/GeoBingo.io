@@ -6,6 +6,8 @@ services:
       - token
       - domain
       - supabasekey
+    2342342 14319287349213479283477747893217490827439217  83490856902183466573281900szzgbn
+
       - supabaseurl
       - jwtpriv
     ports:

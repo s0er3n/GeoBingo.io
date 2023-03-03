@@ -56,7 +56,7 @@ client.on("message", (channel, tags, message, self) => {
     }
   }
   if (!lobbies[channel].privateLobby) {
-    if (command === "bongo"  || command === "bingo"  || command === "join" || command === "link") {
+    if (command === "bongo" || command === "bingo" || command === "join" || command === "link") {
       try {
         client.say(
           channel,
@@ -93,11 +93,11 @@ client.on("message", (channel, tags, message, self) => {
 export const join = (channel: string, lobby: Game | GeoBingoAgainstHumanityGame) => {
   try {
     client.join("#" + channel).catch((e) => console.log(e));
-    // client.say(
-    //   "#" + channel,
-    //   `🤖 ${process.env.domain} just connected to twitch chat. You can use !link or !code to join the game. If you like the game join the discord server and follow the twitch category. You can also support me on https://ko-fi.com/soerenmichaels <3.` +
-    //   (!lobby.privateLobby ? "The code is " + lobby.title : "")
-    // );
+    client.say(
+      "#" + channel,
+      `🤖 ${process.env.domain} just connected to twitch chat. You can use !link or !code to join the game.` +
+      (!lobby.privateLobby ? "The code is " + lobby.title : "")
+    );
     lobbies["#" + channel.toLowerCase()] = lobby;
   } catch (e) {
     console.log(e);
