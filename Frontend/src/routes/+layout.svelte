@@ -11,5 +11,6 @@
 </script>
 
 <div class=" min-h-screen w-full flex flex-col justify-stretch">
+  <div id="preroll" />
   <slot />
 </div>

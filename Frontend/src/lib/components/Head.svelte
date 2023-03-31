@@ -9,6 +9,7 @@
     <button class="btn btn-warning my-2" on:click={() => api.player.leave()}
       ><ChevronLeftIcon class="" size="1x" />leave Game</button
     >
+
     <input
       class={`hidden sm:flex input col-span-2 input-primary rounded input-bordered ${
         $api.game.currentPhase.privateLobby ? "blur-sm" : ""

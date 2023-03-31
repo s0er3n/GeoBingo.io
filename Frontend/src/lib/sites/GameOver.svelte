@@ -2,6 +2,8 @@
   import Head from "$lib/components/Head.svelte";
 
   import Pano from "$lib/components/Pano.svelte";
+
+  show_preroll();
 </script>
 
 <div class="card h-full" style="height: 100vh;">
