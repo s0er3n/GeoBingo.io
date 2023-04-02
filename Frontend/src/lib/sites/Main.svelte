@@ -36,7 +36,7 @@
   </div>
 
   <div class="flex justify-center items-center p-2">
-    <div id="geobingo-io_970x250">
+    <div id="geobingo-io_970x250" class="hidden lg:block">
       <script type="text/javascript">
         if (!localStorage.getItem("donator")) {
           aiptag.cmd.display.push(function () {
