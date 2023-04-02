@@ -48,7 +48,7 @@
     function show_preroll() {
       //check if the adslib is loaded correctly or blocked by adblockers etc.
       if (
-        !localStorage.getItem("donator") ||
+        !localStorage.getItem("donator") &&
         typeof aiptag.adplayer !== "undefined"
       ) {
         aiptag.cmd.player.push(function () {
