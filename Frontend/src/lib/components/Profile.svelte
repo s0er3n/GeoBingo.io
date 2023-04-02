@@ -11,6 +11,15 @@
 
   $: playerIsHost = api.getHost(player.id);
   let playerToKick;
+
+  if ($api.player.id === player.id && !localStorage.getItem("donator")) {
+    for (const badge of player.auth.badges) {
+      if (badge.toLowerCase().startsWith("donator")) {
+        localStorage.setItem("donator", "true");
+        break;
+      }
+    }
+  }
 </script>
 
 {#if player}

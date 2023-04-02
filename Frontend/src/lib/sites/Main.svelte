@@ -35,12 +35,14 @@
     <Socials />
   </div>
 
-  <div id="geobingo-io_970x250">
-    <script type="text/javascript">
-      aiptag.cmd.display.push(function () {
-        aipDisplayTag.display("geobingo-io_970x250");
-      });
-    </script>
+  <div class="flex justify-center items-center p-2">
+    <div id="geobingo-io_970x250">
+      <script type="text/javascript">
+        aiptag.cmd.display.push(function () {
+          aipDisplayTag.display("geobingo-io_970x250");
+        });
+      </script>
+    </div>
   </div>
   <div class="w-full flex flex-col md:flex-row p-2 justify-center items-center">
     <div class="p-2 flex items-center justify-center">
