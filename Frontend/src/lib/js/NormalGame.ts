@@ -299,6 +299,23 @@ class VotingPhase implements GamePhase {
       console.log(e);
     }
   };
+  savePano = async (
+    i: number,
+    tags: string,
+    playerId: string
+  ) => {
+    try {
+      let { data, error } = await supabase.from("savedPanos").insert({
+        panoid: this.captures[i].pano.pano.pano,
+        tags,
+        playerid: playerId,
+      });
+      console.log(data, error);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
 
   async reportAsNSFW(i: number, reason: string, playerId: string) {
     // maybe i should consider doing this on server site

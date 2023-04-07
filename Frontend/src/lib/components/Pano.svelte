@@ -151,6 +151,10 @@
     map = false;
   };
   let panoToReportIndex;
+
+  const savePano = () => {
+    api.game.currentPhase.savePano(captureIndex, "");
+  };
 </script>
 
 <div class="modal {nsfwModal ? 'modal-open' : ''}">
@@ -380,6 +384,7 @@
                 class="btn btn-sm m-2   bg-base-100 btn-ghost"
                 ><XIcon size="1x" /> <span class="font-thin">(s)</span></button
               >
+              <button onclick={savePano} class="btn">save</button>
             </div>
 
             <div>
