@@ -2,6 +2,7 @@
   import { api } from "$lib/js/api";
   import Inventory from "./Inventory.svelte";
   import { ChevronLeftIcon } from "svelte-feather-icons";
+  import SavedLocations from "./SavedLocations.svelte";
 </script>
 
 <div class="flex justify-between m-0 p-0">
@@ -25,4 +26,5 @@
     />
   </div>
   <Inventory />
+  <SavedLocations />
 </div>

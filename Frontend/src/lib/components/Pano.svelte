@@ -152,11 +152,56 @@
   };
   let panoToReportIndex;
 
+  $: savedLocations = new Set();
+
+  $: isSaved = savedLocations.has(captureIndex);
+
   const savePano = () => {
-    api.game.currentPhase.savePano(captureIndex, "");
+    api.game.currentPhase.savePano(captureIndex, "", api.player.id);
+    savedLocations.add(captureIndex);
+    savedLocations = savedLocations;
   };
+  let savePanoModal = false;
+  let panoToSaveIndex = undefined;
+  let description = "";
 </script>
 
+<div class="modal {savePanoModal ? 'modal-open' : ''}">
+  <div class="modal-box">
+    <p>Write a short description for the pano:</p>
+    <input
+      required
+      type=""
+      bind:value={description}
+      on:keydown={(e) => {
+        e.stopPropagation();
+      }}
+      placeholder="type a short description here"
+      class="input mt-2 input-bordered w-full max-w-xs"
+    />
+
+    <div class="modal-action">
+      <label
+        for="my-modal-5"
+        on:click={() => {
+          api.game.currentPhase.savePano(panoToSaveIndex, description);
+          description = "";
+          savePanoModal = false;
+          panoToSaveIndex = undefined;
+        }}
+        class="btn btn-primary">save pano</label
+      >
+      <label
+        for="my-modal-5"
+        class="btn"
+        on:click={() => {
+          savePanoModal = false;
+          panoToSaveIndex = undefined;
+        }}>Close</label
+      >
+    </div>
+  </div>
+</div>
 <div class="modal {nsfwModal ? 'modal-open' : ''}">
   <div class="modal-box">
     <p>Are you sure you want to report this image as NSFW?</p>
@@ -384,7 +429,17 @@
                 class="btn btn-sm m-2   bg-base-100 btn-ghost"
                 ><XIcon size="1x" /> <span class="font-thin">(s)</span></button
               >
-              <button onclick={savePano} class="btn">save</button>
+              {#if $api.player.twitch}
+                <button
+                  class="btn"
+                  on:click={() => {
+                    panoToSaveIndex = captureIndex;
+                    savePanoModal = true;
+                  }}
+                >
+                  save
+                </button>
+              {/if}
             </div>
 
             <div>
