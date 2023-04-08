@@ -11,14 +11,14 @@
 
 {#if $api.player.twitch}
   <!-- Put this part before </body> tag -->
-  <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-  <label for="my-modal-4" class="modal cursor-pointer">
+  <input type="checkbox" id="my-modal-5" class="modal-toggle" />
+  <label for="my-modal-5" class="modal cursor-pointer">
     <label class="modal-box relative" for="">
       <h1>Your Inventory (click to choose)</h1>
       <div class="grid grid-cols-9 content-center">
         {#if api?.player?.twitch}
           {#await getPhotospheres() then data}
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto overflow-scroll">
               <table class="bg-base-100 table w-full">
                 <thead>
                   <tr>
@@ -48,10 +48,10 @@
 {/if}
 {#if !ghost}
   {#if $api.player.twitch}
-    <label for="my-modal-4" class="m-2 btn btn-info modal-button "
+    <label for="my-modal-5" class="m-2 btn btn-info modal-button "
       >Saved Locatoins<ArchiveIcon size="1x" class="ml-2" />
     </label>
   {/if}
 {:else}
-  <label disabled={!api.player.twitch} for="my-modal-4"><slot /></label>
+  <label disabled={!api.player.twitch} for="my-modal-5"><slot /></label>
 {/if}
