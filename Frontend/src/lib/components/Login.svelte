@@ -46,7 +46,7 @@
       />
       <button
         on:click={() => api.player.join(lobbyToJoin)}
-        class="absolute top-0 right-0 rounded-l-none btn btn-primary font-bold text-xl"
+        class="absolute  top-0 right-0 rounded-l-none btn btn-primary font-bold text-xl"
         >join</button
       >
     </li>
@@ -76,9 +76,24 @@
               $api.player.host(privateLobby, "game", lang);
             }
           }}
-          class="btn btn-primary  w-full"
+          class="btn btn-primary w-full"
         >
           Play with friends/chat
+        </button>
+      </li>
+    </div>
+    <div class="indicator w-full">
+      <li class="w-full">
+        <span class="indicator-item badge badge-info">BETA</span>
+        <button
+          on:click={() => {
+            if (api.player) {
+              $api.player.host(privateLobby, "MMGame");
+            }
+          }}
+          class="btn btn-secondary w-full h-fit"
+        >
+          join public game
         </button>
       </li>
     </div>
@@ -91,26 +106,11 @@
               $api.player.host(privateLobby, "gah");
             }
           }}
-          class="btn btn-primary w-full h-fit p-2"
+          class="btn btn-secondary w-full h-fit p-2"
         >
           Create GeoBingo Against Humanity Game (not affilated with Cards
           Against Humanity)</button
         >
-      </li>
-    </div>
-    <div class="indicator w-full">
-      <li class="w-full">
-        <span class="indicator-item badge badge-info">BETA</span>
-        <button
-          on:click={() => {
-            if (api.player) {
-              $api.player.host(privateLobby, "MMGame");
-            }
-          }}
-          class="btn btn-primary w-full h-fit"
-        >
-          join public game
-        </button>
       </li>
     </div>
   </ul>

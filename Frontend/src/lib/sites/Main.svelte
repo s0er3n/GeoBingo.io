@@ -18,10 +18,10 @@
   // 	}
   // ];
   let events = [
-    {
-      image: "wikiparty.png",
-      link: "https://wikiparty.org",
-    },
+    // {
+    //   image: "wikiparty.png",
+    //   link: "https://wikiparty.org",
+    // },
   ];
   let disabled = false;
 </script>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="flex justify-center items-center p-2">
-    <div id="geobingo-io_970x250" class="hidden lg:block">
+    <div id="geobingo-io_970x250" class="max-w-screen">
       <script type="text/javascript">
         if (!localStorage.getItem("donator")) {
           aiptag.cmd.display.push(function () {
@@ -46,6 +46,18 @@
       </script>
     </div>
   </div>
+    <div class="flex">
+    <div class="hidden xl:flex justify-center items-center">
+        <div id="geobingo-io_300x600" class="max-w-screen">
+          <script type="text/javascript">
+            if (!localStorage.getItem("donator")) {
+              aiptag.cmd.display.push(function () {
+                aipDisplayTag.display("geobingo-io_970x250");
+              });
+            }
+          </script>
+        </div>
+    </div>
   <div class="w-full flex flex-col md:flex-row p-2 justify-center items-center">
     <div class="p-2 flex items-center justify-center">
       {#if $api?.player}
@@ -62,6 +74,7 @@
       {:else}
         <Discord />
       {/if}
+    </div>
     </div>
   </div>
 </div>

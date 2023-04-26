@@ -1,6 +1,7 @@
 <script>
   import { api } from "$lib/js/api";
   import Inventory from "./Inventory.svelte";
+  import Socials from "./Socials.svelte";
   import { ChevronLeftIcon } from "svelte-feather-icons";
   import SavedLocations from "./SavedLocations.svelte";
 </script>
@@ -25,6 +26,7 @@
       }}
     />
   </div>
+    <Socials/>
   <Inventory />
   <SavedLocations />
 </div>

@@ -166,7 +166,7 @@
   let description = "";
 </script>
 
-<div class="modal {savePanoModal ? 'modal-open' : ''}">
+<div class="w-max modal {savePanoModal ? 'modal-open' : ''}">
   <div class="modal-box">
     <p>Write a short description for the pano:</p>
     <input
