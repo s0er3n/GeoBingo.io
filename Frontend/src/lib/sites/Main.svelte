@@ -35,8 +35,8 @@
     <Socials />
   </div>
 
-  <div class="flex justify-center items-center p-2">
-    <div id="geobingo-io_970x250" class="max-w-screen">
+  <div class="flex justify-center items-center p-2 max-w-screen">
+    <div id="geobingo-io_970x250" class="hidden md:block max-w-screen">
       <script type="text/javascript">
         if (!localStorage.getItem("donator")) {
           aiptag.cmd.display.push(function () {
