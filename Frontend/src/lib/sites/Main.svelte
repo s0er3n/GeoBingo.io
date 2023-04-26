@@ -27,14 +27,6 @@
 </script>
 
 <div class="min-h-screen">
-  <div class="flex justify-center items-center p-2">
-    <img class=" rounded-md  back shadow-2xl w-1/4" src="cover.png" alt="" />
-  </div>
-
-  <div class="p-2">
-    <Socials />
-  </div>
-
   <div class="flex justify-center items-center p-2 max-w-screen">
     <div id="geobingo-io_970x250" class="hidden md:block max-w-screen">
       <script type="text/javascript">
@@ -46,6 +38,17 @@
       </script>
     </div>
   </div>
+  <div class="flex justify-center items-center p-2">
+    <img class=" rounded-md  back shadow-2xl w-1/4" src="cover.png" alt="" />
+  </div>
+
+  <div class="p-2">
+    <Socials />
+  </div>
+  <div class="flex justify-center items-center p-2">
+<span class="md:text-3xl font-bold shadow-2xl bg-base-200 p-2 rounded-md">Find the most prompts in Google Street View</span>
+    </div>
+
     <div class="flex">
     <div class="hidden xl:flex justify-center items-center">
         <div id="geobingo-io_300x600" class="max-w-screen">
