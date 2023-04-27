@@ -429,17 +429,17 @@
                 class="btn btn-sm m-2   bg-base-100 btn-ghost"
                 ><XIcon size="1x" /> <span class="font-thin">(s)</span></button
               >
-              {#if $api.player.twitch}
-                <button
-                  class="btn"
-                  on:click={() => {
-                    panoToSaveIndex = captureIndex;
-                    savePanoModal = true;
-                  }}
-                >
-                  save
-                </button>
-              {/if}
+              <!-- {#if $api.player.twitch} -->
+              <!--   <button -->
+              <!--     class="btn" -->
+              <!--     on:click={() => { -->
+              <!--       panoToSaveIndex = captureIndex; -->
+              <!--       savePanoModal = true; -->
+              <!--     }} -->
+              <!--   > -->
+              <!--     save -->
+              <!--   </button> -->
+              <!-- {/if} -->
             </div>
 
             <div>
