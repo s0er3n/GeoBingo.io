@@ -28,5 +28,4 @@
   </div>
     <Socials/>
   <Inventory />
-  <SavedLocations />
 </div>
