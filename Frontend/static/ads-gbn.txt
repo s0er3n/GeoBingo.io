@@ -1,5 +1,5 @@
 ##################################
-# AdinPlay.com ads.txt - 2023-04-14
+# AdinPlay.com ads.txt - 2023-05-05
 ##################################
 
 OWNERDOMAIN=geobingo.io
@@ -728,5 +728,5 @@ sharethrough.com, OAW69Fon, RESELLER, d53b998a7bd4ecd2
 contextweb.com, 560288, RESELLER, 89ff185a4c4e857c
 
 ##################################
-# AdinPlay.com ads.txt - 2023-04-14
+# AdinPlay.com ads.txt - 2023-05-05
 ##################################
