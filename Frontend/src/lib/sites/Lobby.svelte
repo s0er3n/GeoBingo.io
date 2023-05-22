@@ -147,17 +147,17 @@
     <Head />
   </div>
 
-<div class="flex justify-center items-center p-2">
-    <div id="geobingo-io_970x250" class="max-w-screen">
-      <script type="text/javascript">
-        if (!localStorage.getItem("donator")) {
-          aiptag.cmd.display.push(function () {
-            aipDisplayTag.display("geobingo-io_970x250");
-          });
-        }
-      </script>
-    </div>
-</div>
+<!-- <div class="flex justify-center items-center p-2"> -->
+    <!-- <div id="geobingo-io_970x250" class="max-w-screen"> -->
+    <!--   <script type="text/javascript"> -->
+    <!--     if (!localStorage.getItem("donator")) { -->
+    <!--       aiptag.cmd.display.push(function () { -->
+    <!--         aipDisplayTag.display("geobingo-io_970x250"); -->
+    <!--       }); -->
+    <!--     } -->
+    <!--   </script> -->
+    <!-- </div> -->
+<!-- </div> -->
   <div class="grid gap-5 m-0 lg:grid-cols-2 ">
     <div>
       <div class="card bg-base-100 bordered shadow-lg ">

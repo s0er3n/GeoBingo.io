@@ -22,7 +22,7 @@
   }
 
   $: playersOnline = getOnlinePLayers(lobby.players);
-  show_preroll();
+  // show_preroll();
 </script>
 
 <div class="p-2">

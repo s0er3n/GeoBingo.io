@@ -27,17 +27,17 @@
 </script>
 
 <div class="min-h-screen">
-  <div class="flex justify-center items-center p-2 max-w-screen">
-    <div id="geobingo-io_970x250" class="hidden md:block max-w-screen">
-      <script type="text/javascript">
-        if (!localStorage.getItem("donator")) {
-          aiptag.cmd.display.push(function () {
-            aipDisplayTag.display("geobingo-io_970x250");
-          });
-        }
-      </script>
-    </div>
-  </div>
+  <!-- <div class="flex justify-center items-center p-2 max-w-screen"> -->
+    <!-- <div id="geobingo-io_970x250" class="hidden md:block max-w-screen"> -->
+    <!--   <script type="text/javascript"> -->
+    <!--     if (!localStorage.getItem("donator")) { -->
+    <!--       aiptag.cmd.display.push(function () { -->
+    <!--         aipDisplayTag.display("geobingo-io_970x250"); -->
+    <!--       }); -->
+    <!--     } -->
+    <!--   </script> -->
+    <!-- </div> -->
+  <!-- </div> -->
   <div class="flex justify-center items-center p-2">
     <img class=" rounded-md  back shadow-2xl w-1/4" src="cover.png" alt="" />
   </div>
@@ -50,17 +50,17 @@
     </div>
 
     <div class="flex">
-    <div class="hidden xl:flex justify-center items-center">
-        <div id="geobingo-io_300x600" class="max-w-screen">
-          <script type="text/javascript">
-            if (!localStorage.getItem("donator")) {
-              aiptag.cmd.display.push(function () {
-                aipDisplayTag.display("geobingo-io_970x250");
-              });
-            }
-          </script>
-        </div>
-    </div>
+    <!-- <div class="hidden xl:flex justify-center items-center"> -->
+    <!--     <div id="geobingo-io_300x600" class="max-w-screen"> -->
+    <!--       <script type="text/javascript"> -->
+    <!--         if (!localStorage.getItem("donator")) { -->
+    <!--           aiptag.cmd.display.push(function () { -->
+    <!--             aipDisplayTag.display("geobingo-io_970x250"); -->
+    <!--           }); -->
+    <!--         } -->
+    <!--       </script> -->
+    <!--     </div> -->
+    <!-- </div> -->
   <div class="w-full flex flex-col md:flex-row p-2 justify-center items-center">
     <div class="p-2 flex items-center justify-center">
       {#if $api?.player}
