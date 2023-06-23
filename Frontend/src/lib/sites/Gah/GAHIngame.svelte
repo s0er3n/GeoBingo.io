@@ -95,7 +95,7 @@
   </div>
 </div>
 <div
-  class="absolute flex pointer-events-none justify-center top-16  z-50 w-full text-center "
+  class="absolute flex pointer-events-none justify-center top-16 z-50 w-full text-center"
 >
   <div class="bg-base-100 p-2 shadow-md">
     {finnishedCapture}/{playersOnline}

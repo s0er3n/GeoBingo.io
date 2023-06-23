@@ -29,9 +29,9 @@
 {#if $api.game}
   <div class="pointer-events-none absolute flex justify-center w-screen z-10">
     <div
-      class="  rounded-sm  bg-base-100 text-xl m-2 shadow-2xl text-center p-1"
+      class="  rounded-sm bg-base-100 text-xl m-2 shadow-2xl text-center p-1"
     >
-      <span class="p-2 text-center  countdown">
+      <span class="p-2 text-center countdown">
         <span style={`--value:${min};`} />m
 
         <span style={`--value:${seconds};`} />s

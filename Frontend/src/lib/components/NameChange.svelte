@@ -28,5 +28,5 @@
   value={name}
   type="text"
   placeholder="username"
-  class="input input-bordered w-full select-auto	"
+  class="input input-bordered w-full select-auto"
 />

@@ -36,7 +36,7 @@
 <table class="table flex flex-col w-full">
   {#each data.filter(([key, value]) => !["latitude", "longitude"].includes(key)) as [key, value]}
     <tr
-      class="flex p-2 flex-col md:flex-row flex-wrap justify-between items-center w-full h-full "
+      class="flex p-2 flex-col md:flex-row flex-wrap justify-between items-center w-full h-full"
     >
       <td class="font-bold md:w-12">{key}:</td>
       <td>{value ? value : "no " + key}</td>

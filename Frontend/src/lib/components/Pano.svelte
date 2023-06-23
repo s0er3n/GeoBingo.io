@@ -191,9 +191,9 @@
 </div>
 
 {#if !nsfwModal}
-  <div class="h-full ">
-    <div class="h-full card shadow bordered ">
-      <div class="h-full overflow-auto bg-base-100 ">
+  <div class="h-full">
+    <div class="h-full card shadow bordered">
+      <div class="h-full overflow-auto bg-base-100">
         {#if !map}
           {#if warning && $api.player.twitch && isHost && !$api.game.currentPhase.onlyOfficialCoverage}
             <div class="p-20 content-center font-bold text-center">
@@ -222,7 +222,7 @@
                 show on map
               </button>
               <button
-                class="absolute  btn-xs bottom-5 left-5 btn btn-info"
+                class="absolute btn-xs bottom-5 left-5 btn btn-info"
                 on:click={() => {
                   document.getElementById("pano").src =
                     document.getElementById("pano").src;
@@ -230,7 +230,7 @@
               >
               {#if $api.player.twitch}
                 <button
-                  class="hidden absolute md:block  bottom-5 right-20 btn btn-xs btn-error"
+                  class="hidden absolute md:block bottom-5 right-20 btn btn-xs btn-error"
                   on:click={() => {
                     panoToReportIndex = captureIndex;
                     nsfwModal = true;
@@ -242,7 +242,7 @@
 
               {#if isHost}
                 <div
-                  class="absolute pointer-events-none top-5 w-full flex justify-center "
+                  class="absolute pointer-events-none top-5 w-full flex justify-center"
                 >
                   <Timer
                     callback={() => {
@@ -286,7 +286,7 @@
                 />
               {:else}
                 <iframe
-                  class="blur-xl "
+                  class="blur-xl"
                   title="google maps"
                   id="pano"
                   frameborder="8"
@@ -331,7 +331,7 @@
           />
         {/if}
       </div>
-      <div class="p-4 w-full m-0 bg-base-100 ">
+      <div class="p-4 w-full m-0 bg-base-100">
         <div class="flex flex-wrap items-center mb-0 pb-0">
           <div class="tooltip" data-tip={`time: ${capture.time}s`}>
             <span class="uppercase"
@@ -359,7 +359,7 @@
                 disabled={captures[captureIndex].voting.keep.includes(
                   $api.player.name.toLowerCase()
                 ) || !playerAllowedToVote}
-                class="btn btn-sm text-primary m-2   bg-base-100 btn-ghost"
+                class="btn btn-sm text-primary m-2 bg-base-100 btn-ghost"
                 >️<HeartIcon size="1x" />
                 <span class="font-thin">(w)</span></button
               >
@@ -377,7 +377,7 @@
                 ) || !playerAllowedToVote}
                 on:click={() =>
                   api.game.currentPhase.vote("remove", captureIndex)}
-                class="btn btn-sm m-2   bg-base-100 btn-ghost"
+                class="btn btn-sm m-2 bg-base-100 btn-ghost"
                 ><XIcon size="1x" /> <span class="font-thin">(s)</span></button
               >
             </div>
@@ -400,11 +400,11 @@
             <div class="flex"><Profile {player} /></div>
           {/if}
         </div>
-        <div class="flex  justify-around items-center">
+        <div class="flex justify-around items-center">
           <div class="flex flex-wrap w-full items-center gap-2">
             <button
               use:shortcut={{ code: "KeyA" }}
-              class="btn btn-sm  btn-secondary"
+              class="btn btn-sm btn-secondary"
               disabled={captureIndex === 0}
               on:click={goBack}
               ><ArrowLeftIcon size="1x" /> go back
@@ -414,7 +414,7 @@
             {#if !isHost}
               <button
                 disabled={!$unsync.enabled}
-                class="btn btn-sm  btn-warning"
+                class="btn btn-sm btn-warning"
                 on:click={() => switchUnsyncOff()}
               >
                 sync with host</button
@@ -424,7 +424,7 @@
               <button
                 disabled={!isHost && lastPano}
                 use:shortcut={{ code: "KeyR" }}
-                class="btn btn-sm  btn-warning"
+                class="btn btn-sm btn-warning"
                 on:click={() => goNextAndMaybeRemoveOrKeep(true)}
                 >{#if keepAndRemoveOnButtons}<XIcon
                     size="1x"
@@ -445,7 +445,7 @@
               <button
                 use:shortcut={{ code: "KeyD" }}
                 disabled={!isHost && lastPano}
-                class="btn btn-sm  btn-info"
+                class="btn btn-sm btn-info"
                 on:click={() => goNextAndMaybeRemoveOrKeep(false)}
                 >{#if keepAndRemoveOnButtons}<HeartIcon size="1x" />
                   {#if !isHost}vote {/if}keep and
@@ -512,8 +512,8 @@
                     )}
                   class="form-control p-0 m-0"
                 >
-                  <label class="cursor-pointer label m-0 ">
-                    <span class="text-sm  m-0 mr-2"
+                  <label class="cursor-pointer label m-0">
+                    <span class="text-sm m-0 mr-2"
                       >+1 EXTRA POINT <span class="font-thin">(F)</span></span
                     >
                     <input
@@ -521,7 +521,7 @@
                       type="checkbox"
                       disabled={!isHost}
                       checked={captures[captureIndex].extrapoint}
-                      class="toggle m-0 p-0 "
+                      class="toggle m-0 p-0"
                     />
                   </label>
                 </div>
@@ -529,7 +529,7 @@
             </div>
           </div>
 
-          <div class="hidden w-fit  lg:flex gap-2  p-0 justify-self-end">
+          <div class="hidden w-fit lg:flex gap-2 p-0 justify-self-end">
             {#if playerAllowedToVote}
               <div
                 class="tooltip"
@@ -548,15 +548,15 @@
                   checked={localStorage.getItem("keepAndRemove")}
                   class="form-control p-0 m-0"
                 >
-                  <label class="cursor-pointer label m-0 ">
-                    <span class=" text-xs  m-0 mr-2 ">
+                  <label class="cursor-pointer label m-0">
+                    <span class=" text-xs m-0 mr-2">
                       {#if !isHost}vote with remove and keep{:else}overwrite
                         voting{/if}
                     </span>
                     <input
                       type="checkbox"
                       checked={keepAndRemoveOnButtons}
-                      class="toggle toggle-xs m-0 p-0 "
+                      class="toggle toggle-xs m-0 p-0"
                     />
                   </label>
                 </div>
@@ -574,12 +574,12 @@
                     )}
                   class="form-control p-0 m-0"
                 >
-                  <label class="cursor-pointer label m-0 ">
-                    <span class="text-xs  m-0 mr-2 "> anonymous voting </span>
+                  <label class="cursor-pointer label m-0">
+                    <span class="text-xs m-0 mr-2"> anonymous voting </span>
                     <input
                       type="checkbox"
                       checked={$api.game.currentPhase.anonVoting}
-                      class="toggle toggle-xs m-0 p-0 "
+                      class="toggle toggle-xs m-0 p-0"
                     />
                   </label>
                 </div>

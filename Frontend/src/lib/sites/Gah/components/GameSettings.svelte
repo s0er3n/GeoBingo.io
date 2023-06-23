@@ -16,7 +16,7 @@
       : undefined;
 </script>
 
-<div class="p-5 bg-base-100 shadow-xl  shadow-md rounded-md h-fit">
+<div class="p-5 bg-base-100 shadow-xl shadow-md rounded-md h-fit">
   <button
     disabled={!$api.isHost}
     class="btn btn-primary w-full"

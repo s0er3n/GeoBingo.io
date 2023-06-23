@@ -35,13 +35,13 @@
   $: console.log(votingPhase);
 </script>
 
-<div id="" class="px-2 h-screen flex flex-col  justify-stretch">
+<div id="" class="px-2 h-screen flex flex-col justify-stretch">
   <Head />
   <SentenceWithStreetView phase={votingPhase} capture={currentCapture} />
   <div class="flex justify-center w-full">
     <!-- <Profile player={currentCapture.player} /> -->
 
-    <div class="pt-2 w-full ">
+    <div class="pt-2 w-full">
       <div class="grid bg-base-100 rounded-md shadow-md w-full">
         <div class="p-2 text-center">{captureIndex + 1}/{captures.length}</div>
         <div class="p-2 text-center font-bold">

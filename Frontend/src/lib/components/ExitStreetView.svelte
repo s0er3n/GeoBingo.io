@@ -5,7 +5,7 @@
 </script>
 
 <button
-  class="btn  m-4 z-[5000]"
+  class="btn m-4 z-[5000]"
   use:shortcut={{ code: "Escape" }}
   on:click={() =>
     $map.wait.then(() => {

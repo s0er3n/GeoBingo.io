@@ -111,8 +111,8 @@
 </script>
 
 <div class="p-5">
-  <div class="border-0 rounded-md  bg-base-100 shadow-md">
-    <div class="p-5 flex w-full  justify-center items-center">
+  <div class="border-0 rounded-md bg-base-100 shadow-md">
+    <div class="p-5 flex w-full justify-center items-center">
       <span class="text-3xl xl:text-6xl w-full h-fit text-center"
         >{lobby?.card?.text}</span
       >

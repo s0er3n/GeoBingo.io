@@ -31,7 +31,7 @@
 {#if $api.player.twitch}
   <div class="card bordered p-2">
     <Profile player={api.player} />
-    <div class="p-2 flex w-full justify-center ">
+    <div class="p-2 flex w-full justify-center">
       <button class="btn btn-xs btn-error" on:click={() => signout()}
         >Logout</button
       >

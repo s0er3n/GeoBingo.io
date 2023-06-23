@@ -76,7 +76,7 @@
               $api.player.host(privateLobby, "game", lang);
             }
           }}
-          class="btn btn-primary  w-full"
+          class="btn btn-primary w-full"
         >
           Play with friends/chat
         </button>

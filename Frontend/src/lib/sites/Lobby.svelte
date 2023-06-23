@@ -140,12 +140,12 @@
     </div>
   </label>
 </label>
-<div class="flex flex-col justify-center items-center  w-full h-full px-2">
+<div class="flex flex-col justify-center items-center w-full h-full px-2">
   <div class="w-full py-2">
     <Head />
   </div>
 
-  <div class="grid gap-5 m-0 lg:grid-cols-2 ">
+  <div class="grid gap-5 m-0 lg:grid-cols-2">
     <div>
       <div class="mb-4 bg-base-100 card bordered shadow-lg">
         <div class="card-body">
@@ -159,7 +159,7 @@
           </div>
         </div>
       </div>
-      <div class="card bg-base-100 bordered shadow-lg ">
+      <div class="card bg-base-100 bordered shadow-lg">
         <div class="card-body">
           <h3 class="card-title flex flex-wrap">
             Words {words.length}
@@ -414,9 +414,9 @@
       </div>
     </div>
     <div>
-      <div class="grid ">
-        <div class="card bg-base-100 bordered shadow-lg ">
-          <div class="card-body ">
+      <div class="grid">
+        <div class="card bg-base-100 bordered shadow-lg">
+          <div class="card-body">
             <h3 class="card-title">Game</h3>
             {#if $api.player?.twitch && !lobby.privateLobby}
               <span class="font-normal my-2"
@@ -455,7 +455,7 @@
               />
               <div>
                 {#if countryEnabled}
-                  <div class="flex ">
+                  <div class="flex">
                     <!-- <select -->
                     <!-- 	disabled={!isHost} -->
                     <!-- 	on:change={(e) => -->
@@ -678,7 +678,7 @@
           <ul>
             {#each $api.game.currentPhase.players as player}
               <li class="my-2">
-                <div class="flex ">
+                <div class="flex">
                   <div
                     class="text-center flex justify-center items-center w-6 font-bold text-xl"
                   >

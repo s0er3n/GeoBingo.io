@@ -94,10 +94,10 @@
     </div>
     <span class={` ${small ? "font-thin" : ""}  mr-1`}>{player.name}</span>
     {#if player.auth.emotes.length > 0}
-      <div class="mx-1 h-6 max-w-12  inline">
+      <div class="mx-1 h-6 max-w-12 inline">
         <Inventory ghost={true}
           ><img
-            class="mx-1 max-h-6 max-w-12 "
+            class="mx-1 max-h-6 max-w-12"
             src={player.auth.emotes[player.auth.equiped]}
           /></Inventory
         >
@@ -105,19 +105,19 @@
     {/if}
     {#if $api.game}
       {#if playerIsHost}
-        <div class="badge badge-primary  mr-1">host</div>
+        <div class="badge badge-primary mr-1">host</div>
       {/if}
     {/if}
 
     {#if $api.player.id === player.id}
-      <div class="badge badge-secondary  mr-1">me</div>
+      <div class="badge badge-secondary mr-1">me</div>
     {/if}
     {#if !small}
       {#if player.twitch}
-        <div class="badge badge-info  mr-1">twitch</div>
+        <div class="badge badge-info mr-1">twitch</div>
       {/if}
       {#each player.auth.badges as badge}
-        <div class="badge  mr-1">{badge}</div>
+        <div class="badge mr-1">{badge}</div>
       {/each}
     {/if}
     {#if $api.isHost && !playerIsHost}

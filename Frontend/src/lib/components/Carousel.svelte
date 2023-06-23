@@ -18,7 +18,7 @@
 
 <div class="p-2 w-full">
   <div class="">
-    <div class="w-full h-full carousel ">
+    <div class="w-full h-full carousel">
       {#each events as event, i}
         <div id={i} class="w-full carousel-item flex justify-center">
           <a href={event.link} class="" target="_blank">
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <div class="flex justify-center w-full py-2 gap-2 ">
+  <div class="flex justify-center w-full py-2 gap-2">
     {#if events.length > 1}
       {#each events as event, i}
         <a

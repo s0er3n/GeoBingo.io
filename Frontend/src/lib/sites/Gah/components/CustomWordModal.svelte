@@ -12,7 +12,7 @@
     <slot />
     <div class="flex justify-end space-x-2">
       <div on:click={() => (open = false)} class="modal-action">
-        <label for="my-modal" class="btn ">cancel</label>
+        <label for="my-modal" class="btn">cancel</label>
       </div>
       <div on:click={() => callback()} class="modal-action">
         <label for="my-modal" class="btn btn-primary">{closeText}</label>

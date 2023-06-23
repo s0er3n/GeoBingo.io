@@ -30,12 +30,12 @@
     }  z-20 h-full p-2 items-center`}
   >
     <div
-      class=" pointer-events-auto	 max-h-96 overflow-auto card shadow-xl  rounded-sm p-1   bg-base-100 hidden md:flex"
+      class=" pointer-events-auto max-h-96 overflow-auto card shadow-xl rounded-sm p-1 bg-base-100 hidden md:flex"
     >
       <ul>
         {#each Object.entries(score) as [player, score]}
           <li class="flex items-center m-1">
-            <span class="font-thin text-center  mx-1">{score.points}</span>
+            <span class="font-thin text-center mx-1">{score.points}</span>
             <Profile small={true} player={score.player} />
           </li>
         {/each}

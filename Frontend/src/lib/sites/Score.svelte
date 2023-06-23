@@ -33,7 +33,7 @@
       <table class="z-0 table w-full bg-base-100 rounded-md">
         <thead>
           <tr>
-            <th class="cursor-pointer " on:click={() => (sorted = sortedTotal)}
+            <th class="cursor-pointer" on:click={() => (sorted = sortedTotal)}
               >Points</th
             >
             <th

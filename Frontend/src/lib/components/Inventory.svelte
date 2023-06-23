@@ -36,7 +36,7 @@
 {/if}
 {#if !ghost}
   {#if $api.player.twitch}
-    <label for="my-modal-4" class="m-2 btn btn-info modal-button "
+    <label for="my-modal-4" class="m-2 btn btn-info modal-button"
       >Inventory<ArchiveIcon size="1x" class="ml-2" />
     </label>
   {/if}

@@ -98,5 +98,5 @@
 <div
   class="absolute h-full w-full flex flex-col justify-stretch overflow-hidden"
 >
-  <div id="map" class="w-full h-full  " />
+  <div id="map" class="w-full h-full" />
 </div>

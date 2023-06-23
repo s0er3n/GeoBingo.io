@@ -50,7 +50,7 @@
   <div
     class="flex w-3/4 item-scenter absolute bottom-0 justify-center shadow-xl rounded-md"
   >
-    <div class="p-2 text-xl bg-base-100  z-50 ">
+    <div class="p-2 text-xl bg-base-100 z-50">
       {#each ingame.card.text as c, i}
         {#if c === "_"}
           <button
@@ -60,7 +60,7 @@
             }}
           >
             {#if !captureIndices.includes(String(getWhichPicture(i)))}
-              <div class="px-2 btn  btn-xs w-16">
+              <div class="px-2 btn btn-xs w-16">
                 <CameraIcon size="1x" />
               </div>
             {:else}

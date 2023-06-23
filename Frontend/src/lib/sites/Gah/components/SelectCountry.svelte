@@ -5,7 +5,7 @@
 </script>
 
 <div class="label uppercase pt-4">country</div>
-<div class="flex ">
+<div class="flex">
   <div class="w-full">
     <select
       disabled={!isHost}
@@ -14,7 +14,7 @@
           key: "countryName",
           val: e.target.value,
         })}
-      class="w-full select select-bordered select "
+      class="w-full select select-bordered select"
     >
       <option
         value={"all"}

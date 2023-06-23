@@ -33,7 +33,7 @@
     >
       not nsfw
     </button>
-    <button class="btn " on:click={() => (i += 1)}> next </button>
+    <button class="btn" on:click={() => (i += 1)}> next </button>
     <input bind:value={i} />
   {/await}
 </div>

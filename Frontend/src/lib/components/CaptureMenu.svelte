@@ -104,7 +104,7 @@
     <div class="flex flex-row">
       {#if !hide}
         <ul
-          class="pointer-events-auto max-w-xs menu menu-compact bg-base-100 shadow-xl rounded-l-sm "
+          class="pointer-events-auto max-w-xs menu menu-compact bg-base-100 shadow-xl rounded-l-sm"
         >
           <li class="p-2 menu-title uppercase">Words</li>
           <ul class="overflow-auto max-h-96">
@@ -123,7 +123,7 @@
                     on:click={() => makePhoto(i)}
                   >
                     <!-- svelte-ignore a11y-label-has-associated-control -->
-                    <label class="swap ">
+                    <label class="swap">
                       <svg
                         class={`${
                           taken.includes(i) ? "swap-on" : "swap-off"
@@ -155,7 +155,7 @@
           <div class="divider" />
 
           {#if $api.isHost}
-            <li class="uppercase ">
+            <li class="uppercase">
               <a class="" on:click={() => (endGameModal = true)}
                 ><XIcon size="1x" />end game</a
               >
@@ -173,7 +173,7 @@
         class="m-0 p-0 min-h-fit pointer-events-auto bg-base-100 grid content-center rounded-r-sm"
       >
         {#if hide}
-          <div class="w-18 p-2 bg-base-100 rounded-sm drop-shadow-xl ">
+          <div class="w-18 p-2 bg-base-100 rounded-sm drop-shadow-xl">
             WORDS
           </div>
         {:else}

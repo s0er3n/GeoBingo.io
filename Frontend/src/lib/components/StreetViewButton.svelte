@@ -36,14 +36,13 @@
 <div class="grid xl:flex">
   {#if click || onlyOfficialCoverage}
     <button
-      class="btn btn-wide  m-4  "
+      class="btn btn-wide m-4"
       use:shortcut={{ code: "Space", default: true }}
       on:click={handleSpace}>Enter Street View (space)</button
     >
   {/if}
 
-  <button
-    class="btn  btn-wide m-4  z-[5000]"
-    on:click={switchStreetViewCoverage}>Switch Street view showing</button
+  <button class="btn btn-wide m-4 z-[5000]" on:click={switchStreetViewCoverage}
+    >Switch Street view showing</button
   >
 </div>

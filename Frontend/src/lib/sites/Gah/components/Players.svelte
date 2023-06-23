@@ -21,7 +21,7 @@
   <ul>
     {#each lobby.players.sort((a, b) => getOverallScore(b) - getOverallScore(a)) ?? [] as player}
       <li class="">
-        <div class="p-2 flex ">
+        <div class="p-2 flex">
           <!-- <div -->
           <!-- 	class="text-center flex justify-center items-center w-6 font-bold text-xl"> -->
           <!-- 	<!-- {api.game.currentPhase.score[player.id]?.points ?? 0} -->

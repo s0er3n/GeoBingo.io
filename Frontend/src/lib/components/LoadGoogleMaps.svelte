@@ -21,7 +21,8 @@
   {#if !$load}
     <script
       async
-      src={`https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&language=en&callback=initMap`}>
+      src={`https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&language=en&callback=initMap`}
+    >
     </script>
   {/if}
 </svelte:head>

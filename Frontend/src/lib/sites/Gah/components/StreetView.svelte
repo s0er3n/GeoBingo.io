@@ -36,7 +36,7 @@
       />
 
       <button
-        class="absolute  btn-xs bottom-5 left-5 btn btn-info"
+        class="absolute btn-xs bottom-5 left-5 btn btn-info"
         on:click={() => {
           document.getElementById(pano.pano + random).src =
             document.getElementById(pano.pano + random).src;
@@ -57,7 +57,7 @@
       {/if}
     {:else}
       <div
-        class="p-2 w-full h-full flex justify-center items-center  bg-red-500"
+        class="p-2 w-full h-full flex justify-center items-center bg-red-500"
       >
         <div class="flex flex">
           warning this photosphere was reported
@@ -73,7 +73,7 @@
     {/if}
   {:else}
     <div
-      class="w-full h-48 h-full text-center items-center flex justify-center "
+      class="w-full h-48 h-full text-center items-center flex justify-center"
     >
       no image
     </div>

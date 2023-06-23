@@ -6,7 +6,7 @@
 {#if !donation || localStorage.getItem("noDonate")}
   <slot />
 {:else}
-  <div class="h-full w-screen flex  content-center justify-center p-5">
+  <div class="h-full w-screen flex content-center justify-center p-5">
     <div class="card w-96 bg-base-100 shadow-xl">
       <iframe
         id="kofiframe"

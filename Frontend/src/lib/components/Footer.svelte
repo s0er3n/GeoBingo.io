@@ -10,8 +10,8 @@
       Sören Michaels © 2022 - All right reserved
     </p>
     <p>
-      <a href="Impressum" target="_blank" class="text-xs "> Impressum </a>
-      <a href="Datenschutzerklaerung" target="_blank" class="text-xs ">
+      <a href="Impressum" target="_blank" class="text-xs"> Impressum </a>
+      <a href="Datenschutzerklaerung" target="_blank" class="text-xs">
         Datenschutzerklärung
       </a>
     </p>

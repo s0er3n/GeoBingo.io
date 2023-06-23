@@ -38,7 +38,7 @@
     <ul class="p-2">
       {#each $api.game.currentPhase.players as player}
         <li class="my-2">
-          <div class="flex ">
+          <div class="flex">
             <div
               class="text-center flex justify-center items-center w-6 font-bold text-xl"
             >

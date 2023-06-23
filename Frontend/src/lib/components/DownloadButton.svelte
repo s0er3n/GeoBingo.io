@@ -40,7 +40,7 @@
 
 <div class="flex w-full my-5 justify-between">
   <button
-    class="btn btn-sm m-1 "
+    class="btn btn-sm m-1"
     on:click={() => {
       locationsShowing = !locationsShowing;
     }}
@@ -48,7 +48,7 @@
     show all locations
   </button>
   <button
-    class="btn  btn-sm   m-1"
+    class="btn btn-sm m-1"
     on:click={() => {
       link.click();
     }}
@@ -78,7 +78,7 @@
             <td>{row[2]}</td>
             <td
               ><a href={row[3]} target="_blank"
-                ><button class="btn btn-sm ">open</button><a /></a
+                ><button class="btn btn-sm">open</button><a /></a
               ></td
             >
           </tr>
