@@ -6,15 +6,16 @@ import { isGame } from "./checkers";
 
 dotEnv.config({ path: "../.env" })
 import dotEnv from "dotenv";
+let client:any;
 try {
-const client = new tmi.Client({
+client = new tmi.Client({
   identity: {
     username: process.env.name, password: process.env.token,
   },
 });
 } catch (e) {
   console.log(e)
-  const client = new tmi.Client();
+   client = new tmi.Client({});
 }
 
 // u have to wait for client connect before you can join channel
@@ -28,7 +29,7 @@ try {
 
 const lobbies: { [key: string]: Game | GeoBingoAgainstHumanityGame } = {};
 
-client.on("message", (channel, tags, message, self) => {
+client.on("message", (channel: any, tags: any, message: string, self: any) => {
   if (self || !message.startsWith("!")) return;
 
   const args = message.slice(1).split(" ");
@@ -97,7 +98,7 @@ client.on("message", (channel, tags, message, self) => {
 
 export const join = (channel: string, lobby: Game | GeoBingoAgainstHumanityGame) => {
   try {
-    client.join("#" + channel).catch((e) => console.log(e));
+    client.join("#" + channel).catch((e:any) => console.log(e));
     client.say(
       "#" + channel,
       `🤖 ${process.env.domain} just connected to twitch chat. You can use !link or !code to join the game.` +
@@ -110,7 +111,7 @@ export const join = (channel: string, lobby: Game | GeoBingoAgainstHumanityGame)
 };
 export const disconnect = (channel: string) => {
   try {
-    client.part("#" + channel).catch((e) => console.log(e));
+    client.part("#" + channel).catch((e:any) => console.log(e));
   } catch (e) {
     console.log(e);
   }
