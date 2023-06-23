@@ -6,11 +6,16 @@ import { isGame } from "./checkers";
 
 dotEnv.config({ path: "../.env" })
 import dotEnv from "dotenv";
+try {
 const client = new tmi.Client({
   identity: {
     username: process.env.name, password: process.env.token,
   },
 });
+} catch (e) {
+  console.log(e)
+  const client = new tmi.Client();
+}
 
 // u have to wait for client connect before you can join channel
 try {
