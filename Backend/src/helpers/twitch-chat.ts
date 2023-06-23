@@ -9,9 +9,9 @@ import dotEnv from "dotenv";
 let client:any;
 try {
 client = new tmi.Client({
-  identity: {
-    username: process.env.name, password: process.env.token,
-  },
+  // identity: {
+  //   username: process.env.name, password: process.env.token,
+  // },
 });
 } catch (e) {
   console.log(e)
