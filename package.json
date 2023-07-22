@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "concurrently": "^7.0.0",
+    "concurrently": "^7.6.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.0",
     "nodemon": "^2.0.15"
@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "concurrently --kill-others \"npm run Backend\" \"npm run Frontend\" ",
     "Backend": "npm run --prefix Backend  dev",
-    "install": "npm install --prefix Backend && npm install --prefix Frontend",
+    "install": "npm ci --prefix Backend && npm ci --prefix Frontend",
     "Frontend": "npm run --prefix Frontend dev ",
     "test": "npm run --prefix Backend test ",
     "precommit": "npm run --prefix Frontend format",

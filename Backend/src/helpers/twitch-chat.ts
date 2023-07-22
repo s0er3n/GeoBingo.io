@@ -9,9 +9,9 @@ import dotEnv from "dotenv";
 let client:any;
 try {
 client = new tmi.Client({
-  // identity: {
-  //   username: process.env.name, password: process.env.token,
-  // },
+  identity: {
+    username: process.env.name, password: process.env.token,
+  },
 });
 } catch (e) {
   console.log(e)
@@ -97,22 +97,22 @@ client.on("message", (channel: any, tags: any, message: string, self: any) => {
 });
 
 export const join = (channel: string, lobby: Game | GeoBingoAgainstHumanityGame) => {
-  // try {
-  //   client.join("#" + channel).catch((e:any) => console.log(e));
-  //   client.say(
-  //     "#" + channel,
-  //     `🤖 ${process.env.domain} just connected to twitch chat. You can use !link or !code to join the game.` +
-  //     (!lobby.privateLobby ? "The code is " + lobby.title : "")
-  //   );
-  //   lobbies["#" + channel.toLowerCase()] = lobby;
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  try {
+    client.join("#" + channel).catch((e:any) => console.log(e));
+    client.say(
+      "#" + channel,
+      `🤖 ${process.env.domain} just connected to twitch chat. You can use !link or !code to join the game.` +
+      (!lobby.privateLobby ? "The code is " + lobby.title : "")
+    );
+    lobbies["#" + channel.toLowerCase()] = lobby;
+  } catch (e) {
+    console.log(e);
+  }
 };
 export const disconnect = (channel: string) => {
-  // try {
-  //   client.part("#" + channel).catch((e:any) => console.log(e));
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  try {
+    client.part("#" + channel).catch((e:any) => console.log(e));
+  } catch (e) {
+    console.log(e);
+  }
 };
