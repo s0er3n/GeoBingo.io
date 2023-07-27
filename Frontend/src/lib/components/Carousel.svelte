@@ -22,7 +22,7 @@
       {#each events as event, i}
         <div id={i} class="w-full carousel-item flex justify-center">
           <a href={event.link} class="" target="_blank">
-            <img src={event.image} class="rounded-md border-white border-2" />
+            <img src={event.image} class="rounded-md max-w-lg" />
           </a>
         </div>
       {/each}
