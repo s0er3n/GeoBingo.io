@@ -12,7 +12,7 @@ const config = {
       fallback: null,
       precompress: true,
     }),
-    prerender: { handleMissingId: "ignore" }
+    prerender: { handleMissingId: "ignore" },
   },
 
   preprocess: [
