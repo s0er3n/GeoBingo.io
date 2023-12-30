@@ -22,7 +22,7 @@
   setRoom();
 </script>
 
-<div class="w-3/4">
+<div class="w-lg">
   <ul class="p-4 grid w-full space-y-4 shadow-lg bg-base-100 rounded-box">
     <li class="flex justify-center w-full">
       <span> login or choose username </span>
