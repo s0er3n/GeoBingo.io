@@ -83,22 +83,6 @@
       </li>
     </div>
     <div class="indicator w-full">
-      <li class="">
-        <span class="indicator-item badge badge-info">BETA</span>
-        <button
-          on:click={() => {
-            if (api.player) {
-              $api.player.host(privateLobby, "gah");
-            }
-          }}
-          class="btn btn-primary w-full h-fit p-2"
-        >
-          Create GeoBingo Against Humanity Game (not affilated with Cards
-          Against Humanity)</button
-        >
-      </li>
-    </div>
-    <div class="indicator w-full">
       <li class="w-full">
         <span class="indicator-item badge badge-info">BETA</span>
         <button
