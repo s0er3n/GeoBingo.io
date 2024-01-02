@@ -6,7 +6,7 @@
 {#if !donation}
   <slot />
 {:else}
-  <div class="h-full w-screen flex content-center justify-center p-5">
+  <div class="h-full w-screen h-screen flex content-center justify-center p-5">
     <div class="card w-96 bg-base-100 shadow-xl">
       <iframe
         id="kofiframe"
@@ -15,8 +15,8 @@
         title="soerenmichaels"
       />
       <div class="card-body">
-        <h2 class="card-title text-3xl">Help me keep the site alive.</h2>
-        <p class="text-xl">
+        <h2 class="card-title text-xs">Help me keep the site alive.</h2>
+        <p class="text-xs">
           Since the recent rise in users, I cannot justify paying for the Google
           Maps API on my own anymore and I will have to put the site offline if
           the usage keeps being this high. Please consider donating on <a
