@@ -1,9 +1,9 @@
 <script lang="ts">
-  let donation = false;
+  let donation = true;
   import { HeartIcon } from "svelte-feather-icons";
 </script>
 
-{#if !donation || localStorage.getItem("noDonate")}
+{#if !donation}
   <slot />
 {:else}
   <div class="h-full w-screen flex content-center justify-center p-5">
@@ -15,32 +15,16 @@
         title="soerenmichaels"
       />
       <div class="card-body">
-        <h2 class="card-title text-sm">
-          If you like the site and you can afford it consider donating :)
-        </h2>
-        <p class="text-xs">
-          I want to keep improving the site and give you the best experience
-          <span class="font-bold">WITHOUT</span> ads or pro accounts with a
-          monthly fee. Everyone should have fun on my site <HeartIcon
-            class="inline"
-            size="1x"
-          />
+        <h2 class="card-title text-3xl">Help me keep the site alive.</h2>
+        <p class="text-xl">
+          Since the recent rise in users, I cannot justify paying for the Google
+          Maps API on my own anymore and I will have to put the site offline if
+          the usage keeps being this high. Please consider donating on <a
+            class="text-blue-400"
+            href="https://ko-fi.com/soerenmichaels">Ko-fi.com/soerenmichaels</a
+          >. <br /><br /> Have fun playing, <br /> Sören
         </p>
         <div class="card-actions flex justify-between">
-          <div class="form-control">
-            <label class="label cursor-pointer">
-              <span class="label-text m-2">don't show again</span>
-              <input
-                type="checkbox"
-                on:click={() =>
-                  localStorage.getItem("noDonate")
-                    ? localStorage.removeItem("noDonate")
-                    : localStorage.setItem("noDonate", "1")}
-                checked={localStorage.getItem("noDonate") === "1"}
-                class="checkbox"
-              />
-            </label>
-          </div>
           <button on:click={() => (donation = false)} class="btn btn-primary"
             >go to lobby</button
           >

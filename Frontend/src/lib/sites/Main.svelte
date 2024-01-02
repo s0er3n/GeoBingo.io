@@ -7,6 +7,7 @@
   import StreamerFrontPage from "$lib/components/StreamerFrontPage.svelte";
   import YoutubeVideo from "$lib/components/YoutubeVideo.svelte";
   import { api } from "$lib/js/api";
+  import DonationPopup from "$lib/components/DonationPopup.svelte";
   // let events = [
   // 	{
   // 		image: 'ukraine.jpg.webp',
