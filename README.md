@@ -10,7 +10,7 @@ an open source multiplayer street view bingo game
 [YouTube](https://www.youtube.com/channel/UCEB92TvBTby2GeDyU2ak8Dg)
 [Instagram](https://www.instagram.com/geobingo.io/)
 
-my discord tag: **Sören#1141**
+my discord tag: **.soeren**
 
 **You want to contribute? See this [issue here](https://github.com/s0er3n/GeoBingo.io/issues/1)**
 
