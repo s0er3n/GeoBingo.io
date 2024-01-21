@@ -15,15 +15,6 @@
         title="soerenmichaels"
       />
       <div class="card-body">
-        <h2 class="card-title text-xs">Help me keep the site alive.</h2>
-        <p class="text-xs">
-          Since the recent rise in users, I cannot justify paying for the Google
-          Maps API on my own anymore and I will have to put the site offline if
-          the usage keeps being this high. Please consider donating on <a
-            class="text-blue-400"
-            href="https://ko-fi.com/soerenmichaels">Ko-fi.com/soerenmichaels</a
-          >. <br /><br /> Have fun playing, <br /> Sören
-        </p>
         <div class="card-actions flex justify-between">
           <button on:click={() => (donation = false)} class="btn btn-primary"
             >go to lobby</button
