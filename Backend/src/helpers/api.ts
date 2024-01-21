@@ -27,6 +27,8 @@ export const addWordToDB = async (word: { word: string; tags: string[] }) => {
 const LANGUAGES = ["en", "nl", "es", "de", "fr", "pt", "pl", "id"]
 
 export const backUpDBAndTranslate = async (words: { word: { word: string | { [lng: string]: string } } }[]) => {
+  // FIXME: only translate with api key
+  return
   if (!supabaseProvided) return
   // console.log(words)
   const langWords = words.map(async word => {

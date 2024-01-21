@@ -13,10 +13,17 @@ an open source multiplayer street view bingo game
 my discord tag: **.soeren**
 
 **You want to contribute? See this [issue here](https://github.com/s0er3n/GeoBingo.io/issues/1)**
+# Self hosting with docker-compose
+
+1. Set the Environment Variables from .env.example (only VITE_GMAPSAPI is needed for the base game)
+
+2. run `docker-compose up --build`
+
+3. the game should be running on port 3000
 
 
-# ⚡ How to run it yourself
-- install node 16.5
+# ⚡ How to run it yourself for development
+- install node 20
 
 - clone repository
 
