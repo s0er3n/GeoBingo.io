@@ -38,6 +38,8 @@ npm install
 
 get an api key https://developers.google.com/maps/documentation/javascript/get-api-key
 
+under `API restrictions` select the following 2 APIs: `Maps JavaScript API` and `Maps Embed API`
+
 create Frontend/.env file and paste in your api key like this: 
 
 `
